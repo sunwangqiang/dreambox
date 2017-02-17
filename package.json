@@ -1,6 +1,6 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
+  "name": "dreambox",
+  "author": "sunwangqiang@gmail.com",
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
@@ -47,5 +47,5 @@
       "locator": "ios"
     }
   ],
-  "description": "MyIonic2Project: An Ionic project"
+  "description": "dreambox: hold on our dream"
 }
