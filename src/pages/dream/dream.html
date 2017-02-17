@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      梦想盒子
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="itemAdd($event)">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<!--
+<ion-content class="list-avatar-page">
+
+
+  <ion-list>
+    <div ion-item *ngFor="let dream of dreams" (click)="itemTapped($event, dream)" (press)="itemPressed($event, dream)">
+      <ion-avatar item-left>
+        <ion-icon name="{{dream.icon}}"></ion-icon>
+      </ion-avatar>
+      <h2>{{dream.title}}</h2>
+      <p>{{dream.content}}</p>
+      <ion-note item-right>{{dream.time}}</ion-note>
+    </div>
+  </ion-list>
+</ion-content>
+-->
+<ion-content>
+  <div class="weui-cells">
+    <div class="weui-cell" *ngFor="let dream of dreams" (click)="itemTapped($event, dream)" (press)="itemPressed($event, dream)">
+      <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+        <ion-icon name="{{dream.icon}}" style="width: 50px;display: block"></ion-icon>
+        <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>
+      </div>
+      <div class="weui-cell__bd">
+        <p>{{dream.title}}</p>
+        <p style="font-size: 13px;color: #888888;">{{dream.content}}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>
