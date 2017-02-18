@@ -1,109 +1,63 @@
-export class Dream {
-    life:number;
-    color:string;
-    icon: string;
-    title: string;
-    content: string;
-    time:string;
+export class DreamBox {
+    rootDataModelVersion:string;
+    updateTime:string;
+    keyWorlds:string;
+    totalUsers:number;
+    totalPlans:number;
+    totalFans:number;
+    totalFocus:number;
 }
+
+export class DreamBoxUser {
+    nickName:string;
+    totalDreams:number;
+    credibility:number;
+}
+
+
+export enum DreamStatus{
+    CREATED = 1,
+    STARTING,
+    FINISH,
+}
+export class Dream {
+    title: string;
+    description:string;
+    status:DreamStatus;
+    life:number;
+    hot:number;
+    totalStars:number;
+    totalSprints:number;
+    totalReports:number;
+    owner:string;
+    actor:string;
+}
+
+export class DreamSprint{
+    start:string;
+    stop:string;
+    stars:number;
+    likes:number;
+    dislikes:number;
+    totalPictures:number;
+    totalAudios:number;
+    totalVideos:number;
+}
+
 const Dreams: Dream[] = [
     {
+        title: "Woody",
+        description: "This town ain't big enough for the two of us!",
+        status:DreamStatus.CREATED,
         life:80,
-        color:"green",
-        icon:"heart",
-        title: "Woody",
-        content: "This town ain't big enough for the two of us!",
-        time:"3:43 pm"
+        hot:0,
+        totalStars:0,
+        totalSprints:0,
+        totalReports:0,
+        owner:"sunwangqiang",
+        actor:"sunyufan",
     },
-    {
-        life:100,
-        color:"dark",
-        icon:"calculator",
-        title: "Buzz Lightyear",
-        content: "My eyeballs could have been sucked from their sockets!",
-        time:"1:12 pm"
-    },
-    {
-        life:10,
-        color:"danger",
-        icon:"cloud",
-        title: "Jessie",
-        content: "Well aren't you just the sweetest space toy I ever did meet!",
-        time:"3:43 pm"
-    },
-    {
-        life:20,
-        color:"danger",
-        icon:"arrow-dropup-circle",
-        title: "Mr. Potato Head",
-        content: "You're not turning me into a Mashed Potato",
-        time:"5:47 am"
-    },
-    {
-        life:30,
-        color:"danger",
-        icon:"heart",
-        title: "Woody",
-        content: "This town ain't big enough for the two of us!",
-        time:"3:43 pm"
-    },
-    {
-        life:40,
-        color:"danger",
-        icon:"calculator",
-        title: "Buzz Lightyear",
-        content: "My eyeballs could have been sucked from their sockets!",
-        time:"1:12 pm"
-    },
-    {
-        life:50,
-        color:"danger",
-        icon:"cloud",
-        title: "Jessie",
-        content: "Well aren't you just the sweetest space toy I ever did meet!",
-        time:"3:43 pm"
-    },
-    {
-        life:60,
-        color:"danger",
-        icon:"arrow-dropup-circle",
-        title: "Mr. Potato Head",
-        content: "You're not turning me into a Mashed Potato",
-        time:"5:47 am"
-    },
-    {
-        life:70,
-        color:"danger",
-        icon:"heart",
-        title: "Woody",
-        content: "This town ain't big enough for the two of us!",
-        time:"3:43 pm"
-    },
-    {
-        life:80,
-        color:"danger",
-        icon:"calculator",
-        title: "Buzz Lightyear",
-        content: "My eyeballs could have been sucked from their sockets!",
-        time:"1:12 pm"
-    },
-    {
-        life:90,
-        color:"danger",
-        icon:"cloud",
-        title: "Jessie",
-        content: "Well aren't you just the sweetest space toy I ever did meet!",
-        time:"3:43 pm"
-    },
-    {
-        life:100,
-        color:"danger",
-        icon:"arrow-dropup-circle",
-        title: "Mr. Potato Head",
-        content: "You're not turning me into a Mashed Potato",
-        time:"5:47 am"
-    }
-];
+]
 
 export class DataModel{
     get(key:string):any{

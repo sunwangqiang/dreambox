@@ -5,7 +5,7 @@ import { MinePage } from '../pages/mine/mine';
 import { FocusPage } from '../pages/focus/focus';
 import { discoverPage } from '../pages/discover/discover';
 import { DreamPage } from '../pages/dream/dream';
-import { DreamDetailsPage } from '../pages/dream/details/details'
+import { DreamSprintsPage } from '../pages/dream/details/dreamsprint'
 import { NewDreamPage } from '../pages/dream/newdream/newdream'
 import { TabsPage } from '../pages/tabs/tabs';
 import { DataModel } from '../datamodel/datamodel'
@@ -16,7 +16,7 @@ import { DataModel } from '../datamodel/datamodel'
     FocusPage,
     discoverPage,
     DreamPage,
-    DreamDetailsPage,
+    DreamSprintsPage,
     NewDreamPage,
     TabsPage,
     MinePage,
@@ -30,7 +30,7 @@ import { DataModel } from '../datamodel/datamodel'
     FocusPage,
     discoverPage,
     DreamPage,
-    DreamDetailsPage,
+    DreamSprintsPage,
     NewDreamPage,
     TabsPage,
     MinePage

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NavController, AlertController } from 'ionic-angular';
 import { Dream, DataModel } from '../../datamodel/datamodel'
-import { DreamDetailsPage } from './details/details'
+import { DreamSprintsPage } from './details/dreamsprint'
 import { NewDreamPage } from './newdream/newdream'
 
 @Component({
@@ -18,8 +18,8 @@ export class DreamPage {
     this.dreams = model.list("Dream");
   }
   itemTapped(event, dream) {
-    this.navCtrl.push(DreamDetailsPage, {
-      item: dream
+    this.navCtrl.push(DreamSprintsPage, {
+      dream: dream
     });
   }
   itemAdd(event){

@@ -5,13 +5,13 @@ import { Dream } from '../../../datamodel/datamodel'
 
 @Component({
   selector: 'page-contact',
-  templateUrl: 'details.html'
+  templateUrl: 'dreamsprints.html'
 })
-export class DreamDetailsPage {
+export class DreamSprintsPage {
   dream: Dream;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.dream = navParams.get('item');
+    this.dream = navParams.get('dream');
   }
 
 }
