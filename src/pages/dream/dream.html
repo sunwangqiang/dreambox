@@ -31,7 +31,7 @@
   <div class="weui-cells">
     <div class="weui-cell" *ngFor="let dream of dreams" (click)="itemTapped($event, dream)" (press)="itemPressed($event, dream)">
       <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-        <ion-icon name="{{dream.icon}}" style="width: 50px;display: block"></ion-icon>
+        <button ion-button color={{dream.color}} style="width: 50px;display: block">{{dream.life}}</button>
         <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>
       </div>
       <div class="weui-cell__bd">

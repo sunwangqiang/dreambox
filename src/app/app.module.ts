@@ -8,7 +8,7 @@ import { DreamPage } from '../pages/dream/dream';
 import { DreamDetailsPage } from '../pages/dream/details/details'
 import { NewDreamPage } from '../pages/dream/newdream/newdream'
 import { TabsPage } from '../pages/tabs/tabs';
-import { Service } from '../service/service'
+import { DataModel } from '../datamodel/datamodel'
 
 @NgModule({
   declarations: [
@@ -35,6 +35,6 @@ import { Service } from '../service/service'
     TabsPage,
     MinePage
   ],
-  providers: [Service, {provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [DataModel, {provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
 export class AppModule {}

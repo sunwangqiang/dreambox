@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController, AlertController } from 'ionic-angular';
-import { Dream, Service } from '../../service/service'
+import { Dream, DataModel } from '../../datamodel/datamodel'
 import { DreamDetailsPage } from './details/details'
 import { NewDreamPage } from './newdream/newdream'
 
@@ -13,9 +13,9 @@ export class DreamPage {
   dreams:Dream[];
 
   constructor(public navCtrl: NavController,
-              public service:Service,
+              public model:DataModel,
               public alertController: AlertController) {
-    this.dreams = service.list("Dream");
+    this.dreams = model.list("Dream");
   }
   itemTapped(event, dream) {
     this.navCtrl.push(DreamDetailsPage, {

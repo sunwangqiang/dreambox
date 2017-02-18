@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
-import { Dream } from '../../../service/service'
+import { Dream } from '../../../datamodel/datamodel'
 
 @Component({
   selector: 'page-contact',
