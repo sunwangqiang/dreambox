@@ -5,7 +5,7 @@ import { MinePage } from '../pages/mine/mine';
 import { FocusPage } from '../pages/focus/focus';
 import { discoverPage } from '../pages/discover/discover';
 import { DreamPage } from '../pages/dream/dream';
-import { DreamSprintsPage } from '../pages/dream/details/dreamsprint'
+import { DreamSprintsPage } from '../pages/dream/dreamsprints/dreamsprints'
 import { NewDreamPage } from '../pages/dream/newdream/newdream'
 import { TabsPage } from '../pages/tabs/tabs';
 import { DataModel } from '../datamodel/datamodel'

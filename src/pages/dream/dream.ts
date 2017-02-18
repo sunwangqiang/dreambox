@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NavController, AlertController } from 'ionic-angular';
 import { Dream, DataModel } from '../../datamodel/datamodel'
-import { DreamSprintsPage } from './details/dreamsprint'
+import { DreamSprintsPage } from './dreamsprints/dreamsprints'
 import { NewDreamPage } from './newdream/newdream'
 
 @Component({
