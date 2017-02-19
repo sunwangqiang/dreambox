@@ -10,6 +10,11 @@ import { NewDreamPage } from '../pages/dream/newdream/newdream'
 import { TabsPage } from '../pages/tabs/tabs';
 import { DataModel } from '../datamodel/datamodel'
 
+import { Storage } from '@ionic/storage';
+export function provideStorage() {
+  return new Storage(['sqlite', 'websql', 'indexeddb'], { name: '__mydb' });
+}
+
 @NgModule({
   declarations: [
     MyApp,
@@ -35,6 +40,10 @@ import { DataModel } from '../datamodel/datamodel'
     TabsPage,
     MinePage
   ],
-  providers: [DataModel, {provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: Storage, useFactory: provideStorage },
+    DataModel,
+  ]
 })
 export class AppModule {}
