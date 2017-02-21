@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { Dream, DreamBox } from '../../../datamodel/datamodel'
 
@@ -11,10 +11,15 @@ import { Dream, DreamBox } from '../../../datamodel/datamodel'
 export class NewDreamPage {
   dream:Dream;
 
-  constructor(public navCtrl: NavController,
+  constructor(public navCtrl: NavController,  public navParams: NavParams,
               public dreamBox:DreamBox) {
     //TODO: move to page exit
-    this.dream = dreamBox.newDream();
+    let dream = navParams.get('dream');
+    if(dream == undefined) {
+      this.dream = dreamBox.newDream();
+    }else{
+      this.dream = dream;
+    }
   }
 
 }

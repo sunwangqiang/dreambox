@@ -19,12 +19,10 @@ export class DreamPage {
     this.dreams = dreamBox.listDream();
   }
   dreamTapped(event, dream) {
-    this.navCtrl.push(DreamSprintsPage, {
-      dream: dream
-    });
+    this.navCtrl.push(DreamSprintsPage, {dream: dream} );
   }
   dreamAdd(event){
-    this.navCtrl.push(NewDreamPage);
+    this.navCtrl.push(NewDreamPage, {dream: undefined});
   }
   dreamPressed(event, dream:Dream) {
     let prompt = this.alertController.create({
@@ -33,13 +31,13 @@ export class DreamPage {
         {
           text: '编辑',
           handler: data => {
-            console.log('edit clicked');
+            this.navCtrl.push(NewDreamPage, {dream: dream});
           },
         },
         {
           text: '删除',
           handler: data => {
-            console.log('Saved clicked');
+            this.dreamBox.delDream(dream);
           },
         },
         {

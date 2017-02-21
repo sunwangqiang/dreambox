@@ -97,6 +97,26 @@ export class DreamBox {
     listDream():Dream[]{
         return this.dreams;
     }
+    delDream(dream:Dream):void{
+        console.log( dream);
+        let move:boolean = false;
+        
+        this.dreams.forEach(
+            (value, index, array)=>{
+              if(value == dream){
+                  move = true;
+                  return;
+              }
+              if(move){
+                  array[index-1] = array[index];
+              }
+            }
+         );
+
+        if(move) {
+            this.dreams.length--;
+        }
+    }
 }
 
 /*
