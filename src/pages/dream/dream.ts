@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController, AlertController } from 'ionic-angular';
-import { Dream, DataModel } from '../../datamodel/datamodel'
+import { Dream, DreamBox } from '../../datamodel/datamodel'
 import { DreamSprintsPage } from './dreamsprints/dreamsprints'
 import { NewDreamPage } from './newdream/newdream'
 
@@ -13,19 +13,20 @@ export class DreamPage {
   dreams:Dream[];
 
   constructor(public navCtrl: NavController,
-              public model:DataModel,
+              public dreamBox:DreamBox,
               public alertController: AlertController) {
-    this.dreams = model.list("Dream");
+    //model.list("Dream").then((d)=>{this.dreams = d});
+    this.dreams = dreamBox.listDream();
   }
-  itemTapped(event, dream) {
+  dreamTapped(event, dream) {
     this.navCtrl.push(DreamSprintsPage, {
       dream: dream
     });
   }
-  itemAdd(event){
+  dreamAdd(event){
     this.navCtrl.push(NewDreamPage);
   }
-  itemPressed(event, dream:Dream) {
+  dreamPressed(event, dream:Dream) {
     let prompt = this.alertController.create({
       cssClass:'custom-alert',
       buttons: [

@@ -1,13 +1,18 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      梦想盒子
+      小目标
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="sprintAdd($event)">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <div *ngFor="let sprint of sprints">
 <!--
     <ion-item>
       <ion-avatar item-left>
@@ -17,74 +22,24 @@
       <p>November 5, 1955</p>
     </ion-item>
     -->
-    <div class="weui-cells">
-      <div class="weui-cell">
-        <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-          <img src="./assets/images/Jack.png">
-        </div>
-        <div class="weui-cell__bd">
-          <h2>Marty McFly</h2>
-          <p style="font-size: 13px;color: #888888;">November 5, 1955</p>
-        </div>
-      </div>
-    </div>
 
     <div class="weui-cells__title">小目标</div>
 
     <div class="weui-cells weui-cells_form">
       <div class="weui-cell">
         <div class="weui-cell__bd">
-          <textarea class="weui-textarea" placeholder="请输入文本" rows="3">
-            Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.
-          </textarea>
-          <div class="weui-textarea-counter"><span>0</span>/200</div>
+          <textarea class="weui-textarea" placeholder="请输入文本" rows="3" [(ngModel)] = "sprint.description">
+            </textarea>
+          <div class="weui-textarea-counter"><span>{{sprint.description.length}}</span>/200</div>
         </div>
       </div>
-    </div>
-
-    <div class="weui-grids">
-      <a href="javascript:;" class="weui-grid">
-        <div class="weui-grid__icon">
-          <img src="./assets/images/Jack.png" alt="">
-        </div>
-      </a>
-      <a href="javascript:;" class="weui-grid">
-        <div class="weui-grid__icon">
-          <img src="./images/icon_tabbar.png" alt="">
-        </div>
-      </a>
-      <a href="javascript:;" class="weui-grid">
-        <div class="weui-grid__icon">
-          <img src="./images/icon_tabbar.png" alt="">
-        </div>
-      </a>
-      <a href="javascript:;" class="weui-grid">
-        <div class="weui-grid__icon">
-          <img src="./images/icon_tabbar.png" alt="">
-        </div>
-      </a>
-      <a href="javascript:;" class="weui-grid">
-        <div class="weui-grid__icon">
-          <img src="./images/icon_tabbar.png" alt="">
-        </div>
-      </a>
-      <a href="javascript:;" class="weui-grid">
-        <div class="weui-grid__icon">
-          <img src="./images/icon_tabbar.png" alt="">
-        </div>
-      </a>
-      <a href="javascript:;" class="weui-grid">
-        <div class="weui-grid__icon">
-          <img src="./images/icon_tabbar.png" alt="">
-        </div>
-      </a>
     </div>
 
     <ion-row>
       <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="thumbs-up"></ion-icon>
-          <div>12 Likes</div>
+          <div>{{sprint.likes}} Likes</div>
         </button>
       </ion-col>
       <ion-col>
@@ -100,5 +55,95 @@
       </ion-col>
     </ion-row>
 
-  </ion-card>
+  </div>
 </ion-content>
+
+
+
+<!--
+  <div>
+<div class="weui-cells">
+  <div class="weui-cell">
+    <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+      <img src="./assets/images/Jackdddd.png">
+    </div>
+    <div class="weui-cell__bd">
+      <h2>Marty McFly</h2>
+      <p style="font-size: 13px;color: #888888;">November 5, 1955</p>
+    </div>
+  </div>
+</div>
+
+<div class="weui-cells__title">小目标</div>
+
+<div class="weui-cells weui-cells_form">
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入文本" rows="3">
+            Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.
+          </textarea>
+      <div class="weui-textarea-counter"><span>0</span>/200</div>
+    </div>
+  </div>
+</div>
+
+<div class="weui-grids">
+  <a href="javascript:;" class="weui-grid">
+    <div class="weui-grid__icon">
+      <img src="./assets/images/Jack.png" alt="">
+    </div>
+  </a>
+  <a href="javascript:;" class="weui-grid">
+    <div class="weui-grid__icon">
+      <img src="./images/icon_tabbar.png" alt="">
+    </div>
+  </a>
+  <a href="javascript:;" class="weui-grid">
+    <div class="weui-grid__icon">
+      <img src="./images/icon_tabbar.png" alt="">
+    </div>
+  </a>
+  <a href="javascript:;" class="weui-grid">
+    <div class="weui-grid__icon">
+      <img src="./images/icon_tabbar.png" alt="">
+    </div>
+  </a>
+  <a href="javascript:;" class="weui-grid">
+    <div class="weui-grid__icon">
+      <img src="./images/icon_tabbar.png" alt="">
+    </div>
+  </a>
+  <a href="javascript:;" class="weui-grid">
+    <div class="weui-grid__icon">
+      <img src="./images/icon_tabbar.png" alt="">
+    </div>
+  </a>
+  <a href="javascript:;" class="weui-grid">
+    <div class="weui-grid__icon">
+      <img src="./images/icon_tabbar.png" alt="">
+    </div>
+  </a>
+</div>
+
+<ion-row>
+  <ion-col>
+    <button ion-button icon-left clear small>
+      <ion-icon name="thumbs-up"></ion-icon>
+      <div>12 Likes</div>
+    </button>
+  </ion-col>
+  <ion-col>
+    <button ion-button icon-left clear small>
+      <ion-icon name="text"></ion-icon>
+      <div>4 Comments</div>
+    </button>
+  </ion-col>
+  <ion-col center text-center>
+    <ion-note>
+      11h ago
+    </ion-note>
+  </ion-col>
+</ion-row>
+
+</div>
+-->

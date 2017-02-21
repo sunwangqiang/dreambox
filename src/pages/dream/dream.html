@@ -4,7 +4,7 @@
       梦想盒子
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="itemAdd($event)">
+      <button ion-button icon-only (click)="dreamAdd($event)">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -29,7 +29,7 @@
 -->
 <ion-content>
   <div class="weui-cells">
-    <div class="weui-cell" *ngFor="let dream of dreams" (click)="itemTapped($event, dream)" (press)="itemPressed($event, dream)">
+    <div class="weui-cell" *ngFor="let dream of dreams" (click)="dreamTapped($event, dream)" (press)="dreamPressed($event, dream)">
       <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
         <button class="weui-btn weui-btn_primary" style="font-size: 13px; width: 50px;display: block">{{dream.life}}</button>
         <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>

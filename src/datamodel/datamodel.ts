@@ -1,16 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
-export class DreamBox {
-    rootDataModelVersion:string;
-    updateTime:string;
-    keyWorlds:string;
-    totalUsers:number;
-    totalPlans:number;
-    totalFans:number;
-    totalFocus:number;
-}
-
 export class DreamBoxUser {
     nickName:string;
     totalDreams:number;
@@ -18,6 +8,25 @@ export class DreamBoxUser {
     avatar:string;
 }
 
+export class DreamSprint{
+    start:Date;
+    stop:Date;
+    description:string = "";
+    stars:number = 0;
+    likes:number = 0;
+    dislikes:number = 0;
+    totalPictures:number = 0;
+    totalAudios:number = 0;
+    totalVideos:number = 0;
+    owner:string;
+    pictures:string[];
+    audios:string[];
+    videos:string[];
+
+    constructor(){
+        this.start = new Date();
+    }
+}
 
 export enum DreamStatus{
     CREATED = 1,
@@ -25,33 +34,72 @@ export enum DreamStatus{
     FINISH,
 }
 export class Dream {
-    key:string;
     title: string;
     description:string;
     status:DreamStatus;
+    startTime:Date;
+    stopTime:Date;
     life:number;
     hot:number;
+    expose:boolean;
     totalStars:number;
     totalSprints:number;
     totalReports:number;
     owner:string;
+
+    sprints:DreamSprint[] = [];
+
+    constructor(){
+        this.title = "";
+        this.description = "";
+        this.status = DreamStatus.CREATED;
+        this.startTime = new Date();
+        //this.stopTime;
+        this.life = 0;
+        this.hot = 0;
+        this.expose = true;
+        this.totalStars = 0;;
+        this.totalSprints = 0;
+        this.totalReports = 0;
+        //owner:string;
+    }
+    newSprint(): DreamSprint {
+        let d = new DreamSprint();
+        this.sprints.push(d);
+        this.totalSprints++;
+        return d;
+    }
+    listSprint():DreamSprint[]{
+        return this.sprints;
+    }
 }
 
-export class DreamSprint{
-    start:string;
-    stop:string;
-    stars:number;
-    likes:number;
-    dislikes:number;
-    totalPictures:number;
-    totalAudios:number;
-    totalVideos:number;
-    owner:string;
-    pictures:string[];
-    audios:string[];
-    videos:string[];
+@Injectable()
+export class DreamBox {
+    rootDataModelVersion:string = "1.0";
+    updateTime:Date;
+    keyWorlds:string[];
+    totalUsers:number = 0;
+    totalDreams:number = 0;
+    totalFans:number = 0;
+    totalFocus:number = 0;
+    dreams:Dream[] = [];
+
+    constructor(){
+        //load from database, and init attribute
+    }
+    newDream(): Dream {
+        let d = new Dream();
+        this.dreams.push(d);
+        this.totalDreams++;
+        return d;
+    }
+    listDream():Dream[]{
+        return this.dreams;
+    }
 }
 
+/*
 let Dreams: Dream[] = [
     {
         key:"DreamBox.Dream.1",
@@ -66,15 +114,12 @@ let Dreams: Dream[] = [
         owner:"sunwangqiang",
     },
 ]
-class MockStorage{
-    key:string;
-    value:any;
-}
-
-@Injectable()
+*/
 export class DataModel{
 
     constructor(public storage: Storage) {
+        this.storage.clear();
+        console.log("storage cleared");
     }
     /**
      * Get the value associated with the given key.
@@ -135,22 +180,19 @@ export class DataModel{
         return this.storage.forEach(iteratorCallback);
     }
 
-    list(key:string){
-        this.storage.set('name1', {f1:"aaa"});
-        this.storage.set('name2', {f2:"aaa"});
-        this.storage.set('name3', {f3:"aaa"});
-        this.storage.set('name4', {f4:"aaa"});
+    list(key: string): Promise<any[]>{
+        let ret:any[] = new Array();
 
-        // Or to get a key/value pair
-        this.storage.get('name1').then((val) => {
-            console.log('Your name is', val);
-        });
-        console.log('I am run here');
-        this.forEach((value, key, iterationNumber) => {
-                console.log(key + " is " + value);
+        this.forEach((v, k, i) => {
+                console.log(k+" = "+v);
+                let e = k.substr(key.length+1);
+                if(isNaN(Number(e))){
+                    return;
+                }
+                ret.push(v);
             }
         );
-        return Dreams;
+        return Promise.all(ret);
     }
 
 }

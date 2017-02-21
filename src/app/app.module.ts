@@ -8,7 +8,7 @@ import { DreamPage } from '../pages/dream/dream';
 import { DreamSprintsPage } from '../pages/dream/dreamsprints/dreamsprints'
 import { NewDreamPage } from '../pages/dream/newdream/newdream'
 import { TabsPage } from '../pages/tabs/tabs';
-import { DataModel } from '../datamodel/datamodel'
+import { DreamBox } from '../datamodel/datamodel'
 
 import { Storage } from '@ionic/storage';
 export function provideStorage() {
@@ -43,7 +43,7 @@ export function provideStorage() {
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: Storage, useFactory: provideStorage },
-    DataModel,
+    DreamBox,
   ]
 })
 export class AppModule {}
