@@ -27,7 +27,7 @@
   </ion-list>
 </ion-content>
 -->
-<ion-content>
+<ion-content class = "dream-list">
   <div class="weui-cells">
     <div class="weui-cell" *ngFor="let dream of dreams" (click)="dreamTapped($event, dream)" (press)="dreamPressed($event, dream)">
       <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
@@ -41,3 +41,9 @@
     </div>
   </div>
 </ion-content>
+
+<style>
+  .dream-list {
+    background-color: #F8F8F8;
+  }
+</style>

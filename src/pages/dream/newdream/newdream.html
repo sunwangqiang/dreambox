@@ -6,6 +6,44 @@
   </ion-navbar>
 </ion-header>
 
+<ion-content class = "dream-list">
+  <div class="weui-cells__title">梦想主题(*)</div>
+  <div class="weui-cells">
+    <div class="weui-cell">
+      <div class="weui-cell__bd">
+        <input class="weui-input" type="text" placeholder="梦想要大" [(ngModel)]="dream.title">
+      </div>
+    </div>
+  </div>
+
+  <div class="weui-cells__title">梦想描述</div>
+  <div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+      <div class="weui-cell__bd">
+        <textarea class="weui-textarea" rows="3" [(ngModel)]="dream.description"></textarea>
+        <div class="weui-textarea-counter"><span>{{dream.description.length}}</span>/200</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="weui-cells weui-cells_form">
+    <div class="weui-cell weui-cell_switch">
+      <div class="weui-cell__bd">仅自己可见</div>
+      <div class="weui-cell__ft">
+        <input class="weui-switch" type="checkbox" [(ngModel)]="dream.expose">
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+
+<style>
+  .dream-list {
+    background-color: #F8F8F8;
+  }
+</style>
+
+<!--
 <ion-content>
   <ion-list>
     <ion-list-header>
@@ -22,3 +60,4 @@
     </ion-item>
   </ion-list>
 </ion-content>
+-->

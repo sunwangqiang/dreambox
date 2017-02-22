@@ -34,34 +34,22 @@ export enum DreamStatus{
     FINISH,
 }
 export class Dream {
-    title: string;
-    description:string;
-    status:DreamStatus;
-    startTime:Date;
-    stopTime:Date;
-    life:number;
-    hot:number;
-    expose:boolean;
-    totalStars:number;
-    totalSprints:number;
-    totalReports:number;
-    owner:string;
+    title: string = "";
+    description:string = "";
+    status:DreamStatus = DreamStatus.CREATED;
+    startTime:Date = new Date();
+    stopTime:Date = undefined;
+    life:number = 0;
+    hot:number = 0;
+    expose:boolean = false;
+    totalStars:number = 0;
+    totalSprints:number = 0;
+    totalReports:number = 0;
+    owner:DreamBoxUser;
 
     sprints:DreamSprint[] = [];
 
     constructor(){
-        this.title = "";
-        this.description = "";
-        this.status = DreamStatus.CREATED;
-        this.startTime = new Date();
-        //this.stopTime;
-        this.life = 0;
-        this.hot = 0;
-        this.expose = true;
-        this.totalStars = 0;;
-        this.totalSprints = 0;
-        this.totalReports = 0;
-        //owner:string;
     }
     newSprint(): DreamSprint {
         let d = new DreamSprint();
@@ -100,7 +88,7 @@ export class DreamBox {
     delDream(dream:Dream):void{
         console.log( dream);
         let move:boolean = false;
-        
+
         this.dreams.forEach(
             (value, index, array)=>{
               if(value == dream){
