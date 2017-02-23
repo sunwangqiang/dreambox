@@ -4,6 +4,7 @@ import { NavController, AlertController } from 'ionic-angular';
 import { Dream, DreamBox } from '../../datamodel/datamodel'
 import { DreamSprintsPage } from './dreamsprints/dreamsprints'
 import { NewDreamPage } from './newdream/newdream'
+import { NewSprintPage } from './newsprint/newsprint'
 
 @Component({
   selector: 'page-home',
@@ -23,6 +24,9 @@ export class DreamPage {
   }
   dreamAdd(event){
     this.navCtrl.push(NewDreamPage, {dream: undefined});
+  }
+  sprintAdd(event, dream:Dream){
+    this.navCtrl.push(NewSprintPage, {dream: dream} );
   }
   dreamPressed(event, dream:Dream) {
     let prompt = this.alertController.create({

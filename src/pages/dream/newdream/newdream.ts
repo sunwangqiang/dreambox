@@ -10,15 +10,25 @@ import { Dream, DreamBox } from '../../../datamodel/datamodel'
 })
 export class NewDreamPage {
   dream:Dream;
+  newDream:boolean = false;
 
   constructor(public navCtrl: NavController,  public navParams: NavParams,
               public dreamBox:DreamBox) {
     //TODO: move to page exit
     let dream = navParams.get('dream');
-    if(dream == undefined) {
-      this.dream = dreamBox.newDream();
-    }else{
+    //Edit dream
+    if(dream != undefined) {
       this.dream = dream;
+    }else{
+      this.dream = new Dream();
+      this.newDream = true;
+    }
+  }
+
+  ngOnDestroy() {
+    // new dream
+    if(this.newDream == true){
+      this.dreamBox.pushDream(this.dream);
     }
   }
 

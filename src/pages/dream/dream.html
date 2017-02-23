@@ -27,7 +27,7 @@
   </ion-list>
 </ion-content>
 -->
-<ion-content class = "dream-list">
+<ion-content>
   <div class="weui-cells">
     <div class="weui-cell" *ngFor="let dream of dreams" (click)="dreamTapped($event, dream)" (press)="dreamPressed($event, dream)">
       <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
@@ -38,12 +38,23 @@
         <p>{{dream.title}}</p>
         <p style="font-size: 13px;color: #888888;">{{dream.description}}</p>
       </div>
+      <div>
+        <button class="sprint-button" (click)="sprintAdd($event, dream);$event.stopPropagation()" >
+          <ion-icon name="ios-camera-outline"></ion-icon>
+        </button>
+      </div>
     </div>
   </div>
 </ion-content>
 
 <style>
-  .dream-list {
-    background-color: #F8F8F8;
+  .sprint-button {
+    font-size: 28px;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
   }
 </style>

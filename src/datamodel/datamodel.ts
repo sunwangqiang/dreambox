@@ -77,13 +77,15 @@ export class DreamBox {
         //load from database, and init attribute
     }
     newDream(): Dream {
-        let d = new Dream();
-        this.dreams.push(d);
-        this.totalDreams++;
-        return d;
+        return this.pushDream(new Dream());
     }
     listDream():Dream[]{
         return this.dreams;
+    }
+    pushDream(d:Dream):Dream{
+        this.dreams.push(d);
+        this.totalDreams++;
+        return d;
     }
     delDream(dream:Dream):void{
         console.log( dream);

@@ -7,6 +7,7 @@ import { discoverPage } from '../pages/discover/discover';
 import { DreamPage } from '../pages/dream/dream';
 import { DreamSprintsPage } from '../pages/dream/dreamsprints/dreamsprints'
 import { NewDreamPage } from '../pages/dream/newdream/newdream'
+import { NewSprintPage } from '../pages/dream/newsprint/newsprint'
 import { TabsPage } from '../pages/tabs/tabs';
 import { DreamBox } from '../datamodel/datamodel'
 
@@ -23,6 +24,7 @@ export function provideStorage() {
     DreamPage,
     DreamSprintsPage,
     NewDreamPage,
+    NewSprintPage,
     TabsPage,
     MinePage,
   ],
@@ -37,6 +39,7 @@ export function provideStorage() {
     DreamPage,
     DreamSprintsPage,
     NewDreamPage,
+    NewSprintPage,
     TabsPage,
     MinePage
   ],
