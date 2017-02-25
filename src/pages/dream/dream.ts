@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController, AlertController } from 'ionic-angular';
-import { Dream, DreamBox } from '../../datamodel/datamodel'
+import { DreamBoxService, DreamBox, Dream} from '../../services/dreambox.service'
 import { DreamSprintsPage } from './dreamsprints/dreamsprints'
 import { NewDreamPage } from './newdream/newdream'
 import { NewSprintPage } from './newsprint/newsprint'
@@ -11,13 +11,18 @@ import { NewSprintPage } from './newsprint/newsprint'
   templateUrl: 'dream.html'
 })
 export class DreamPage {
-  dreams:Dream[];
+  dreams:Dream[]=[];
 
   constructor(public navCtrl: NavController,
-              public dreamBox:DreamBox,
+              public dreamBoxService:DreamBoxService,
               public alertController: AlertController) {
-    //model.list("Dream").then((d)=>{this.dreams = d});
-    this.dreams = dreamBox.listDream();
+  }
+  ngOnInit(){
+    this.dreamBoxService.getDreamBox().then((d:DreamBox)=>{
+      if(d){
+        this.dreams = d.dreams;
+      }
+    });
   }
   dreamTapped(event, dream) {
     this.navCtrl.push(DreamSprintsPage, {dream: dream} );
@@ -41,7 +46,7 @@ export class DreamPage {
         {
           text: '删除',
           handler: data => {
-            this.dreamBox.delDream(dream);
+            this.dreamBoxService.delDream(dream);
           },
         },
         {
@@ -55,52 +60,3 @@ export class DreamPage {
     prompt.present();
   }
 }
-
-/*
-@Component({
-  template: `
-<ion-content>
-  <ion-list>
-    <ion-item>
-      <button ion-button color="light" full>编辑</button>
-      <button ion-button color="light" full>删除</button>
-    </ion-item>
-    <ion-item>
-      <p>
-    <button ion-button color="light" full>Light</button>
-  </p>
-  <p>
-    <button ion-button full>Default</button>
-  </p>
-
-  <p>
-    <button ion-button color="secondary" full>Secondary</button>
-  </p>
-
-  <p>
-    <button ion-button color="danger" full>Danger</button>
-  </p>
-  <p>
-    <button ion-button color="dark" full>Dark</button>
-  </p>
-    </ion-item>
-  </ion-list>
-</ion-content>
-`
-})
-export class ModalContentPage {
-  character;
-
-  constructor(
-      public platform: Platform,
-      public params: NavParams,
-      public viewCtrl: ViewController
-  ) {
-
-  }
-
-  dismiss() {
-    this.viewCtrl.dismiss();
-  }
-}
-*/

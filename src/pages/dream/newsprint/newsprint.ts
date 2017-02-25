@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
 
-import { Dream, DreamBox } from '../../../datamodel/datamodel'
+import { Dream, DreamBox, DreamBoxService } from '../../../services/dreambox.service'
 
 @Component({
   selector: 'page-contact',
@@ -12,7 +12,7 @@ export class NewSprintPage {
   dream:Dream;
 
   constructor(public navCtrl: NavController,  public navParams: NavParams,
-              public dreamBox:DreamBox) {
+              public dreamBoxService:DreamBoxService) {
     this.dream = navParams.get('dream');
   }
 

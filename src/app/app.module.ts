@@ -9,7 +9,7 @@ import { DreamSprintsPage } from '../pages/dream/dreamsprints/dreamsprints'
 import { NewDreamPage } from '../pages/dream/newdream/newdream'
 import { NewSprintPage } from '../pages/dream/newsprint/newsprint'
 import { TabsPage } from '../pages/tabs/tabs';
-import { DreamBox } from '../datamodel/datamodel'
+import { DreamBoxService } from '../services/dreambox.service'
 
 import { Storage } from '@ionic/storage';
 export function provideStorage() {
@@ -41,12 +41,12 @@ export function provideStorage() {
     NewDreamPage,
     NewSprintPage,
     TabsPage,
-    MinePage
+    MinePage,
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: Storage, useFactory: provideStorage },
-    DreamBox,
+    DreamBoxService,
   ]
 })
 export class AppModule {}

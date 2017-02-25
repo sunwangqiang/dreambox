@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
-import { Dream, DreamSprint, DreamBox } from '../../../datamodel/datamodel'
+import { Dream, DreamSprint, DreamBox, DreamBoxService } from '../../../services/dreambox.service'
 import { NewSprintPage } from './newsprint/newsprint'
 
 @Component({
@@ -13,19 +13,19 @@ export class DreamSprintsPage {
   sprints:DreamSprint[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public dreamBox:DreamBox) {
+              public dreamBoxService:DreamBoxService) {
     this.dream = navParams.get('dream');
-    this.sprints = this.dream.listSprint();
+    this.sprints = this.dream.sprints;
 
     /*
      * if there is no sprint, then add it
      */
     if(this.sprints.length == 0){
-      this.dream.newSprint();
-      console.log(this.sprints[0]);
+      this.addSprint()
+      console.log(this.sprints);
     }
   }
-  sprintAdd(event){
-    this.dream.newSprint();
+  addSprint(){
+    this.dreamBoxService.addSprint(this.dream, new DreamSprint());
   }
 }
