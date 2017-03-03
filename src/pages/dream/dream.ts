@@ -34,7 +34,28 @@ export class DreamPage {
     this.navCtrl.push(NewSprintPage, {dream: dream} );
   }
   dreamPressed(event, dream:Dream) {
-    let prompt = this.alertController.create({
+    let confirm = this.alertController.create({
+      title: '确认删除？',
+      message: dream.title,
+      buttons: [
+        {
+          text: '取消',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: '确认',
+          handler: () => {
+            console.log('Agree clicked');
+            this.dreamBoxService.delDream(dream);
+          }
+        }
+      ]
+    });
+
+
+    let promptmenu = this.alertController.create({
       cssClass:'custom-alert',
       buttons: [
         {
@@ -46,17 +67,17 @@ export class DreamPage {
         {
           text: '删除',
           handler: data => {
-            this.dreamBoxService.delDream(dream);
+            confirm.present();
           },
         },
         {
-          text: '添加小目标',
+          text: '统计',
           handler: data => {
             console.log('Cancel clicked');
           },
         }
       ]
     });
-    prompt.present();
+    promptmenu.present();
   }
 }

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      一小步
+      小目标
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -11,8 +11,8 @@
   <div class="weui-cells weui-cells_form">
     <div class="weui-cell">
       <div class="weui-cell__bd">
-        <textarea class="weui-textarea" placeholder="步子要小，稍稍努力就能实现" rows="3" [(ngModel)]="dream.description"></textarea>
-        <div class="weui-textarea-counter"><span>{{dream.description.length}}</span>/200</div>
+        <textarea class="weui-textarea" placeholder="步子要小，稍稍努力就能实现" rows="3" [(ngModel)]="sprint.description"></textarea>
+        <div class="weui-textarea-counter"><span>{{sprint.description.length}}</span>/200</div>
       </div>
     </div>
   </div>
@@ -29,29 +29,9 @@
     <div class="weui-cell weui-cell_switch">
       <div class="weui-cell__bd">仅自己可见</div>
       <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" [(ngModel)]="dream.expose">
+        <input class="weui-switch" type="checkbox" [(ngModel)]="sprint.expose">
       </div>
     </div>
   </div>
 
 </ion-content>
-
-
-<!--
-<ion-content>
-  <ion-list>
-    <ion-list-header>
-      标题(必填)
-    </ion-list-header>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="dream.title"></ion-input>
-    </ion-item>
-    <ion-list-header>
-      备注
-    </ion-list-header>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="dream.description"></ion-input>
-    </ion-item>
-  </ion-list>
-</ion-content>
--->

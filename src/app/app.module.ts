@@ -11,6 +11,8 @@ import { NewSprintPage } from '../pages/dream/newsprint/newsprint'
 import { TabsPage } from '../pages/tabs/tabs';
 import { DreamBoxService } from '../services/dreambox.service'
 
+import {ContenteditableModel} from '../common/contenteditableModel.directive'
+
 import { Storage } from '@ionic/storage';
 export function provideStorage() {
   return new Storage(['sqlite', 'websql', 'indexeddb'], { name: '__mydb' });
@@ -27,6 +29,7 @@ export function provideStorage() {
     NewSprintPage,
     TabsPage,
     MinePage,
+    ContenteditableModel,
   ],
   imports: [
     IonicModule.forRoot(MyApp)

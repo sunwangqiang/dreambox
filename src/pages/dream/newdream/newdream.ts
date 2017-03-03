@@ -14,11 +14,10 @@ export class NewDreamPage {
 
   constructor(public navCtrl: NavController,  public navParams: NavParams,
               public dreamBoxService:DreamBoxService) {
-    //TODO: move to page exit
-    let dream = navParams.get('dream');
+    let d = navParams.get('dream');
     //Edit dream
-    if(dream != undefined) {
-      this.dream = dream;
+    if(d != undefined) {
+      this.dream = d;
     }else{
       this.dream = new Dream();
       this.newDream = true;

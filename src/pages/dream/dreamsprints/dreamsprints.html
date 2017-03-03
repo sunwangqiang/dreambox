@@ -1,49 +1,128 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      梦想足迹
-    </ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="addSprint()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+  <ion-title>
+    梦想足迹
+  </ion-title>
+  <ion-buttons end>
+    <button ion-button icon-only (click)="addSprint()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
 </ion-header>
 
 <ion-content class="social-cards">
-    <ion-card *ngFor="let sprint of sprints">
-      <div class="weui-cells__title">小目标</div>
-      <div class="weui-cells weui-cells_form">
-        <div class="weui-cell">
-          <div class="weui-cell__bd">
-            <textarea class="weui-textarea" placeholder="请输入文本" rows="3" [(ngModel)] = "sprint.description">
-              </textarea>
-            <div class="weui-textarea-counter"><span>{{sprint.description.length}}</span>/200</div>
+  <img src="./assets/images/dreamtree.jpg"/>
+  <div *ngFor="let sprint of sprints">
+
+    <ion-row style=" width:100%;">
+      <ion-col width-33 >
+        <hr style="width: 100%; display:inline-block; " />
+      </ion-col>
+      <ion-col width-40 style=" text-align:center">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAACe0lEQVRIS41Wy3XbMBDcJRqwO7ArCCVQd6uCRBUoriBRBbErcFxB5AriVBDlLEJhKog6CBuANm/wAD4QJkjiRIK7mP3MDsg0Y2mtvxPRB2b+Wtf1Di5VVT2JyGciejXGbKaO4SGD1WpVXi6XnzhERH4x87dgZ4xxPlpriXwB9B7BFEWxPh6PTXpuD0hr/RsGzPxDRL7458fwjPchIGbubPwzQGG7CIAOaLlcfiSiK2Z+Sg5vReQx7BPR2Rhz6zNCUCWeRWTHzJ+I6CYGxT4RtafTaR/KgDLdEZFL2Vq7UUoB9MVa2yilXKZxWaLywn6hlALo1lq7U0qhp1jYOxhj1uwbjY1mTlOnmh5/j892QMz8p67rB0QpIlsRATAyDOtQFMUubbLPCpn3bJm5YeYX2FdV9SAi71zpyrK88unGDmnwXX/CB631X/RlJMsD2tA0TcseBD1yjR1bgXERUEzxnGtjrXU9woyAdZNrAOgf2DrpSLQH0CzjWBXCwZE6TGG1AJqdPmodnzizt85lDtDeGHM/FvKc8k+VbpZgIoggvJmAXOmcMg8ZWGtvm6Y5TzXAj8iNUgp0H1qvAAJIkIyeUcqyKcCRfm+C1g0OnrX2OiVADswTAwxOlxv0Tr3jOydYQokhTVOZ4LuXGne1xEtE7jv19s0czKooisXQRRYfVlXVnYhAXQazcfQOX0aGr8U1kCNFWZYgAa6RNwoRD3kMlIsKsWRnaYy1zLyu6/rQy8hHlqNnd4WntRlTlng80n+GrBzlqD4GFPukQDmBbY0x10PsGxHlnk8PKEfRIeWeIlE6Gm/+6zwY/mjAojOu5KlZ8j5bf9u2zPyc+vwHUEN1A9xMTIIAAAAASUVORK5CYII=" />
+      </ion-col>
+      <ion-col width-40>
+        <hr style="width: 100%; display:inline-block" />
+      </ion-col>
+
+    </ion-row>
+
+    <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col width-100>
+          <div class="weui-cells__title" style= "color:blue">一寸光阴一寸金，寸金难买寸光阴</div>
+          <div class="weui-cells weui-cells_form" >
+            <div class="weui-cell">
+              <div class="weui-cell__bd" div-placeholder="这一刻的想法..." contenteditable="true" [(contenteditableModel)]= "sprint.description">
+              </div>
+            </div>
           </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="weui-grids">
+          <a href="javascript:;" class="weui-grid">
+            <div class="weui-grid__icon">
+              <img src="./assets/images/icon_tabbar.png" alt="">
+            </div>
+            <p class="weui-grid__label">Grid</p>
+          </a>
+          <a href="javascript:;" class="weui-grid">
+            <div class="weui-grid__icon">
+              <img src="./assets/images/icon_tabbar.png" alt="">
+            </div>
+            <p class="weui-grid__label">Grid</p>
+          </a>
+          <a href="javascript:;" class="weui-grid">
+            <div class="weui-grid__icon">
+              <img src="./assets/images/icon_tabbar.png" alt="">
+            </div>
+            <p class="weui-grid__label">Grid</p>
+          </a>
+          <a href="javascript:;" class="weui-grid">
+            <div class="weui-grid__icon">
+              <img src="./assets/images/icon_tabbar.png" alt="">
+            </div>
+            <p class="weui-grid__label">Grid</p>
+          </a>
+          <a href="javascript:;" class="weui-grid">
+            <div class="weui-grid__icon">
+              <img src="./assets/images/icon_tabbar.png" alt="">
+            </div>
+            <p class="weui-grid__label">Grid</p>
+          </a>
+          <a href="javascript:;" class="weui-grid">
+            <div class="weui-grid__icon">
+              <img src="./assets/images/icon_tabbar.png" alt="">
+            </div>
+            <p class="weui-grid__label">Grid</p>
+          </a>
+          <a href="javascript:;" class="weui-grid">
+            <div class="weui-grid__icon">
+              <img src="./assets/images/icon_tabbar.png" alt="">
+            </div>
+            <p class="weui-grid__label">Grid</p>
+          </a>
+          <a href="javascript:;" class="weui-grid">
+            <div class="weui-grid__icon">
+              <img src="./assets/images/icon_tabbar.png" alt="">
+            </div>
+            <p class="weui-grid__label">Grid</p>
+          </a>
+          <a href="javascript:;" class="weui-grid">
+            <div class="weui-grid__icon">
+              <img src="./assets/images/icon_tabbar.png" alt="">
+            </div>
+            <p class="weui-grid__label">Grid</p>
+          </a>
         </div>
-      </div>
+      </ion-row>
       <ion-row>
         <ion-col>
           <button class = "social-cards-likes" ion-button icon-left clear small>
             <ion-icon name="thumbs-up"></ion-icon>
-            <div>{{sprint.likes}} Likes</div>
+            <div>{{sprint.likes}} 赞</div>
           </button>
         </ion-col>
         <ion-col>
           <button class = "social-cards-likes" ion-button icon-left clear small>
             <ion-icon name="text"></ion-icon>
-            <div>4 Comments</div>
+            <div>4 评论</div>
           </button>
         </ion-col>
         <ion-col center text-center>
-          <ion-note>
-            11h ago
-          </ion-note>
+          <button class = "social-cards-likes" ion-button icon-left clear small>
+            <ion-icon name="more"></ion-icon>
+            <div>更多</div>
+          </button>
         </ion-col>
       </ion-row>
+    </ion-grid>
 
-    </ion-card>
+  </ion-card>
+  </div>
 </ion-content>
 
 <style>

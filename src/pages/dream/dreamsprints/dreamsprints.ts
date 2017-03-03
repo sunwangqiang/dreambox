@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
 import { Dream, DreamSprint, DreamBox, DreamBoxService } from '../../../services/dreambox.service'
-import { NewSprintPage } from './newsprint/newsprint'
+import { NewSprintPage } from '../newsprint/newsprint'
 
 @Component({
   selector: 'page-contact',
-  templateUrl: 'dreamsprints.html'
+  templateUrl: 'dreamsprints.html',
 })
 export class DreamSprintsPage {
   dream: Dream;
@@ -27,5 +27,11 @@ export class DreamSprintsPage {
   }
   addSprint(){
     this.dreamBoxService.addSprint(this.dream, new DreamSprint());
+  }
+  detailSprint(sprint:DreamSprint){
+    this.navCtrl.push(NewSprintPage, {dream: this.dream, sprint:sprint} );
+  }
+  likeSprint(sprint:DreamSprint){
+    sprint.likes++;
   }
 }

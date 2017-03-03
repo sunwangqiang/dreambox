@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicframework.myionic2project152041" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>梦想盒子</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="sunwangqiang@gmail.com" href="http://ionicframework.com/">Dream Box Team</author>
+    <name>梦想树</name>
+    <description>一个帮助大家实现梦想的APP.</description>
+    <author email="sunwangqiang@gmail.com" href="http://ionicframework.com/">DreamTree Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />

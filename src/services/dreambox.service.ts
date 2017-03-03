@@ -15,6 +15,7 @@ export class DreamSprint{
     stars:number = 0;
     likes:number = 0;
     dislikes:number = 0;
+    expose:boolean = true;
     totalPictures:number = 0;
     totalAudios:number = 0;
     totalVideos:number = 0;
