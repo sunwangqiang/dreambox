@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
-import { Dream, DreamSprint, DreamBox, DreamBoxService } from '../../../services/dreambox.service'
-import { NewSprintPage } from '../newsprint/newsprint'
+import { Dream, DreamSprint, DreamService } from '../../../services/dream.service'
+import { SprintDetailsPage } from './sprintdetails/sprintdetails'
 
 @Component({
   selector: 'page-contact',
@@ -13,24 +13,18 @@ export class DreamSprintsPage {
   sprints:DreamSprint[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public dreamBoxService:DreamBoxService) {
+              public dreamService:DreamService) {
     this.dream = navParams.get('dream');
     this.sprints = this.dream.sprints;
-
-    /*
-     * if there is no sprint, then add it
-     */
-    if(this.sprints.length == 0){
-      this.addSprint()
-      console.log(this.sprints);
-    }
   }
   addSprint(){
-    this.dreamBoxService.addSprint(this.dream, new DreamSprint());
+    this.navCtrl.push(SprintDetailsPage, {dream: this.dream} );
+    //this.dreamService.addSprint(this.dream, new DreamSprint());
   }
   detailSprint(sprint:DreamSprint){
-    this.navCtrl.push(NewSprintPage, {dream: this.dream, sprint:sprint} );
+    this.navCtrl.push(SprintDetailsPage, {dream: this.dream, sprint:sprint} );
   }
+
   likeSprint(sprint:DreamSprint){
     sprint.likes++;
   }

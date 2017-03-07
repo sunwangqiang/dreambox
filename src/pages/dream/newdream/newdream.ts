@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
 
-import { Dream, DreamBox, DreamBoxService } from '../../../services/dreambox.service'
+import { Dream, DreamService } from '../../../services/dream.service'
 
 @Component({
   selector: 'page-contact',
@@ -13,7 +13,7 @@ export class NewDreamPage {
   newDream:boolean = false;
 
   constructor(public navCtrl: NavController,  public navParams: NavParams,
-              public dreamBoxService:DreamBoxService) {
+              public dreamService:DreamService) {
     let d = navParams.get('dream');
     //Edit dream
     if(d != undefined) {
@@ -27,7 +27,7 @@ export class NewDreamPage {
   ngOnDestroy() {
     // new dream
     if(this.newDream == true){
-      this.dreamBoxService.addDream(this.dream);
+      this.dreamService.addDream(this.dream);
     }
   }
 

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 
 import { NavController, AlertController } from 'ionic-angular';
-import { DreamBoxService, DreamBox, Dream} from '../../services/dreambox.service'
+import { DreamService, DreamTree, Dream} from '../../services/dream.service'
 import { DreamSprintsPage } from './dreamsprints/dreamsprints'
 import { NewDreamPage } from './newdream/newdream'
-import { NewSprintPage } from './newsprint/newsprint'
 
 @Component({
   selector: 'page-home',
@@ -14,11 +13,11 @@ export class DreamPage {
   dreams:Dream[]=[];
 
   constructor(public navCtrl: NavController,
-              public dreamBoxService:DreamBoxService,
+              public dreamService:DreamService,
               public alertController: AlertController) {
   }
   ngOnInit(){
-    this.dreamBoxService.getDreamBox().then((d:DreamBox)=>{
+    this.dreamService.getDreamTree().then((d:DreamTree)=>{
       if(d){
         this.dreams = d.dreams;
       }
@@ -30,12 +29,10 @@ export class DreamPage {
   dreamAdd(event){
     this.navCtrl.push(NewDreamPage, {dream: undefined});
   }
-  sprintAdd(event, dream:Dream){
-    this.navCtrl.push(NewSprintPage, {dream: dream} );
-  }
   dreamPressed(event, dream:Dream) {
     let confirm = this.alertController.create({
       title: '确认删除？',
+
       message: dream.title,
       buttons: [
         {
@@ -48,7 +45,7 @@ export class DreamPage {
           text: '确认',
           handler: () => {
             console.log('Agree clicked');
-            this.dreamBoxService.delDream(dream);
+            this.dreamService.delDream(dream);
           }
         }
       ]

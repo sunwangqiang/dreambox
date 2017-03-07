@@ -7,11 +7,13 @@ import { discoverPage } from '../pages/discover/discover';
 import { DreamPage } from '../pages/dream/dream';
 import { DreamSprintsPage } from '../pages/dream/dreamsprints/dreamsprints'
 import { NewDreamPage } from '../pages/dream/newdream/newdream'
-import { NewSprintPage } from '../pages/dream/newsprint/newsprint'
+import { SprintDetailsPage } from '../pages/dream/dreamsprints/sprintdetails/sprintdetails'
 import { TabsPage } from '../pages/tabs/tabs';
-import { DreamBoxService } from '../services/dreambox.service'
+import { DreamService } from '../services/dream.service'
 
 import {ContenteditableModel} from '../common/contenteditableModel.directive'
+import {Autosize} from '../common/autosize.directive';
+import { Keyboard } from 'ionic-native'
 
 import { Storage } from '@ionic/storage';
 export function provideStorage() {
@@ -26,11 +28,13 @@ export function provideStorage() {
     DreamPage,
     DreamSprintsPage,
     NewDreamPage,
-    NewSprintPage,
+    SprintDetailsPage,
     TabsPage,
     MinePage,
     ContenteditableModel,
+    Autosize,
   ],
+
   imports: [
     IonicModule.forRoot(MyApp)
   ],
@@ -42,14 +46,14 @@ export function provideStorage() {
     DreamPage,
     DreamSprintsPage,
     NewDreamPage,
-    NewSprintPage,
+    SprintDetailsPage,
     TabsPage,
     MinePage,
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: Storage, useFactory: provideStorage },
-    DreamBoxService,
+    DreamService,Keyboard,
   ]
 })
 export class AppModule {}
