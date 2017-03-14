@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { NavController, NavParams } from 'ionic-angular';
-import { Dream, DreamSprint, DreamService } from '../../../services/dream.service'
+import { NavController, NavParams, Events } from 'ionic-angular';
+import { Sprint, DreamService } from '../../../services/dream.service'
 import { SprintDetailsPage } from './sprintdetails/sprintdetails'
 
 @Component({
@@ -9,23 +9,45 @@ import { SprintDetailsPage } from './sprintdetails/sprintdetails'
   templateUrl: 'dreamsprints.html',
 })
 export class DreamSprintsPage {
-  dream: Dream;
-  sprints:DreamSprint[];
+  sprintViewModels:Sprint[] = [];
+  sprintBaseUrl:string = undefined;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              public dreamService:DreamService) {
-    this.dream = navParams.get('dream');
-    this.sprints = this.dream.sprints;
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public dreamService:DreamService,
+              public events: Events) {
+
+    let dreamBaseUrl:string = navParams.get('DreamBaseUrl');
+    let dreamUid:number = navParams.get('DreamUid');
+
+    this.sprintBaseUrl = dreamBaseUrl +"/" + dreamUid + "/Sprint";
+    this.dreamService.listObject(this.sprintBaseUrl).then((sprints)=>{
+        sprints.forEach((value, index, array)=>{
+          this.transformSprintToViewModel(value);
+        })
+      });
+  }
+  /**
+   * Transform service sprints to view Model
+   * @param sprint, sprint that get from service layer
+   */
+  transformSprintToViewModel(sprint: Sprint) {
+    this.sprintViewModels.push(sprint);
   }
   addSprint(){
-    this.navCtrl.push(SprintDetailsPage, {dream: this.dream} );
-    //this.dreamService.addSprint(this.dream, new DreamSprint());
+    this.events.subscribe('DreamSprintPage:addSprint', (s) => {
+      this.transformSprintToViewModel(s as Sprint);
+      this.dreamService.setObject(this.sprintBaseUrl+"/"+(s as Sprint).uid, s);
+      this.events.unsubscribe('DreamSprintPage:addSprint');
+    })
+    this.navCtrl.push(SprintDetailsPage, 
+      { SprintBaseUrl:this.sprintBaseUrl, SprintUid:undefined } );
   }
-  detailSprint(sprint:DreamSprint){
-    this.navCtrl.push(SprintDetailsPage, {dream: this.dream, sprint:sprint} );
+  detailSprint(sprintModel:Sprint){
+    this.navCtrl.push(SprintDetailsPage, 
+      { SprintBaseUrl:this.sprintBaseUrl, SprintUid:sprintModel.uid } );
   }
-
-  likeSprint(sprint:DreamSprint){
+  likeSprint(sprint:Sprint){
     sprint.likes++;
   }
 }

@@ -14,8 +14,8 @@
 <ion-content class="cards-bg social-cards">
   <img src="./assets/images/dreamtree.jpg" />
 
-  <div *ngIf="sprints.length">
-    <div *ngFor="let sprint of sprints">
+  <div *ngIf="sprintViewModels.length">
+    <div *ngFor="let sprintModel of sprintViewModels">
       <!-- footprint begin-->
       <ion-row style=" width:100%;">
         <ion-col width-33>
@@ -38,9 +38,9 @@
         </ion-card-header>
 
         <ion-card-content>
-          <p>{{sprint.description}}</p>
+          <p>{{sprintModel.description}}</p>
         </ion-card-content>
-        
+
         <ion-row>
           <ion-col>
             <button ion-button icon-left clear small>
@@ -55,7 +55,7 @@
         </button>
           </ion-col>
           <ion-col center text-center>
-            <button ion-button icon-left clear small (click)="detailSprint(sprint)">
+            <button ion-button icon-left clear small (click)="detailSprint(sprintModel)">
             <ion-icon name="more"></ion-icon>
             <div>更多</div>
           </button>
@@ -184,23 +184,11 @@
   .social-cards {
     background-color: #F8F8F8;
   }
-
-
-
-
-
-
-
+  
   .social-cards ion-col {
     padding: 0;
   }
-
-
-
-
-
-
-
+  
   .social-cards-likes {
     color: #179B16;
   }

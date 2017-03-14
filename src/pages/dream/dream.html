@@ -4,7 +4,7 @@
       梦想树
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="dreamAdd($event)">
+      <button ion-button icon-only (click)="addDream($event)">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -13,14 +13,15 @@
 
 <ion-content>
   <div class="weui-cells">
-    <div tappable class="weui-cell weui-cell_access" *ngFor="let dream of dreams" (click)="dreamTapped($event, dream)" (press)="dreamPressed($event, dream)">
+    <div tappable class="weui-cell weui-cell_access" *ngFor="let dreamModel of dreamViewModels" 
+                 (tap)="tapDream($event, dreamModel)" (press)="pressDream($event, dreamModel)">
       <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-        <button class="weui-btn weui-btn_primary" style="font-size: 13px; width: 50px;display: block">{{dream.life}}</button>
+        <button class="weui-btn weui-btn_primary" style="font-size: 13px; width: 50px;display: block">{{dreamModel.life}}</button>
         <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>
       </div>
       <div class="weui-cell__bd" style="text-overflow: ellipsis;overflow: hidden;">
-        <p>{{dream.title}}</p>
-        <p style="font-size: 13px;color: #888888;">{{dream.description}}</p>
+        <p>{{dreamModel.title}}</p>
+        <p style="font-size: 13px;color: #888888;">{{dreamModel.description}}</p>
       </div>
       <div class="weui-cell__ft">
       </div>

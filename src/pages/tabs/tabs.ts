@@ -19,28 +19,31 @@ export class TabsPage implements OnInit{
   mine: any = MinePage;
   tabbar:HTMLElement;
 
-  constructor(keyboard: Keyboard) {
-      Keyboard.onKeyboardShow().subscribe(() => { this.hideTabbar() });
-      Keyboard.onKeyboardHide().subscribe(() => { this.showTabbar() });
-/*    
+  constructor(keyboard: Keyboard, private platform: Platform) { 
     platform.ready().then(() => {
       //console.log(platform);
-      Keyboard.onKeyboardShow().subscribe(() => { this.hideTabbar() });
-      Keyboard.onKeyboardHide().subscribe(() => { this.showTabbar() });
-    }
+        //Keyboard.onKeyboardShow().subscribe(() => { this.hideTabbar });
+        //Keyboard.onKeyboardHide().subscribe(() => { this.showTabbar }); 
+
+        window.addEventListener('native.keyboardhide', this.showTabbar);
+        window.addEventListener('native.keyboardshow', this.hideTabbar);
+      }
     );
-*/
+
   }
+
   ngOnInit() {
     this.tabbar =  <HTMLElement>document.getElementsByClassName('tabbar')[0];
-    //console.log(this.tabbar);
+    console.log("######", this.tabbar);
   }
-  showTabbar(){
-    this.tabbar.style.display = 'block';
+  showTabbar(e){
     console.log("showTabbar");
+    this.tabbar =  <HTMLElement>document.getElementsByClassName('tabbar')[0];
+    this.tabbar.style.display = '';
   }
-  hideTabbar(){
-    this.tabbar.style.display = 'none';
+  hideTabbar(e){
     console.log("hideTabbar");
+    this.tabbar =  <HTMLElement>document.getElementsByClassName('tabbar')[0];
+    this.tabbar.style.display = 'none';
   }
 }

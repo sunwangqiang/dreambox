@@ -9,16 +9,16 @@
 <ion-content>
 
   <ion-item>
-    <p>{{sprint.motto}}</p>
+    <p>{{sprintViewModel.motto}}</p>
   </ion-item>
 
   <ion-card-content>
-    <ion-textarea placeholder="这一刻的想法" autosize [(ngModel)]="sprint.description"></ion-textarea>
+    <ion-textarea placeholder="这一刻的想法" autosize [(ngModel)]="sprintViewModel.description"></ion-textarea>
   </ion-card-content>
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button outline (click)="addmediam()">
+        <button ion-button outline (click)="addmedia()">
           <ion-icon name='add' is-active="false" ></ion-icon>
         </button>
       </ion-col>
@@ -38,7 +38,7 @@
         </button>
     </ion-col>
     <ion-col center text-center>
-      <button ion-button icon-left clear small (click)="detailSprint(sprint)">
+      <button ion-button icon-left clear small (click)="detailSprint(sprintViewModel)">
             <ion-icon name="more"></ion-icon>
             <div>更多</div>
           </button>

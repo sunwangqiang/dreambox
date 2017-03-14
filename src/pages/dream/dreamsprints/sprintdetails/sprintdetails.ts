@@ -1,37 +1,49 @@
 import { Component } from '@angular/core';
-
-import { AlertController, NavController, NavParams } from 'ionic-angular';
-
-import { Dream, DreamSprint, DreamService } from '../../../../services/dream.service'
+import { AlertController, NavController, NavParams , Events} from 'ionic-angular';
+import { Sprint, DreamService } from '../../../../services/dream.service'
 
 @Component({
   selector: 'page-contact',
   templateUrl: 'sprintdetails.html',
 })
 export class SprintDetailsPage {
-  dream:Dream;
-  sprint:DreamSprint;
-  newSprint:boolean = false;
+  sprintViewModel:Sprint = new Sprint();
+  newSprint:Sprint = undefined;
+  sprintUrl:string;
 
-  constructor(public navCtrl: NavController,  public navParams: NavParams,
+  constructor(public navCtrl: NavController,  
+              public navParams: NavParams,
               public dreamService:DreamService,
-              public alertController: AlertController) {
-    let s = navParams.get('sprint');
-    this.dream = navParams.get('dream');
-    if(s != undefined) {
-      this.sprint = s;
+              public alertController: AlertController,
+              public events: Events) {
+
+    let sprintBaseUrl = navParams.get('SprintBaseUrl');
+    let sprintUid = navParams.get("SprintUid");
+
+    if(sprintUid != undefined) {
+      this.sprintUrl = sprintBaseUrl+"/"+sprintUid;
+      this.dreamService.getObject(this.sprintUrl).then((sprint)=>{
+        this.transformSprintToViewModel(sprint);
+      })
     }else{
-      this.sprint = new DreamSprint();
-      this.newSprint = true;
+      this.dreamService.addObject(sprintBaseUrl).then((sprint)=>{
+        this.transformSprintToViewModel(sprint);
+        this.newSprint = sprint;
+      });
     }
   }
 
-  ngOnDestroy() {
-    if(this.newSprint){
-      this.dreamService.addSprint(this.dream, this.sprint);
+  transformSprintToViewModel(sprint: Sprint) {
+    this.sprintViewModel = sprint;
+  }
+
+  ionViewWillLeave(){
+    // new dream
+    if(this.newSprint != undefined){
+      this.events.publish('DreamSprintPage:addSprint', this.newSprint);
     }
   }
-  addmediam():void {
+  addmedia():void {
 
     let promptmenu = this.alertController.create({
       cssClass:'custom-alert',
