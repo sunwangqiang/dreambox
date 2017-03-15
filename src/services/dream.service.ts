@@ -173,7 +173,7 @@ export class DreamService {
                     }
                     // end with number?
                     let index: string = v.substring(key.length + 1);
-                    if ((index.length == 0) || (+index != +index) {
+                    if ((index.length == 0) || (+index != +index)){
                         return;
                     }
                     console.log("OK, found object:", v);
