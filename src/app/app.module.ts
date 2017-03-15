@@ -9,7 +9,7 @@ import { DreamSprintsPage } from '../pages/dream/dreamsprints/dreamsprints'
 import { NewDreamPage } from '../pages/dream/newdream/newdream'
 import { SprintDetailsPage } from '../pages/dream/dreamsprints/sprintdetails/sprintdetails'
 import { TabsPage } from '../pages/tabs/tabs';
-import { DreamService } from '../services/dream.service'
+import { DreamService, DataAccessService } from '../services/dream.service'
 
 import {ContenteditableModel} from '../common/contenteditableModel.directive'
 import {Autosize} from '../common/autosize.directive';
@@ -53,7 +53,7 @@ export function provideStorage() {
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: Storage, useFactory: provideStorage },
-    DreamService,Keyboard,
+    DreamService,DataAccessService,Keyboard,
   ]
 })
 export class AppModule {}
