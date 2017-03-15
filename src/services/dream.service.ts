@@ -162,26 +162,33 @@ export class DreamService {
      * @param key looks like "/DreamTree/:id/Dream/:id/Sprint"
      */
     listObject(key: string): Promise<any[]> {
-        let objects:any[] = [];
         console.log("listObject ", key);
-        return this.storage.keys().then((k)=>{
-            k.forEach((v, i, a)=>{
-                if(v.indexOf(key) != 0){
-                    return;
-                }
-                // end with number?
-                let index: string = v.substring(key.length+1);
-                debugger;
-                if(+index != +index){
-                    return;
-                }
-                console.log("OK, found object:", v);
-                this.storage.get(v).then((value)=>{
-                    objects.push(value);
+        let objects = [];
+        let promises = [];
+        return this.storage.keys().then((k) => {
+            let validKeys: string[] = [];
+                k.forEach((v, i, a) => {
+                    if (v.indexOf(key) != 0) {
+                        return;
+                    }
+                    // end with number?
+                    let index: string = v.substring(key.length + 1);
+                    if ((index.length == 0) || (+index != +index) {
+                        return;
+                    }
+                    console.log("OK, found object:", v);
+                    validKeys.push(v);
                 });
-            });
-            console.log(objects);
-            return objects;
-        })
+                return validKeys;
+        }).then((keys) => { 
+            keys.forEach((v, i, a) => {
+                promises.push(this.storage.get(v).then((value) => {
+                                objects.push(value);
+                              }));
+            })
+            return promises;
+        }).then((p) => {
+            return Promise.all(p).then(()=>{return objects});
+        });
     }
 }
