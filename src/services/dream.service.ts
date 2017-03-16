@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
-interface DataObjectFactory{
+interface DataObjectFactory {
     add(key: string): Promise<any>;
     del(key: string): Promise<any>;
     set(key: string, value: any): Promise<any>;
@@ -23,8 +23,9 @@ export class DreamTree {
     dreamsUrl: string[];
 }
 
-class DreamTreeFactory implements DataObjectFactory{
-    constructor(private dataAcessService:DataAccessService){
+class DreamTreeFactory implements DataObjectFactory {
+    constructor(private dataAcessService: DataAccessService,
+        private dataModelService: DataModelService) {
         dataAcessService.clear();
         this.dataAcessService.get("/DreamTree/0").then((val) => {
             if (val == undefined) {
@@ -33,19 +34,19 @@ class DreamTreeFactory implements DataObjectFactory{
             }
         });
     }
-    add(key: string): Promise<any>{
+    add(key: string): Promise<any> {
         return Promise.resolve(undefined);
     }
-    del(key: string): Promise<any>{
+    del(key: string): Promise<any> {
         return Promise.resolve(undefined);
     }
-    set(key: string, value: any): Promise<any>{
+    set(key: string, value: any): Promise<any> {
         return Promise.resolve(undefined);
     }
-    get(key: string): Promise<any>{
+    get(key: string): Promise<any> {
         return Promise.resolve(undefined);
     }
-    list(key: string): Promise<any[]>{
+    list(key: string): Promise<any[]> {
         return Promise.resolve(undefined);
     }
 }
@@ -82,27 +83,27 @@ export class Dream {
     }
 }
 
-class DreamFactory implements DataObjectFactory{
-    constructor(private dataAcessService:DataAccessService){
-
+class DreamFactory implements DataObjectFactory {
+    constructor(private dataAcessService: DataAccessService,
+        private dataModelService: DataModelService) {
     }
 
-    add(key: string): Promise<any>{
+    add(key: string): Promise<any> {
         let dream = new Dream();
         this.dataAcessService.set(key + "/" + dream.uid, dream);
         return Promise.resolve(dream);
     }
 
-    del(key: string): Promise<any>{
+    del(key: string): Promise<any> {
         return this.dataAcessService.del(key);
     }
-    set(key: string, value: any): Promise<any>{
+    set(key: string, value: any): Promise<any> {
         return this.dataAcessService.set(key, value);
     }
-    get(key: string): Promise<any>{
+    get(key: string): Promise<any> {
         return this.dataAcessService.get(key);
     }
-    list(key: string): Promise<any[]>{
+    list(key: string): Promise<any[]> {
         return this.dataAcessService.list(key);
     }
 }
@@ -117,25 +118,26 @@ export class DreamTreeUser {
     avatar: string;
 }
 
-class DreamUserFactory implements DataObjectFactory{
-    constructor(private dataAcessService:DataAccessService){
+class DreamUserFactory implements DataObjectFactory {
+    constructor(private dataAcessService: DataAccessService,
+        private dataModelService: DataModelService) {
 
     }
 
-    add(key: string): Promise<any>{
+    add(key: string): Promise<any> {
         return Promise.resolve(undefined);
     }
 
-    del(key: string): Promise<any>{
+    del(key: string): Promise<any> {
         return this.dataAcessService.del(key);
     }
-    set(key: string, value: any): Promise<any>{
+    set(key: string, value: any): Promise<any> {
         return this.dataAcessService.set(key, value);
     }
-    get(key: string): Promise<any>{
+    get(key: string): Promise<any> {
         return this.dataAcessService.get(key);
     }
-    list(key: string): Promise<any[]>{
+    list(key: string): Promise<any[]> {
         return this.dataAcessService.list(key);
     }
 }
@@ -169,27 +171,28 @@ export class Sprint {
     }
 }
 
-class SprintFactory implements DataObjectFactory{
-    constructor(private dataAcessService:DataAccessService){
+class SprintFactory implements DataObjectFactory {
+    constructor(private dataAcessService: DataAccessService,
+        private dataModelService: DataModelService) {
 
     }
 
-    add(key: string): Promise<any>{
+    add(key: string): Promise<any> {
         let sprint = new Sprint();
         this.dataAcessService.set(key + "/" + sprint.uid, sprint);
         return Promise.resolve(sprint);
     }
 
-    del(key: string): Promise<any>{
+    del(key: string): Promise<any> {
         return this.dataAcessService.del(key);
     }
-    set(key: string, value: any): Promise<any>{
+    set(key: string, value: any): Promise<any> {
         return this.dataAcessService.set(key, value);
     }
-    get(key: string): Promise<any>{
+    get(key: string): Promise<any> {
         return this.dataAcessService.get(key);
     }
-    list(key: string): Promise<any[]>{
+    list(key: string): Promise<any[]> {
         return this.dataAcessService.list(key);
     }
 }
@@ -198,23 +201,23 @@ class SprintFactory implements DataObjectFactory{
  * used for access local Storage or remote database
  */
 @Injectable()
-export class DataAccessService{
-    constructor(public storage: Storage){
+export class DataAccessService {
+    constructor(public storage: Storage) {
 
     }
-    del(key: string): Promise<any>{
+    del(key: string): Promise<any> {
         return this.storage.remove(key);;
     }
-    set(key: string, value: any): Promise<any>{
+    set(key: string, value: any): Promise<any> {
         return this.storage.set(key, value);
     }
-    clear(){
+    clear() {
         return this.storage.clear();
     }
-    get(key: string): Promise<any>{
+    get(key: string): Promise<any> {
         return this.storage.get(key);
     }
-    list(key: string): Promise<any[]>{
+    list(key: string): Promise<any[]> {
         console.log("list Object ", key);
         let objects = [];
         let promises = [];
@@ -251,12 +254,12 @@ export class DataAccessService{
  */
 @Injectable()
 export class DataModelService {
-    dataObjectFactorys:{string, DataObjectFactory} = {} as {string, DataObjectFactory};
+    dataObjectFactorys: { string, DataObjectFactory } = {} as { string, DataObjectFactory };
 
     constructor(public dataAcessService: DataAccessService) {
-        this.dataObjectFactorys["/DreamTree"] = new DreamTreeFactory(dataAcessService);
-        this.dataObjectFactorys["/DreamTree/Dream"] = new DreamFactory(dataAcessService);
-        this.dataObjectFactorys["/DreamTree/Dream/Sprint"] = new SprintFactory(dataAcessService);
+        this.dataObjectFactorys["/DreamTree"] = new DreamTreeFactory(dataAcessService, this);
+        this.dataObjectFactorys["/DreamTree/Dream"] = new DreamFactory(dataAcessService, this);
+        this.dataObjectFactorys["/DreamTree/Dream/Sprint"] = new SprintFactory(dataAcessService, this);
     }
     /**
      * create a new object
@@ -265,19 +268,18 @@ export class DataModelService {
      */
     add(key: string): Promise<any> {
         console.log("add Object ", key, );
-        let factory:DataObjectFactory = 
+        let factory: DataObjectFactory =
             this.dataObjectFactorys[key.replace(/\/[0-9]/g, "")];
-        if(!factory){
+        if (!factory) {
             console.log("invalid object" + key);
             return Promise.resolve(undefined);
         }
         //TODO: check key endwith [a-Z]
         // check parent exist
         let lastSlash = key.lastIndexOf("/");
-        let type: string = key.substr(lastSlash + 1);
         let parent: string = key.substr(0, lastSlash);
 
-        if(!this.dataAcessService.get(key)){
+        if (!this.dataAcessService.get(parent)) {
             return Promise.resolve(undefined);
         }
         return factory.add(key);
@@ -288,9 +290,9 @@ export class DataModelService {
      */
     del(key: string): Promise<any> {
         console.log("del Object ", key);
-        let factory:DataObjectFactory = 
+        let factory: DataObjectFactory =
             this.dataObjectFactorys[key.replace(/\/[0-9]/g, "")];
-        if(!factory){
+        if (!factory) {
             console.log("invalid object" + key);
             return undefined;
         }
@@ -304,9 +306,9 @@ export class DataModelService {
         console.log("set Object ", key, "value:");
         console.dir(value);
 
-        let factory:DataObjectFactory = 
+        let factory: DataObjectFactory =
             this.dataObjectFactorys[key.replace(/\/[0-9]/g, "")];
-        if(!factory){
+        if (!factory) {
             console.log("invalid object" + key);
             return undefined;
         }
@@ -320,9 +322,9 @@ export class DataModelService {
      */
     get(key: string): Promise<any> {
         console.log("get Object ", key);
-        let factory:DataObjectFactory = 
+        let factory: DataObjectFactory =
             this.dataObjectFactorys[key.replace(/\[0-9]/g, "")];
-        if(!factory){
+        if (!factory) {
             console.log("invalid object" + key);
             return undefined;
         }
@@ -334,9 +336,9 @@ export class DataModelService {
      */
     list(key: string): Promise<any[]> {
         console.log("list Object ", key);
-        let factory:DataObjectFactory = 
+        let factory: DataObjectFactory =
             this.dataObjectFactorys[key.replace(/\/[0-9]/g, "")];
-        if(!factory){
+        if (!factory) {
             console.log("invalid object" + key);
             return Promise.resolve(undefined);
         }
