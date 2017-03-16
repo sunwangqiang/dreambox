@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams , Events} from 'ionic-angular';
-import { Sprint, DreamService } from '../../../../services/dream.service'
+import { Sprint, DataModelService } from '../../../../services/dream.service'
 
 @Component({
   selector: 'page-contact',
@@ -13,7 +13,7 @@ export class SprintDetailsPage {
 
   constructor(public navCtrl: NavController,  
               public navParams: NavParams,
-              public dreamService:DreamService,
+              public dataModelService:DataModelService,
               public alertController: AlertController,
               public events: Events) {
 
@@ -22,11 +22,11 @@ export class SprintDetailsPage {
 
     if(sprintUid != undefined) {
       this.sprintUrl = sprintBaseUrl+"/"+sprintUid;
-      this.dreamService.getObject(this.sprintUrl).then((sprint)=>{
+      this.dataModelService.get(this.sprintUrl).then((sprint)=>{
         this.transformSprintToViewModel(sprint);
       })
     }else{
-      this.dreamService.addObject(sprintBaseUrl).then((sprint)=>{
+      this.dataModelService.add(sprintBaseUrl).then((sprint)=>{
         this.transformSprintToViewModel(sprint);
         this.newSprint = sprint;
       });

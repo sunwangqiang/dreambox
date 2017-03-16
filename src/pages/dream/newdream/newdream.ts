@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Events } from 'ionic-angular';
-import { Dream, DreamService } from '../../../services/dream.service'
+import { Dream, DataModelService } from '../../../services/dream.service'
 
 @Component({
   selector: 'page-contact',
@@ -13,7 +13,7 @@ export class NewDreamPage {
   dreamUrl:string;
   
   constructor(public navCtrl: NavController,  public navParams: NavParams,
-              public dreamService:DreamService, public events: Events) {
+              public dataModelService:DataModelService, public events: Events) {
     let dreamBaseUrl:string = navParams.get('DreamBaseUrl');
     let dreamUid:number = navParams.get('DreamUid');
 
@@ -21,11 +21,11 @@ export class NewDreamPage {
     //Edit dream
     if(dreamUid != undefined) {
       this.dreamUrl = dreamBaseUrl+"/"+dreamUid;
-      this.dreamService.getObject(this.dreamUrl).then((d)=>{
+      this.dataModelService.get(this.dreamUrl).then((d)=>{
         this.transformDreamToViewModel(d);
       });
     }else{
-      this.dreamService.addObject(dreamBaseUrl).then((d)=>{
+      this.dataModelService.add(dreamBaseUrl).then((d)=>{
         this.transformDreamToViewModel(d);
         this.newDream = d;
       });

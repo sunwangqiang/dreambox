@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController, AlertController, Events } from 'ionic-angular';
-import { DreamService, Dream } from '../../services/dream.service'
+import { DataModelService, Dream } from '../../services/dream.service'
 import { DreamSprintsPage } from './dreamsprints/dreamsprints'
 import { NewDreamPage } from './newdream/newdream'
 
@@ -15,7 +15,7 @@ export class DreamPage {
   baseUrl: string = "/DreamTree/0/Dream";
 
   constructor(public navCtrl: NavController,
-    public dreamService: DreamService,
+    public dataModelService: DataModelService,
     public alertController: AlertController,
     public events: Events) {
   }
@@ -29,7 +29,7 @@ export class DreamPage {
   }
 
   ngOnInit() {
-    this.dreamService.listObject(this.baseUrl).then((d) => {
+    this.dataModelService.list(this.baseUrl).then((d) => {
       let dreams = d as Dream[];
       dreams.forEach((value, index, array)=>{
         this.transformDreamToViewModel(value);
@@ -45,7 +45,7 @@ export class DreamPage {
   addDream(event) {
     this.events.subscribe('DreamPage:addDream', (d) => {
       this.transformDreamToViewModel(d as Dream);
-      this.dreamService.setObject(this.baseUrl+"/"+(d as Dream).uid, d);
+      this.dataModelService.set(this.baseUrl+"/"+(d as Dream).uid, d);
       this.events.unsubscribe('DreamPage:addDream');
     })
     this.navCtrl.push(NewDreamPage, 
@@ -84,7 +84,7 @@ export class DreamPage {
               this.dreamViewModels.length--;
             }
             //remove from service
-            this.dreamService.delObject(this.baseUrl + dreamModel.uid);
+            this.dataModelService.del(this.baseUrl + dreamModel.uid);
           }
         }
       ]
