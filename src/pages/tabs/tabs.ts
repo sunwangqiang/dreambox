@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 
-import { DreamPage } from '../dream/dream';
+import { DreamTreePage } from '../dream/dreamtree';
 import { FocusPage } from '../focus/focus';
 import { discoverPage } from '../discover/discover';
 import { MinePage } from '../mine/mine';
@@ -13,7 +13,7 @@ import { Platform } from 'ionic-angular';
 export class TabsPage implements OnInit{
   // this tells the tabs component which Pages
   // should be each tab's root Page
-  dream: any = DreamPage;
+  dream: any = DreamTreePage;
   focus: any = FocusPage;
   discover: any = discoverPage;
   mine: any = MinePage;
@@ -21,10 +21,6 @@ export class TabsPage implements OnInit{
 
   constructor(keyboard: Keyboard, private platform: Platform) { 
     platform.ready().then(() => {
-      //console.log(platform);
-        //Keyboard.onKeyboardShow().subscribe(() => { this.hideTabbar });
-        //Keyboard.onKeyboardHide().subscribe(() => { this.showTabbar }); 
-
         window.addEventListener('native.keyboardhide', this.showTabbar);
         window.addEventListener('native.keyboardshow', this.hideTabbar);
       }

@@ -4,14 +4,13 @@ import { MyApp } from './app.component';
 import { MinePage } from '../pages/mine/mine';
 import { FocusPage } from '../pages/focus/focus';
 import { discoverPage } from '../pages/discover/discover';
-import { DreamPage } from '../pages/dream/dream';
+import { DreamTreePage } from '../pages/dream/dreamtree';
 import { DreamSprintsPage } from '../pages/dream/dreamsprints/dreamsprints'
-import { NewDreamPage } from '../pages/dream/newdream/newdream'
+import { DreamDetailsPage } from '../pages/dream/dreamdetails/dreamdetails'
 import { SprintDetailsPage } from '../pages/dream/dreamsprints/sprintdetails/sprintdetails'
 import { TabsPage } from '../pages/tabs/tabs';
 import { DataModelService, DataAccessService } from '../services/dream.service'
 
-import {ContenteditableModel} from '../common/contenteditableModel.directive'
 import {Autosize} from '../common/autosize.directive';
 import { Keyboard } from 'ionic-native'
 
@@ -25,13 +24,12 @@ export function provideStorage() {
     MyApp,
     FocusPage,
     discoverPage,
-    DreamPage,
+    DreamTreePage,
     DreamSprintsPage,
-    NewDreamPage,
+    DreamDetailsPage,
     SprintDetailsPage,
     TabsPage,
     MinePage,
-    ContenteditableModel,
     Autosize,
   ],
 
@@ -43,9 +41,9 @@ export function provideStorage() {
     MyApp,
     FocusPage,
     discoverPage,
-    DreamPage,
+    DreamTreePage,
     DreamSprintsPage,
-    NewDreamPage,
+    DreamDetailsPage,
     SprintDetailsPage,
     TabsPage,
     MinePage,

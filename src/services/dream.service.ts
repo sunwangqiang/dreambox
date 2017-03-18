@@ -14,25 +14,18 @@ interface DataObjectFactory {
  */
 export class DreamTree {
     rootDataModelVersion: string;
-    updateTime: Date;
-    keyWorlds: string[];
-    totalUsers: number;
-    totalDreams: number;
-    totalFans: number;
-    totalFocus: number;
-    dreamsUrl: string[];
+    updateTime: Date = new Date();
+    keyWorlds: string[] = [];
+    totalUsers: number = 0;
+    totalDreams: number = 0;
+    totalFans: number = 0;
+    totalFocus: number = 0;
+    dreamsUid: number[] = [];
 }
 
 class DreamTreeFactory implements DataObjectFactory {
     constructor(private dataAcessService: DataAccessService,
         private dataModelService: DataModelService) {
-        dataAcessService.clear();
-        this.dataAcessService.get("/DreamTree/0").then((val) => {
-            if (val == undefined) {
-                this.dataAcessService.set("/DreamTree/0", new DreamTree());
-                console.log("/DreamTree/0 created");
-            }
-        });
     }
     add(key: string): Promise<any> {
         return Promise.resolve(undefined);
@@ -41,10 +34,20 @@ class DreamTreeFactory implements DataObjectFactory {
         return Promise.resolve(undefined);
     }
     set(key: string, value: any): Promise<any> {
-        return Promise.resolve(undefined);
+        return this.dataAcessService.set(key, value);
     }
     get(key: string): Promise<any> {
-        return Promise.resolve(undefined);
+        return this.dataAcessService.get("/DreamTree/0").then((val) => {
+            let dreamTree;
+            if (val == undefined) {
+                dreamTree = new DreamTree()
+                this.dataAcessService.set("/DreamTree/0", dreamTree);
+                console.log("/DreamTree/0 created");
+            }else{
+                dreamTree = val as DreamTree;
+            }
+            return Promise.resolve(dreamTree);
+        });
     }
     list(key: string): Promise<any[]> {
         return Promise.resolve(undefined);
@@ -75,7 +78,7 @@ export class Dream {
     totalSprints: number;
     totalReports: number;
     owner: DreamTreeUser;
-    sprintsUrl: string[];
+    sprintsUid: number[] = [];
 
     constructor() {
         Dream.gid++;
@@ -95,7 +98,21 @@ class DreamFactory implements DataObjectFactory {
     }
 
     del(key: string): Promise<any> {
-        return this.dataAcessService.del(key);
+        return this.dataModelService.get(key).then((d)=>{
+            let dream = d as Dream;
+            let promises = [];
+            console.log(dream);
+            if(dream){
+                console.log(dream.sprintsUid);
+                dream.sprintsUid.forEach((v, i, a)=>{
+                    console.log("del ", `${key}/Sprint/${v}`);
+                    promises.push( this.dataModelService.del(`${key}/Sprint/${v}`) );
+                });
+            }
+            return promises;
+        }).then((p)=>{
+            return this.dataAcessService.del(key);
+        });
     }
     set(key: string, value: any): Promise<any> {
         return this.dataAcessService.set(key, value);
@@ -121,7 +138,6 @@ export class DreamTreeUser {
 class DreamUserFactory implements DataObjectFactory {
     constructor(private dataAcessService: DataAccessService,
         private dataModelService: DataModelService) {
-
     }
 
     add(key: string): Promise<any> {
@@ -269,7 +285,7 @@ export class DataModelService {
     add(key: string): Promise<any> {
         console.log("add Object ", key, );
         let factory: DataObjectFactory =
-            this.dataObjectFactorys[key.replace(/\/[0-9]/g, "")];
+            this.dataObjectFactorys[key.replace(/\/[0-9]+/g, "")];
         if (!factory) {
             console.log("invalid object" + key);
             return Promise.resolve(undefined);
@@ -291,7 +307,7 @@ export class DataModelService {
     del(key: string): Promise<any> {
         console.log("del Object ", key);
         let factory: DataObjectFactory =
-            this.dataObjectFactorys[key.replace(/\/[0-9]/g, "")];
+            this.dataObjectFactorys[key.replace(/\/[0-9]+/g, "")];
         if (!factory) {
             console.log("invalid object" + key);
             return undefined;
@@ -304,10 +320,10 @@ export class DataModelService {
      */
     set(key: string, value: any): Promise<any> {
         console.log("set Object ", key, "value:");
-        console.dir(value);
+        console.debug(value);
 
         let factory: DataObjectFactory =
-            this.dataObjectFactorys[key.replace(/\/[0-9]/g, "")];
+            this.dataObjectFactorys[key.replace(/\/[0-9]+/g, "")];
         if (!factory) {
             console.log("invalid object" + key);
             return undefined;
@@ -323,10 +339,10 @@ export class DataModelService {
     get(key: string): Promise<any> {
         console.log("get Object ", key);
         let factory: DataObjectFactory =
-            this.dataObjectFactorys[key.replace(/\[0-9]/g, "")];
+            this.dataObjectFactorys[key.replace(/\/[0-9]+/g, "")];
         if (!factory) {
-            console.log("invalid object" + key);
-            return undefined;
+            console.log("invalid object " + key);
+            return Promise.resolve(undefined);
         }
         return factory.get(key);
     }
@@ -337,7 +353,7 @@ export class DataModelService {
     list(key: string): Promise<any[]> {
         console.log("list Object ", key);
         let factory: DataObjectFactory =
-            this.dataObjectFactorys[key.replace(/\/[0-9]/g, "")];
+            this.dataObjectFactorys[key.replace(/\/[0-9]+/g, "")];
         if (!factory) {
             console.log("invalid object" + key);
             return Promise.resolve(undefined);

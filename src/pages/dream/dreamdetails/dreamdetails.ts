@@ -4,40 +4,40 @@ import { Dream, DataModelService } from '../../../services/dream.service'
 
 @Component({
   selector: 'page-contact',
-  templateUrl: 'newdream.html'
+  templateUrl: 'dreamdetails.html'
 })
 
-export class NewDreamPage {
+export class DreamDetailsPage {
   dreamViewModel:Dream = new Dream();
-  newDream:Dream = undefined;
   dreamUrl:string;
   
   constructor(public navCtrl: NavController,  public navParams: NavParams,
               public dataModelService:DataModelService, public events: Events) {
     let dreamBaseUrl:string = navParams.get('DreamBaseUrl');
     let dreamUid:number = navParams.get('DreamUid');
-
-    //this.dream = new Dream();//just a temp dream
-    //Edit dream
+    
     if(dreamUid != undefined) {
-      this.dreamUrl = dreamBaseUrl+"/"+dreamUid;
-      this.dataModelService.get(this.dreamUrl).then((d)=>{
-        this.transformDreamToViewModel(d);
+      this.dataModelService.get(dreamBaseUrl+"/"+dreamUid).then((d)=>{
+        this.dreamViewModel = this.transformDreamToViewModel(d);
+        this.dreamUrl = dreamBaseUrl+"/"+dreamUid;
       });
     }else{
       this.dataModelService.add(dreamBaseUrl).then((d)=>{
-        this.transformDreamToViewModel(d);
-        this.newDream = d;
+        this.dreamViewModel = this.transformDreamToViewModel(d);
+        this.dreamUrl = dreamBaseUrl+"/"+(d as Dream).uid;
       });
     }
   }
-  transformDreamToViewModel(dream: Dream) {
-    this.dreamViewModel = dream;
+  transformDreamToViewModel(dream: Dream):Dream {
+    return dream;
   }
   ionViewWillLeave(){
-    // new dream
-    if(this.newDream != undefined){
-      this.events.publish('DreamPage:addDream', this.newDream);
+    if(this.dreamUrl){
+      this.dataModelService.set(this.dreamUrl, this.dreamViewModel).then(()=>{
+        this.events.publish('DreamPage:UpdateDream', this.dreamUrl);
+      });
+      
     }
+    
   }
 }
