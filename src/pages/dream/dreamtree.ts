@@ -104,7 +104,6 @@ export class DreamTreePage {
             this.events.subscribe('DreamPage:UpdateDream', (key) => {
               this.events.unsubscribe('DreamPage:UpdateDream');
               this.dataModelService.get(key).then((d)=>{
-                debugger;
                 let index = this.dreamViewModels.indexOf(dreamViewModel);
                 if(index != -1){
                   this.dreamViewModels[index] = d as Dream;
