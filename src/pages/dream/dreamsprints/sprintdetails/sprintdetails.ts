@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, NavController, NavParams , Events} from 'ionic-angular';
+import { AlertController, NavController, NavParams, Events } from 'ionic-angular';
 import { Sprint, DataModelService } from '../../../../services/dream.service'
 
 @Component({
@@ -7,28 +7,30 @@ import { Sprint, DataModelService } from '../../../../services/dream.service'
   templateUrl: 'sprintdetails.html',
 })
 export class SprintDetailsPage {
-  sprintViewModel:Sprint = new Sprint();
-  newSprint:Sprint = undefined;
-  sprintUrl:string;
+  sprintViewModel: Sprint = new Sprint();
+  newSprint: Sprint = undefined;
+  sprintkey: string;
 
-  constructor(public navCtrl: NavController,  
-              public navParams: NavParams,
-              public dataModelService:DataModelService,
-              public alertController: AlertController,
-              public events: Events) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public dataModelService: DataModelService,
+    public alertController: AlertController,
+    public events: Events) {
 
-    let sprintBaseUrl = navParams.get('SprintBaseUrl');
+    let sprintBaseKey = navParams.get('SprintBaseKey');
     let sprintUid = navParams.get("SprintUid");
 
-    if(sprintUid != undefined) {
-      this.sprintUrl = sprintBaseUrl+"/"+sprintUid;
-      this.dataModelService.get(this.sprintUrl).then((sprint)=>{
+    if (sprintUid != undefined) {
+      this.sprintkey = sprintBaseKey + "/" + sprintUid;
+      this.dataModelService.get(this.sprintkey).then((sprint) => {
         this.transformSprintToViewModel(sprint);
       })
-    }else{
-      this.dataModelService.add(sprintBaseUrl).then((sprint)=>{
+    } else {
+      this.dataModelService.add(sprintBaseKey).then((s) => {
+        let sprint = s as Sprint;
         this.transformSprintToViewModel(sprint);
         this.newSprint = sprint;
+        this.sprintkey = sprintBaseKey + "/" + sprint.uid;
       });
     }
   }
@@ -37,16 +39,16 @@ export class SprintDetailsPage {
     this.sprintViewModel = sprint;
   }
 
-  ionViewWillLeave(){
+  ionViewWillLeave() {
     // new dream
-    if(this.newSprint != undefined){
-      this.events.publish('DreamSprintPage:addSprint', this.newSprint);
-    }
+    this.dataModelService.set(this.sprintkey, this.sprintViewModel).then(() => {
+      this.events.publish('DreamSprintPage:UpdateSprint', this.sprintkey);
+    });
   }
-  addmedia():void {
+  addmedia(): void {
 
     let promptmenu = this.alertController.create({
-      cssClass:'custom-alert',
+      cssClass: 'custom-alert',
       buttons: [
         {
           text: '照片',

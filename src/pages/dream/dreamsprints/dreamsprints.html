@@ -12,8 +12,45 @@
 </ion-header>
 
 <ion-content class="cards-bg social-cards">
-  <img src="./assets/images/dreamtree.jpg" />
-
+  <ion-card>
+    <img src="./assets/images/dreamtree.jpg" />
+    <div class="weui-panel weui-panel_access">
+      <div class="weui-panel__hd">我的梦想</div>
+      <div class="weui-panel__bd">
+        <div class="weui-media-box weui-media-box_text">
+          <p class="weui-media-box__desc">{{dream.title}}</p>
+        </div>
+        <div class="weui-media-box weui-media-box_text">
+          <p class="weui-media-box__desc">{{dream.description}}</p>
+        </div>
+      </div>
+      <div class="weui-panel__ft">
+        <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+          <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small>
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>12 赞</div>
+          </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small>
+            <ion-icon name="text"></ion-icon>
+            <div>4 评论</div>
+            </button>
+          </ion-col>
+          <ion-col center text-center>
+            <button ion-button icon-left clear small>
+            <ion-icon name="more"></ion-icon>
+            <div>更多</div>
+            </button>
+          </ion-col>
+        </ion-row>
+          <!--span class="weui-cell__ft"></span-->
+        </a>
+      </div>
+    </div>
+  </ion-card>
   <div *ngIf="sprintViewModels.length">
     <div *ngFor="let sprintModel of sprintViewModels">
       <!-- footprint begin-->
@@ -34,7 +71,7 @@
       <ion-card>
 
         <ion-card-header>
-          <p>一寸光阴一寸金，寸金难买寸光阴</p>
+          <p>{{sprintModel.start}}</p>
         </ion-card-header>
 
         <ion-card-content>
@@ -50,15 +87,15 @@
           </ion-col>
           <ion-col>
             <button ion-button icon-left clear small>
-          <ion-icon name="text"></ion-icon>
-          <div>4 评论</div>
-        </button>
+            <ion-icon name="text"></ion-icon>
+            <div>4 评论</div>
+            </button>
           </ion-col>
           <ion-col center text-center>
             <button ion-button icon-left clear small (click)="detailSprint(sprintModel)">
             <ion-icon name="more"></ion-icon>
             <div>更多</div>
-          </button>
+            </button>
           </ion-col>
         </ion-row>
       </ion-card>
