@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      梦想树
+      梦想
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addDream($event)">
@@ -19,7 +19,7 @@
         <button class="weui-btn weui-btn_primary" style="font-size: 13px; width: 50px;display: block">{{dreamModel.life}}</button>
         <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>
       </div>
-      <div class="weui-cell__bd" style="text-overflow: ellipsis;overflow: hidden;">
+      <div class="weui-cell__bd" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
         <p>{{dreamModel.title}}</p>
         <p style="font-size: 13px;color: #888888;">{{dreamModel.description}}</p>
       </div>
