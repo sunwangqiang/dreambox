@@ -4,12 +4,23 @@ import { NavController, NavParams, Events } from 'ionic-angular';
 import { Dream, Sprint, DataModelService } from '../../../services/dream.service'
 import { SprintDetailsPage } from './sprintdetails/sprintdetails'
 
+class SprintViewModel{
+  sprint: Sprint;
+  createTime:string;
+  constructor(sprint:Sprint){
+    let start:Date = new Date(sprint.start);
+    this.createTime = start.getFullYear() + "-" + (start.getMonth()+1)+ "-"
+                      + start.getDate() + " " + start.getHours() + ":" + start.getMinutes();
+    this.sprint = sprint;
+  }
+}
+
 @Component({
   selector: 'page-contact',
   templateUrl: 'dreamsprints.html',
 })
 export class DreamSprintsPage {
-  sprintViewModels: Sprint[] = [];
+  sprintViewModels: SprintViewModel[] = [];
   sprintBaseKey: string = undefined;
   dream: Dream = new Dream();
   dreamKey: string;
@@ -38,8 +49,9 @@ export class DreamSprintsPage {
    * Transform service sprints to view Model
    * @param sprint, sprint that get from service layer
    */
-  transformSprintToViewModel(sprint: Sprint) {
-    return sprint;
+  transformSprintToViewModel(sprint: Sprint):SprintViewModel {
+    let sprintViewModel = new SprintViewModel(sprint);
+    return sprintViewModel;
   }
 
   addSprint() {
@@ -48,28 +60,28 @@ export class DreamSprintsPage {
 
       this.dataModelService.get(key).then((s) => {
         let sprint = s as Sprint;
-        this.sprintViewModels.push(this.transformSprintToViewModel(sprint));
+        this.sprintViewModels.splice(0, 0, this.transformSprintToViewModel(sprint));
         //update dataModel
-        this.dream.sprintsUid.push(sprint.uid);
+        this.dream.sprintsUid.splice(0, 0, sprint.uid);
         this.dataModelService.set(this.dreamKey, this.dream);
       });
     })
     this.navCtrl.push(SprintDetailsPage,
       { SprintBaseKey: this.sprintBaseKey, SprintUid: undefined });
   }
-  detailSprint(sprintModel: Sprint) {
+  detailSprint(sprintModel: SprintViewModel) {
     this.events.subscribe('DreamSprintPage:UpdateSprint', (key) => {
       this.events.unsubscribe('DreamSprintPage:UpdateSprint');
       this.dataModelService.get(key).then((s) => {
         let index = this.sprintViewModels.indexOf(sprintModel);
         if (index != -1) {
-          this.sprintViewModels[index] = s as Sprint;
+          this.sprintViewModels[index] = this.transformSprintToViewModel(s as Sprint);
           console.log(this.sprintViewModels);
         }
       });
     })
     this.navCtrl.push(SprintDetailsPage,
-      { SprintBaseKey: this.sprintBaseKey, SprintUid: sprintModel.uid });
+      { SprintBaseKey: this.sprintBaseKey, SprintUid: sprintModel.sprint.uid });
   }
   likeSprint(sprint: Sprint) {
     sprint.likes++;

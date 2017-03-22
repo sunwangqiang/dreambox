@@ -35,7 +35,12 @@ export class DreamTreePage {
       this.dreamTree = dt as DreamTree;
       this.dreamTree.dreamsUid.forEach((value, index, array) => {
         this.dataModelService.get(this.dreamBaseKey + "/" + value).then((dream) => {
-          this.dreamViewModels.push(this.transformDreamToViewModel(dream));
+          console.log(dream);
+          if(dream){
+            this.dreamViewModels.push(this.transformDreamToViewModel(dream));
+          }else{
+            debugger;
+          }
         })
       })
     });

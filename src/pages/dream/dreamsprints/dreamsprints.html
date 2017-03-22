@@ -11,108 +11,88 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="cards-bg social-cards">
+<ion-content class="dream-sprint">
   <ion-card>
-    <img src="./assets/images/dreamtree.jpg" />
-    <div class="weui-panel weui-panel_access">
-      <div class="weui-panel__hd">我的梦想</div>
-      <div class="weui-panel__bd">
-        <div class="weui-media-box weui-media-box_text">
-          <p class="weui-media-box__desc">{{dream.title}}</p>
-        </div>
-        <div class="weui-media-box weui-media-box_text">
-          <p class="weui-media-box__desc">{{dream.description}}</p>
-        </div>
-      </div>
-      <div class="weui-panel__ft">
-        <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
-          <ion-row>
+    <ion-list>
+      <ion-item>
+        <h4>{{dream.title}}:</h4>
+        <p>{{dream.description}}</p>
+      </ion-item>
+        <ion-row >
           <ion-col>
-            <button ion-button icon-left clear small>
+            <button ion-button icon-left clear small color="light-blue">
             <ion-icon name="thumbs-up"></ion-icon>
             <div>12 赞</div>
           </button>
           </ion-col>
           <ion-col>
-            <button ion-button icon-left clear small>
+            <button ion-button icon-left clear small color="light-blue">
             <ion-icon name="text"></ion-icon>
             <div>4 评论</div>
             </button>
           </ion-col>
           <ion-col center text-center>
-            <button ion-button icon-left clear small>
+            <button ion-button icon-left clear small color="light-blue">
             <ion-icon name="more"></ion-icon>
             <div>更多</div>
             </button>
           </ion-col>
         </ion-row>
-          <!--span class="weui-cell__ft"></span-->
-        </a>
-      </div>
-    </div>
+    </ion-list>
   </ion-card>
-  <div *ngIf="sprintViewModels.length">
-    <div *ngFor="let sprintModel of sprintViewModels">
-      <!-- footprint begin-->
-      <ion-row style=" width:100%;">
-        <ion-col width-33>
-          <hr style="width: 100%; display:inline-block; " />
+
+
+  <div *ngFor="let sprintModel of sprintViewModels">
+      <ion-row >
+        <ion-col></ion-col>
+        <ion-col>
+          <ion-badge class="badge-start-time">{{sprintModel.createTime}}</ion-badge>
         </ion-col>
-        <ion-col width-33 style=" text-align:center">
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAACe0lEQVRIS41Wy3XbMBDcJRqwO7ArCCVQd6uCRBUoriBRBbErcFxB5AriVBDlLEJhKog6CBuANm/wAD4QJkjiRIK7mP3MDsg0Y2mtvxPRB2b+Wtf1Di5VVT2JyGciejXGbKaO4SGD1WpVXi6XnzhERH4x87dgZ4xxPlpriXwB9B7BFEWxPh6PTXpuD0hr/RsGzPxDRL7458fwjPchIGbubPwzQGG7CIAOaLlcfiSiK2Z+Sg5vReQx7BPR2Rhz6zNCUCWeRWTHzJ+I6CYGxT4RtafTaR/KgDLdEZFL2Vq7UUoB9MVa2yilXKZxWaLywn6hlALo1lq7U0qhp1jYOxhj1uwbjY1mTlOnmh5/j892QMz8p67rB0QpIlsRATAyDOtQFMUubbLPCpn3bJm5YeYX2FdV9SAi71zpyrK88unGDmnwXX/CB631X/RlJMsD2tA0TcseBD1yjR1bgXERUEzxnGtjrXU9woyAdZNrAOgf2DrpSLQH0CzjWBXCwZE6TGG1AJqdPmodnzizt85lDtDeGHM/FvKc8k+VbpZgIoggvJmAXOmcMg8ZWGtvm6Y5TzXAj8iNUgp0H1qvAAJIkIyeUcqyKcCRfm+C1g0OnrX2OiVADswTAwxOlxv0Tr3jOydYQokhTVOZ4LuXGne1xEtE7jv19s0czKooisXQRRYfVlXVnYhAXQazcfQOX0aGr8U1kCNFWZYgAa6RNwoRD3kMlIsKsWRnaYy1zLyu6/rQy8hHlqNnd4WntRlTlng80n+GrBzlqD4GFPukQDmBbY0x10PsGxHlnk8PKEfRIeWeIlE6Gm/+6zwY/mjAojOu5KlZ8j5bf9u2zPyc+vwHUEN1A9xMTIIAAAAASUVORK5CYII="
-          />
+        <ion-col></ion-col>
+      </ion-row>
+    <!--card begin-->
+    <ion-card>
+      <ion-card-content>
+        <p>{{sprintModel.sprint.description}}</p>
+      </ion-card-content>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small color="light-blue">
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>12 赞</div>
+          </button>
         </ion-col>
-        <ion-col width-33>
-          <hr style="width: 100%; display:inline-block" />
+        <ion-col>
+          <button ion-button icon-left clear small color="light-blue">
+            <ion-icon name="text"></ion-icon>
+            <div>4 评论</div>
+            </button>
+        </ion-col>
+        <ion-col center text-center>
+          <button color="light-blue" ion-button icon-left clear small (click)="detailSprint(sprintModel)">
+            <ion-icon name="more"></ion-icon>
+            <div>更多</div>
+            </button>
         </ion-col>
       </ion-row>
-
-      <!--card begin-->
-      <ion-card>
-
-        <ion-card-header>
-          <p>{{sprintModel.start}}</p>
-        </ion-card-header>
-
-        <ion-card-content>
-          <p>{{sprintModel.description}}</p>
-        </ion-card-content>
-
-        <ion-row>
-          <ion-col>
-            <button ion-button icon-left clear small>
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>12 赞</div>
-          </button>
-          </ion-col>
-          <ion-col>
-            <button ion-button icon-left clear small>
-            <ion-icon name="text"></ion-icon>
-            <div>4 评论</div>
-            </button>
-          </ion-col>
-          <ion-col center text-center>
-            <button ion-button icon-left clear small (click)="detailSprint(sprintModel)">
-            <ion-icon name="more"></ion-icon>
-            <div>更多</div>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </div>
+    </ion-card>
   </div>
 </ion-content>
 
 <style>
-  .social-cards {
-    background-color: #F8F8F8;
+  .dream-sprint ion-card {
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
+    margin: 0 10px 10px 10px
   }
   
-  .social-cards ion-col {
-    padding: 0;
+  .dream-sprint ion-list ion-item {
+    border-bottom: 0.55px solid #c8c7cc;
   }
   
-  .social-cards-likes {
-    color: #179B16;
+  .badge-start-time {
+    border-radius: 2px;
+    background-color: #d4d4d4;
   }
 </style>

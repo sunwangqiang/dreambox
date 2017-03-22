@@ -39,10 +39,21 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f8f8f8,
-  dark:       #222
+  dark:       #222,
+  light-dark: #666,
+  light-blue: #61749b,
 );
 
-$background-color: #F8F8F8;
+//$background-color: #F8F8F8;
+
+
+$background-color: #EBEBEB;
+$toolbar-background: #393A3F;
+$list-background-color: #FFFFFF;
+$list-ios-margin-top:6px;
+$list-md-margin-top:6px;
+$toolbar-ios-height: 46px;
+$toolbar-md-height: 46px;
 
 // App iOS Variables
 // --------------------------------------------------
@@ -55,7 +66,7 @@ $background-color: #F8F8F8;
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-
+$item-md-detail-push-show:true;
 
 
 // App Windows Variables

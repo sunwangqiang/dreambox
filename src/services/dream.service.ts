@@ -63,13 +63,13 @@ export enum DreamStatus {
     FINISH,
 }
 export class Dream {
-    private static gid = 0;
+    private static gid = Date.now();
     readonly uid: number;
 
     title: string = "";
     description: string = "";
     status: DreamStatus;
-    startTime: Date;
+    startTime: Date = new Date();
     stopTime: Date;
     life: number = 100;
     hot: number;
@@ -162,11 +162,11 @@ class DreamUserFactory implements DataObjectFactory {
  * /DreamTree/Dream/Sprint object and factory
  */
 export class Sprint {
-    private static gid = 0;
+    private static gid = Date.now();
     readonly uid: number;
 
-    start: Date;
-    stop: Date;
+    start;
+    stop;
     description: string = "";
     motto: string = "一寸光阴一寸金，寸金难买寸光阴";
     stars: number = 0;

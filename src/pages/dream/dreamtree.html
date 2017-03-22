@@ -12,20 +12,22 @@
 </ion-header>
 
 <ion-content>
-  <div class="weui-cells">
-    <div tappable class="weui-cell weui-cell_access" *ngFor="let dreamModel of dreamViewModels" 
-                 (tap)="tapDream($event, dreamModel)" (press)="pressDream($event, dreamModel)">
-      <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-        <button class="weui-btn weui-btn_primary" style="font-size: 13px; width: 50px;display: block">{{dreamModel.life}}</button>
-        <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>
-      </div>
-      <div class="weui-cell__bd" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
-        <p>{{dreamModel.title}}</p>
-        <p style="font-size: 13px;color: #888888;">{{dreamModel.description}}</p>
-      </div>
-      <div class="weui-cell__ft">
-      </div>
-    </div>
-  </div>
+<ion-list class="dream-list" *ngFor="let dreamModel of dreamViewModels" >
+  <button ion-item (tap)="tapDream($event, dreamModel)" (press)="pressDream($event, dreamModel)">
+    <ion-avatar item-left>
+      <ion-icon name="football"></ion-icon>
+      <ion-badge color="danger" style="position:relative;top: -1em;right: -1em;">8</ion-badge>
+    </ion-avatar>
+    <h2>{{dreamModel.title}}</h2>
+    <p>{{dreamModel.description}}</p>
+  </button>
+</ion-list>
 </ion-content>
 
+<style>
+  .dream-list{
+    background-color: #FFFFFF;
+    border-bottom: 0px solid #E5E5E5;
+    margin: 5px 0 -4px 0;
+  }
+</style>
