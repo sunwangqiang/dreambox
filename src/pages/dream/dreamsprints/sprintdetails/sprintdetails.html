@@ -1,29 +1,24 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      目标详情
+      足迹详情
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="sprint-details">
   <ion-item>
-    <p>{{sprintViewModel.motto}}</p>
+    <ion-textarea [(ngModel)]="sprintDetailsModel.sprint.description" autosize ></ion-textarea>
   </ion-item>
-
-  <ion-card-content>
-    <ion-textarea placeholder="这一刻的想法" autosize [(ngModel)]="sprintViewModel.description"></ion-textarea>
-  </ion-card-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <button ion-button outline (click)="addmedia()">
-          <ion-icon name='add' is-active="false" ></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div>
+    <button ion-button outline large *ngFor="let pic of sprintDetailsModel.sprint.picturesUrl">
+      {{pic}}
+    </button>
+    <button ion-button outline (click)="addmedia()" large>
+      <ion-icon name='add' is-active="false" ></ion-icon>
+    </button>
+  </div>
+  <ion-item>
   <ion-row>
     <ion-col>
       <button ion-button icon-left clear small>
@@ -38,4 +33,18 @@
         </button>
     </ion-col>
   </ion-row>
+  </ion-item>
+  <ion-item>
+    <button ion-button outline (click)="delSprint()" large>
+      <ion-icon name='del' is-active="false" >del</ion-icon>
+    </button>
+  </ion-item>
 </ion-content>
+
+<style>
+  .sprint-details {
+    background-color: #FFFFFF;
+    border-bottom: 0px solid #E5E5E5;
+    margin: 5px 0 -4px 0;
+  }
+</style>

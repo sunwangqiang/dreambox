@@ -18,64 +18,70 @@
         <h4>{{dream.title}}:</h4>
         <p>{{dream.description}}</p>
       </ion-item>
-        <ion-row >
-          <ion-col>
-            <button ion-button icon-left clear small color="light-blue">
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>12 赞</div>
-          </button>
-          </ion-col>
-          <ion-col>
-            <button ion-button icon-left clear small color="light-blue">
-            <ion-icon name="text"></ion-icon>
-            <div>4 评论</div>
-            </button>
-          </ion-col>
-          <ion-col center text-center>
-            <button ion-button icon-left clear small color="light-blue">
-            <ion-icon name="more"></ion-icon>
-            <div>更多</div>
-            </button>
-          </ion-col>
-        </ion-row>
-    </ion-list>
-  </ion-card>
-
-
-  <div *ngFor="let sprintModel of sprintViewModels">
-      <ion-row >
-        <ion-col></ion-col>
-        <ion-col>
-          <ion-badge class="badge-start-time">{{sprintModel.createTime}}</ion-badge>
-        </ion-col>
-        <ion-col></ion-col>
-      </ion-row>
-    <!--card begin-->
-    <ion-card>
-      <ion-card-content>
-        <p>{{sprintModel.sprint.description}}</p>
-      </ion-card-content>
-
       <ion-row>
         <ion-col>
-          <button ion-button icon-left clear small color="light-blue">
+          <button ion-button icon-left clear small>
             <ion-icon name="thumbs-up"></ion-icon>
             <div>12 赞</div>
           </button>
         </ion-col>
         <ion-col>
-          <button ion-button icon-left clear small color="light-blue">
+          <button ion-button icon-left clear small>
             <ion-icon name="text"></ion-icon>
             <div>4 评论</div>
             </button>
         </ion-col>
         <ion-col center text-center>
-          <button color="light-blue" ion-button icon-left clear small (click)="detailSprint(sprintModel)">
+          <button ion-button icon-left clear small>
             <ion-icon name="more"></ion-icon>
-            <div>更多</div>
+            <div>编辑</div>
             </button>
         </ion-col>
       </ion-row>
+    </ion-list>
+  </ion-card>
+
+
+  <div *ngFor="let dreamSprintModel of dreamSprintModels">
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col>
+        <ion-badge class="badge-start-time">{{dreamSprintModel.createTime}}</ion-badge>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+    <!--card begin-->
+    <ion-card>
+      <ion-list>
+        <ion-item>
+            <ion-textarea readonly value={{dreamSprintModel.sprint.description}} autosize></ion-textarea>
+        </ion-item>
+        <div>
+          <button ion-button outline large *ngFor="let pic of dreamSprintModel.sprint.picturesUrl">
+            {{pic}}
+          </button>
+        </div>
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small >
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>12 赞</div>
+          </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small >
+            <ion-icon name="text"></ion-icon>
+            <div>4 评论</div>
+            </button>
+          </ion-col>
+          <ion-col center text-center>
+            <button ion-button icon-left clear small (click)="detailSprint(dreamSprintModel)">
+            <ion-icon name="more"></ion-icon>
+            <div>编辑</div>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-list>
     </ion-card>
   </div>
 </ion-content>

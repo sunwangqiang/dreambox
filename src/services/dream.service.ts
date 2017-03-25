@@ -177,9 +177,9 @@ export class Sprint {
     totalAudios: number = 0;
     totalVideos: number = 0;
     owner: string;
-    picturesUrl: string[];
-    audiosUrl: string[];
-    videosUrl: string[];
+    picturesUrl: string[] = [];
+    audiosUrl: string[] = [];
+    videosUrl: string[] = [];
     constructor() {
         Sprint.gid++;
         this.uid = Sprint.gid;
@@ -321,7 +321,6 @@ export class DataModelService {
     set(key: string, value: any): Promise<any> {
         console.log("set Object ", key, "value:");
         console.debug(value);
-
         let factory: DataObjectFactory =
             this.dataObjectFactorys[key.replace(/\/[0-9]+/g, "")];
         if (!factory) {

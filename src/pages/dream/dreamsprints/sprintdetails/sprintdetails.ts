@@ -2,14 +2,22 @@ import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams, Events } from 'ionic-angular';
 import { Sprint, DataModelService } from '../../../../services/dream.service'
 
+class SprintDetailsModel{
+  sprint:Sprint;
+  constructor(sprint:Sprint){
+    this.sprint = sprint;
+  }
+}
+
 @Component({
   selector: 'page-contact',
   templateUrl: 'sprintdetails.html',
 })
 export class SprintDetailsPage {
-  sprintViewModel: Sprint = new Sprint();
+  sprintDetailsModel: SprintDetailsModel = new SprintDetailsModel(new Sprint());
   newSprint: Sprint = undefined;
   sprintkey: string;
+  update:Boolean = true;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -36,14 +44,22 @@ export class SprintDetailsPage {
   }
 
   transformSprintToViewModel(sprint: Sprint) {
-    this.sprintViewModel = sprint;
+    if(sprint){
+      this.sprintDetailsModel = new SprintDetailsModel(sprint);
+    }
   }
 
   ionViewWillLeave() {
-    // new dream
-    this.dataModelService.set(this.sprintkey, this.sprintViewModel).then(() => {
-      this.events.publish('DreamSprintPage:UpdateSprint', this.sprintkey);
-    });
+    //TODO: check content changed
+    if(this.update){
+      this.dataModelService.set(this.sprintkey, this.sprintDetailsModel.sprint).then(() => {
+        this.events.publish('DreamSprintPage:UpdateSprint', this.sprintkey);
+      });
+    }else{
+      this.dataModelService.del(this.sprintkey).then(() => {
+        this.events.publish('DreamSprintPage:DeleteSprint', this.sprintkey);
+      });
+    }
   }
   addmedia(): void {
 
@@ -54,6 +70,7 @@ export class SprintDetailsPage {
           text: '照片',
           handler: data => {
             console.log("pic is tapped");
+            this.sprintDetailsModel.sprint.picturesUrl.push(new Date().getMilliseconds().toString())
           },
         },
         {
@@ -71,5 +88,9 @@ export class SprintDetailsPage {
       ]
     });
     promptmenu.present();
+  }
+  delSprint():void{
+    this.update = false;
+    this.navCtrl.pop();
   }
 }
