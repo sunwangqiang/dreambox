@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Events } from 'ionic-angular';
 import { Dream, Sprint, DataModelService } from '../../../services/dream.service'
 import { SprintDetailsPage } from './sprintdetails/sprintdetails'
+import { PhotoViewer } from 'ionic-native';
 
 class DreamSprintsModel{
   sprint: Sprint;
@@ -100,6 +101,9 @@ export class DreamSprintsPage {
 
     this.navCtrl.push(SprintDetailsPage,
       { SprintBaseKey: this.sprintBaseKey, SprintUid: dreamSprintModel.sprint.uid });
+  }
+  viewPhoto(dreamSprintModel:DreamSprintsModel, pic:string):void{
+    PhotoViewer.show(pic);
   }
   likeSprint(sprint: Sprint) {
     sprint.likes++;

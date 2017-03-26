@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams, Events } from 'ionic-angular';
 import { Sprint, DataModelService } from '../../../../services/dream.service'
 import { ImagePicker, ImagePickerOptions } from 'ionic-native';
-//import { Camera, CameraOptions } from 'ionic-native';
+import { Camera, CameraOptions } from 'ionic-native';
+import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions, CaptureVideoOptions } from 'ionic-native';
 
 class SprintDetailsModel{
   sprint:Sprint;
@@ -69,7 +70,7 @@ export class SprintDetailsPage {
       cssClass: 'custom-alert',
       buttons: [
         {
-          text: '照片',
+          text: '选择照片',
           handler: data => {
             let option:ImagePickerOptions = {};
 
@@ -86,15 +87,44 @@ export class SprintDetailsPage {
           },
         },
         {
+          text: '拍摄照片',
+          handler: data => {
+            let options:CameraOptions = {
+              destinationType:0,
+              sourceType:1,
+              allowEdit:true,
+            };
+
+            console.log("take pic is tapped");
+            
+            //this.sprintDetailsModel.sprint.picturesUrl.push(new Date().getMilliseconds().toString())
+            Camera.getPicture(options).then((imageData) => {
+              // imageData is either a base64 encoded string or a file URI
+              // If it's base64:
+              let base64Image = 'data:image/jpeg;base64,' + imageData;
+              this.sprintDetailsModel.sprint.picturesUrl.push(base64Image);
+            }, (err) => {
+              // Handle error
+            });
+            
+          },
+        },
+        {
           text: '音频',
           handler: data => {
             console.log("audio is tapped");
           },
         },
         {
-          text: '视频',
+          text: '拍摄视频',
           handler: data => {
+            let options: CaptureVideoOptions = { limit: 1 };
+            
             console.log("video is tapped");
+            MediaCapture.captureVideo(options).then((media: MediaFile[])=>{
+              console.log(media[0].fullPath);
+              this.sprintDetailsModel.sprint.videosUrl.push(media[0].fullPath);
+            });
           },
         }
       ]

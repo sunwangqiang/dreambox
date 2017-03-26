@@ -15,6 +15,12 @@
       <!--{{pic}}-->
       <img src = {{pic}} style="max-width: 100px"/>
     </button>
+
+    <button ion-button outline large *ngFor="let video of sprintDetailsModel.sprint.videosUrl">
+      <!--{{pic}}-->
+      <video src = {{video}} width="100px" controls="controls"></video>
+    </button>
+
     <button ion-button outline (click)="addmedia()" large>
       <ion-icon name='add' is-active="false" ></ion-icon>
     </button>
