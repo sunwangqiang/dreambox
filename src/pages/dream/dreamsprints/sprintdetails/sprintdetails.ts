@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams, Events } from 'ionic-angular';
 import { Sprint, DataModelService } from '../../../../services/dream.service'
+import { ImagePicker, ImagePickerOptions } from 'ionic-native';
+//import { Camera, CameraOptions } from 'ionic-native';
 
 class SprintDetailsModel{
   sprint:Sprint;
@@ -69,8 +71,18 @@ export class SprintDetailsPage {
         {
           text: '照片',
           handler: data => {
+            let option:ImagePickerOptions = {};
+
             console.log("pic is tapped");
-            this.sprintDetailsModel.sprint.picturesUrl.push(new Date().getMilliseconds().toString())
+            
+            //this.sprintDetailsModel.sprint.picturesUrl.push(new Date().getMilliseconds().toString())
+            ImagePicker.getPictures(option).then((results) => {
+              for (let i = 0; i < results.length; i++) {
+                  console.log('Image URI: ' + results[i]);
+                  this.sprintDetailsModel.sprint.picturesUrl.push(results[i]);
+              }
+            }, (err) => { });
+            
           },
         },
         {

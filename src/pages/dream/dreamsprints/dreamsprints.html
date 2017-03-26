@@ -58,7 +58,7 @@
         </ion-item>
         <div>
           <button ion-button outline large *ngFor="let pic of dreamSprintModel.sprint.picturesUrl">
-            {{pic}}
+            <img src={{pic}} style="max-width: 100px"/>
           </button>
         </div>
         <ion-row>
