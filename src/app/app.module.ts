@@ -6,6 +6,7 @@ import { FocusPage } from '../pages/focus/focus';
 import { discoverPage } from '../pages/discover/discover';
 import { DreamTreePage } from '../pages/dream/dreamtree';
 import { DreamSprintsPage } from '../pages/dream/dreamsprints/dreamsprints'
+import { SprintMediaSlidePage } from '../pages/dream/dreamsprints/sprint.media.slide/page'
 import { DreamDetailsPage } from '../pages/dream/dreamdetails/dreamdetails'
 import { SprintDetailsPage } from '../pages/dream/dreamsprints/sprintdetails/sprintdetails'
 import { TabsPage } from '../pages/tabs/tabs';
@@ -26,6 +27,7 @@ export function provideStorage() {
     discoverPage,
     DreamTreePage,
     DreamSprintsPage,
+    SprintMediaSlidePage,
     DreamDetailsPage,
     SprintDetailsPage,
     TabsPage,
@@ -43,6 +45,7 @@ export function provideStorage() {
     discoverPage,
     DreamTreePage,
     DreamSprintsPage,
+    SprintMediaSlidePage,
     DreamDetailsPage,
     SprintDetailsPage,
     TabsPage,

@@ -26,7 +26,7 @@
           </button>
         </ion-col>
         <ion-col>
-          <button ion-button icon-left clear small>
+          <button ion-button icon-left clear small (click)="viewPhoto()">
             <ion-icon name="text"></ion-icon>
             <div>4 评论</div>
             </button>
@@ -57,14 +57,8 @@
             <ion-textarea readonly value={{dreamSprintModel.sprint.description}} autosize></ion-textarea>
         </ion-item>
         <div>
-          <button ion-button outline large *ngFor="let pic of dreamSprintModel.sprint.picturesUrl">
-            <img src={{pic}} style="max-width: 100px" (click)="viewPhoto(dreamSprintModel, pic)"/>
-          </button>
-        </div>
-        <div>
-          <button ion-button outline large *ngFor="let video of dreamSprintModel.sprint.videosUrl">
-            <!--{{pic}}-->
-            <video src = {{video}} width="100px" controls="controls"></video>
+          <button ion-button outline large *ngFor="let mediaRecord of dreamSprintModel.sprint.mediaRecord">
+            <img src="{{mediaRecord.thumbnail}}"  (click)="viewPhoto(dreamSprintModel, mediaRecord)" />
           </button>
         </div>
 

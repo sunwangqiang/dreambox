@@ -158,6 +158,16 @@ class DreamUserFactory implements DataObjectFactory {
     }
 }
 
+export enum MediaRecordType{
+    PHOTO = 0,
+    AUDIO = 1,
+    VIDEO = 2
+}
+export class MediaRecord{
+    type:MediaRecordType;
+    thumbnail:string;
+    full:string;
+}
 /**
  * /DreamTree/Dream/Sprint object and factory
  */
@@ -177,6 +187,7 @@ export class Sprint {
     totalAudios: number = 0;
     totalVideos: number = 0;
     owner: string;
+    mediaRecord: MediaRecord[] = [];
     picturesUrl: string[] = [];
     audiosUrl: string[] = [];
     videosUrl: string[] = [];

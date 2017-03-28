@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 import { NavController, NavParams, Events } from 'ionic-angular';
-import { Dream, Sprint, DataModelService } from '../../../services/dream.service'
+import { Dream, Sprint, MediaRecord, DataModelService } from '../../../services/dream.service'
 import { SprintDetailsPage } from './sprintdetails/sprintdetails'
+import { SprintMediaSlidePage } from './sprint.media.slide/page'
 import { PhotoViewer } from 'ionic-native';
 
 class DreamSprintsModel{
@@ -58,8 +59,8 @@ export class DreamSprintsPage {
   }
 
   addSprint() {
-    this.events.subscribe('DreamSprintPage:UpdateSprint', (key) => {
-      this.events.unsubscribe('DreamSprintPage:UpdateSprint');
+    this.events.subscribe('SprintDetailsPage:UpdateSprint', (key) => {
+      this.events.unsubscribe('SprintDetailsPage:UpdateSprint');
 
       this.dataModelService.get(key).then((s) => {
         let sprint = s as Sprint;
@@ -73,8 +74,8 @@ export class DreamSprintsPage {
       { SprintBaseKey: this.sprintBaseKey, SprintUid: undefined });
   }
   detailSprint(dreamSprintModel: DreamSprintsModel) {
-    this.events.subscribe('DreamSprintPage:UpdateSprint', (key) => {
-      this.events.unsubscribe('DreamSprintPage:UpdateSprint');
+    this.events.subscribe('SprintDetailsPage:UpdateSprint', (key) => {
+      this.events.unsubscribe('SprintDetailsPage:UpdateSprint');
       this.dataModelService.get(key).then((s) => {
         let index = this.dreamSprintModels.indexOf(dreamSprintModel);
         if (index != -1) {
@@ -84,8 +85,8 @@ export class DreamSprintsPage {
       });
     });
 
-    this.events.subscribe('DreamSprintPage:DeleteSprint', (key) => {
-      this.events.unsubscribe('DreamSprintPage:DeleteSprint');
+    this.events.subscribe('SprintDetailsPage:DeleteSprint', (key) => {
+      this.events.unsubscribe('SprintDetailsPage:DeleteSprint');
       let index = this.dreamSprintModels.indexOf(dreamSprintModel);
       if (index != -1) {
         this.dreamSprintModels.splice(index, 1);
@@ -102,8 +103,12 @@ export class DreamSprintsPage {
     this.navCtrl.push(SprintDetailsPage,
       { SprintBaseKey: this.sprintBaseKey, SprintUid: dreamSprintModel.sprint.uid });
   }
-  viewPhoto(dreamSprintModel:DreamSprintsModel, pic:string):void{
-    PhotoViewer.show(pic);
+  viewPhoto(dreamSprintModel:DreamSprintsModel, mediaRecord:MediaRecord):void{
+    PhotoViewer.show(mediaRecord.full);
+    let sprintkey = this.sprintBaseKey+"/"+dreamSprintModel.sprint.uid;
+    let index = dreamSprintModel.sprint.mediaRecord.indexOf(mediaRecord);
+    this.navCtrl.push(SprintMediaSlidePage,
+              { SprintKey: sprintkey, MediaRecordIndex: index });
   }
   likeSprint(sprint: Sprint) {
     sprint.likes++;
