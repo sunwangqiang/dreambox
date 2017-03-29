@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { DomSanitizer  } from '@angular/platform-browser';
 import { AlertController, NavController, NavParams, Events } from 'ionic-angular';
 import { Sprint, MediaRecord, MediaRecordType, DataModelService } from '../../../../services/dream.service'
 import { ImagePicker, ImagePickerOptions } from 'ionic-native';
 import { Camera, CameraOptions } from 'ionic-native';
 import { ImageResizer, ImageResizerOptions } from 'ionic-native';
 import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions, CaptureVideoOptions } from 'ionic-native';
+import { SprintMediaSlidePage } from '../sprint.media.slide/page'
 
 class SprintDetailsModel {
   sprint: Sprint;
@@ -27,7 +29,8 @@ export class SprintDetailsPage {
     public navParams: NavParams,
     public dataModelService: DataModelService,
     public alertController: AlertController,
-    public events: Events) {
+    public events: Events,
+    private sanitizer: DomSanitizer) {
 
     let sprintBaseKey = navParams.get('SprintBaseKey');
     let sprintUid = navParams.get("SprintUid");
@@ -108,13 +111,17 @@ export class SprintDetailsPage {
           text: '拍摄照片',
           handler: data => {
 
-            let options: CaptureImageOptions = { limit: 1 };
+            let cameraOptions: CameraOptions = {
+              quality: 100,
+              destinationType: Camera.DestinationType.FILE_URI,
+              sourceType: Camera.PictureSourceType.CAMERA,
+            };
 
             console.log("take pic is tapped");
-            MediaCapture.captureImage(options).then((media: MediaFile[]) => {
-              console.log(media[0].fullPath);
+            Camera.getPicture(cameraOptions).then((result) => {
+              console.log(result);
               let imageResizerOptions: ImageResizerOptions = {
-                uri: media[0].fullPath,
+                uri: result,
                 quality: 50,
                 width: 180,
                 height: 180,
@@ -124,12 +131,12 @@ export class SprintDetailsPage {
                 let mediaRecord: MediaRecord = {
                   type: MediaRecordType.PHOTO,
                   thumbnail: filePath,
-                  full: media[0].fullPath,
+                  full: result,
                 } as MediaRecord;
                 console.log(mediaRecord);
                 this.sprintDetailsModel.sprint.mediaRecord.push(mediaRecord);
               });
-              this.sprintDetailsModel.sprint.picturesUrl.push(media[0].fullPath);
+              this.sprintDetailsModel.sprint.picturesUrl.push(result);
             });
 
           },
@@ -149,11 +156,11 @@ export class SprintDetailsPage {
             MediaCapture.captureVideo(options).then((media: MediaFile[]) => {
               console.log(media[0].fullPath);
               let mediaRecord: MediaRecord = {
-                  type: MediaRecordType.VIDEO,
-                  //thumbnail: filePath,
-                  full: media[0].fullPath,
-                } as MediaRecord;
-                console.log(mediaRecord);
+                type: MediaRecordType.VIDEO,
+                //thumbnail: filePath,
+                full: media[0].fullPath,
+              } as MediaRecord;
+              console.log(mediaRecord);
               this.sprintDetailsModel.sprint.mediaRecord.push(mediaRecord);
               this.sprintDetailsModel.sprint.videosUrl.push(media[0].fullPath);
             });
@@ -166,5 +173,14 @@ export class SprintDetailsPage {
   delSprint(): void {
     this.update = false;
     this.navCtrl.pop();
+  }
+  viewMedia(mediaRecord:MediaRecord):void{
+    //PhotoViewer.show(mediaRecord.full);
+    let index = this.sprintDetailsModel.sprint.mediaRecord.indexOf(mediaRecord);
+    this.navCtrl.push(SprintMediaSlidePage,
+              { SprintKey: this.sprintkey, MediaRecordIndex: index });
+  }
+  getBackgroundImage(mediaRecord:MediaRecord){
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${mediaRecord.thumbnail})`);
   }
 }

@@ -11,9 +11,12 @@
     <ion-textarea [(ngModel)]="sprintDetailsModel.sprint.description" autosize ></ion-textarea>
   </ion-item>
   <div>
-    <button ion-button outline large *ngFor="let mediaRecord of sprintDetailsModel.sprint.mediaRecord">
-      <!--{{pic}}-->
-      <img src = "{{mediaRecord.thumbnail}}" />
+    <button ion-button outline large *ngFor="let mediaRecord of sprintDetailsModel.sprint.mediaRecord"
+    [style.background-image]="getBackgroundImage(mediaRecord)" 
+            (click)="viewMedia(mediaRecord)" >
+      <!--{{pic}}
+      <img src = "{{mediaRecord.thumbnail}}" (click)="viewMedia(mediaRecord)" />
+      -->
     </button>
     <!--
     <button ion-button outline large *ngFor="let video of sprintDetailsModel.sprint.videosUrl">

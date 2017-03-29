@@ -57,8 +57,13 @@
             <ion-textarea readonly value={{dreamSprintModel.sprint.description}} autosize></ion-textarea>
         </ion-item>
         <div>
-          <button ion-button outline large *ngFor="let mediaRecord of dreamSprintModel.sprint.mediaRecord">
-            <img src="{{mediaRecord.thumbnail}}"  (click)="viewPhoto(dreamSprintModel, mediaRecord)" />
+          <button ion-button outline large *ngFor="let mediaRecord of dreamSprintModel.sprint.mediaRecord"
+            [style.background-image]="getBackgroundImage(mediaRecord)" 
+            (click)="viewMedia(dreamSprintModel, mediaRecord)" >
+            <ion-icon></ion-icon>
+            <!--
+            <img src="{{mediaRecord.thumbnail}}"  (click)="viewMedia(dreamSprintModel, mediaRecord)" />
+            -->
           </button>
         </div>
 

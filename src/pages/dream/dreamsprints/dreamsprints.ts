@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { DomSanitizer  } from '@angular/platform-browser';
 import { NavController, NavParams, Events } from 'ionic-angular';
 import { Dream, Sprint, MediaRecord, DataModelService } from '../../../services/dream.service'
 import { SprintDetailsPage } from './sprintdetails/sprintdetails'
@@ -30,7 +30,8 @@ export class DreamSprintsPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public dataModelService: DataModelService,
-    public events: Events) {
+    public events: Events,
+    private sanitizer: DomSanitizer) {
 
     let dreamBaseKey: string = navParams.get('DreamBaseKey');
     let dreamUid: number = navParams.get('DreamUid');
@@ -103,12 +104,15 @@ export class DreamSprintsPage {
     this.navCtrl.push(SprintDetailsPage,
       { SprintBaseKey: this.sprintBaseKey, SprintUid: dreamSprintModel.sprint.uid });
   }
-  viewPhoto(dreamSprintModel:DreamSprintsModel, mediaRecord:MediaRecord):void{
-    PhotoViewer.show(mediaRecord.full);
+  viewMedia(dreamSprintModel:DreamSprintsModel, mediaRecord:MediaRecord):void{
+    //PhotoViewer.show(mediaRecord.full);
     let sprintkey = this.sprintBaseKey+"/"+dreamSprintModel.sprint.uid;
     let index = dreamSprintModel.sprint.mediaRecord.indexOf(mediaRecord);
     this.navCtrl.push(SprintMediaSlidePage,
               { SprintKey: sprintkey, MediaRecordIndex: index });
+  }
+  getBackgroundImage(mediaRecord:MediaRecord){
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${mediaRecord.thumbnail})`);
   }
   likeSprint(sprint: Sprint) {
     sprint.likes++;
