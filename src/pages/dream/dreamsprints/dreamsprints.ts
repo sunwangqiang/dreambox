@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { DomSanitizer  } from '@angular/platform-browser';
 import { NavController, NavParams, Events } from 'ionic-angular';
-import { Dream, Sprint, MediaRecord, DataModelService } from '../../../services/dream.service'
+import { Dream, Sprint, MediaRecord, DataModelService, MediaRecordType } from '../../../services/dream.service'
 import { SprintDetailsPage } from './sprintdetails/sprintdetails'
 import { SprintMediaSlidePage } from './sprint.media.slide/page'
-import { PhotoViewer } from 'ionic-native';
 
 class DreamSprintsModel{
   sprint: Sprint;
@@ -26,6 +25,8 @@ export class DreamSprintsPage {
   sprintBaseKey: string = undefined;
   dream: Dream = new Dream();
   dreamKey: string;
+  photo = MediaRecordType.PHOTO;
+  video = MediaRecordType.VIDEO;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,

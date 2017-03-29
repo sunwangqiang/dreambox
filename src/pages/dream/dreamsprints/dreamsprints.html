@@ -54,13 +54,12 @@
     <ion-card>
       <ion-list>
         <ion-item>
-            <ion-textarea readonly value={{dreamSprintModel.sprint.description}} autosize></ion-textarea>
+            <ion-textarea readonly value={{dreamSprintModel.sprint.description}}></ion-textarea>
         </ion-item>
         <div>
-          <button ion-button outline large *ngFor="let mediaRecord of dreamSprintModel.sprint.mediaRecord"
+          <button class="thumbnail-button" ion-button outline large *ngFor="let mediaRecord of dreamSprintModel.sprint.mediaRecord"
             [style.background-image]="getBackgroundImage(mediaRecord)" 
             (click)="viewMedia(dreamSprintModel, mediaRecord)" >
-            <ion-icon></ion-icon>
             <!--
             <img src="{{mediaRecord.thumbnail}}"  (click)="viewMedia(dreamSprintModel, mediaRecord)" />
             -->
@@ -106,5 +105,10 @@
   .badge-start-time {
     border-radius: 2px;
     background-color: #d4d4d4;
+  }
+
+  .thumbnail-button {
+    width: 60px;
+    height: 60px;
   }
 </style>

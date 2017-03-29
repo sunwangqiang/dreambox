@@ -184,3 +184,4 @@ export class SprintDetailsPage {
     return this.sanitizer.bypassSecurityTrustStyle(`url(${mediaRecord.thumbnail})`);
   }
 }
+

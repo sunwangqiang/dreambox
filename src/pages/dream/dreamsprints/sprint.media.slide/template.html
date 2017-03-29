@@ -1,8 +1,10 @@
 
 <ion-content class="tutorial-page">
   <ion-slides pager [initialSlide]="initialSlide">
-    <ion-slide *ngFor="let slide of slides" (click)="exit()">
-      <img [src]="slide" class="slide-image"/>
+    <ion-slide *ngFor="let mediaRecord of mediaRecords" (click)="exit()">
+      <img *ngIf="mediaRecord.type == photo" [src]="mediaRecord.full" class="slide-image"/>
+      <video *ngIf="mediaRecord.type == video" [src]="mediaRecord.full"
+             controls="controls" class="slide-image"> </video>
     </ion-slide>
   </ion-slides>
 </ion-content>
