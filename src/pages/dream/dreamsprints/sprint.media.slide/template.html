@@ -4,7 +4,7 @@
     <ion-slide *ngFor="let mediaRecord of mediaRecords" (click)="exit()">
       <img *ngIf="mediaRecord.type == photo" [src]="mediaRecord.full" class="slide-image"/>
       <video *ngIf="mediaRecord.type == video" [src]="mediaRecord.full"
-             controls="controls" class="slide-image"> </video>
+             controls="controls" class="slide-image" (click)="$event.stopPropagation();"> </video>
     </ion-slide>
   </ion-slides>
 </ion-content>

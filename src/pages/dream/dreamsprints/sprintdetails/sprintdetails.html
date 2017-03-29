@@ -7,13 +7,13 @@
 </ion-header>
 
 <ion-content class="sprint-details">
+  <ion-item-divider>详情:</ion-item-divider>
   <ion-item>
-    <ion-textarea placeholder="这一刻的想法..." [(ngModel)]="sprintDetailsModel.sprint.description" autosize ></ion-textarea>
+    <ion-textarea placeholder="这一刻的想法..." [(ngModel)]="sprintDetailsModel.sprint.description" autosize></ion-textarea>
   </ion-item>
-  <div>
+  <div style="padding-left: 16px; background-color: #FFFFFF">
     <button class="thumbnail-button" ion-button outline large *ngFor="let mediaRecord of sprintDetailsModel.sprint.mediaRecord"
-    [style.background-image]="getBackgroundImage(mediaRecord)" 
-            (click)="viewMedia(mediaRecord)" >
+      [style.background-image]="getBackgroundImage(mediaRecord)" (click)="viewMedia(mediaRecord)">
             <ion-icon></ion-icon>
       <!--{{pic}}
       <img src = "{{mediaRecord.thumbnail}}" (click)="viewMedia(mediaRecord)" />
@@ -24,25 +24,33 @@
       <video src = {{video}} width="100px" controls="controls"></video>
     </button>
     -->
-    <button ion-button outline (click)="addmedia()" large>
+    <button class="thumbnail-button" ion-button outline (click)="addmedia()" large>
       <ion-icon name='add' is-active="false" ></ion-icon>
     </button>
   </div>
+  <ion-item-divider>自我评价：</ion-item-divider>
   <ion-item>
-  <ion-row>
-    <ion-col>
-      <button ion-button icon-left clear small>
+    <ion-range min="0" max="5" step="1" snaps="true" [(ngModel)]="stars" color="danger">
+      <ion-icon range-left small name="star" color="danger"></ion-icon>
+      <ion-icon range-right name="star" color="danger"></ion-icon>
+    </ion-range>
+  </ion-item>
+  <ion-item-divider>其他:</ion-item-divider>
+  <ion-item>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
             <ion-icon name="thumbs-up"></ion-icon>
             <div>12 赞</div>
           </button>
-    </ion-col>
-    <ion-col>
-      <button ion-button icon-left clear small>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
           <ion-icon name="text"></ion-icon>
           <div>4 评论</div>
         </button>
-    </ion-col>
-  </ion-row>
+      </ion-col>
+    </ion-row>
   </ion-item>
   <ion-item>
     <button ion-button outline (click)="delSprint()" large>
@@ -53,9 +61,12 @@
 
 <style>
   .sprint-details {
-    background-color: #FFFFFF;
+    background-color: #EBEBEB;
     border-bottom: 0px solid #E5E5E5;
     margin: 5px 0 -4px 0;
+  }
+  ion-item-divider{
+    background-color: #EBEBEB;
   }
   .thumbnail-button {
     width: 60px;

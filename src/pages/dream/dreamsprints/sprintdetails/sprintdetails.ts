@@ -24,7 +24,8 @@ export class SprintDetailsPage {
   newSprint: Sprint = undefined;
   sprintkey: string;
   update: Boolean = true;
-
+  stars:number;
+  
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public dataModelService: DataModelService,
