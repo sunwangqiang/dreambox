@@ -100,9 +100,8 @@ export class SprintDetailsPage {
                   } as MediaRecord;
                   console.log(mediaRecord);
                   this.sprintDetailsModel.sprint.mediaRecord.push(mediaRecord);
+                  this.dataModelService.set(this.sprintkey, this.sprintDetailsModel.sprint);
                 });
-
-                this.sprintDetailsModel.sprint.picturesUrl.push(results[i]);
               }
             }, (err) => { /*TODO*/ });
 
@@ -136,8 +135,8 @@ export class SprintDetailsPage {
                 } as MediaRecord;
                 console.log(mediaRecord);
                 this.sprintDetailsModel.sprint.mediaRecord.push(mediaRecord);
+                this.dataModelService.set(this.sprintkey, this.sprintDetailsModel.sprint);
               });
-              this.sprintDetailsModel.sprint.picturesUrl.push(result);
             });
 
           },
@@ -163,7 +162,7 @@ export class SprintDetailsPage {
               } as MediaRecord;
               console.log(mediaRecord);
               this.sprintDetailsModel.sprint.mediaRecord.push(mediaRecord);
-              this.sprintDetailsModel.sprint.videosUrl.push(media[0].fullPath);
+              this.dataModelService.set(this.sprintkey, this.sprintDetailsModel.sprint);
             });
           },
         }

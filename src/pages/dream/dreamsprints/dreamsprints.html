@@ -54,7 +54,7 @@
     <ion-card>
       <ion-list>
         <ion-item>
-            <ion-textarea readonly value={{dreamSprintModel.sprint.description}}></ion-textarea>
+            <ion-textarea autosize readonly value={{dreamSprintModel.sprint.description}}></ion-textarea>
         </ion-item>
         <div>
           <button class="thumbnail-button" ion-button outline large *ngFor="let mediaRecord of dreamSprintModel.sprint.mediaRecord"

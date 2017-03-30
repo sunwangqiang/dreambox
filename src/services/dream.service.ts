@@ -188,9 +188,6 @@ export class Sprint {
     totalVideos: number = 0;
     owner: string;
     mediaRecord: MediaRecord[] = [];
-    picturesUrl: string[] = [];
-    audiosUrl: string[] = [];
-    videosUrl: string[] = [];
     constructor() {
         Sprint.gid++;
         this.uid = Sprint.gid;
