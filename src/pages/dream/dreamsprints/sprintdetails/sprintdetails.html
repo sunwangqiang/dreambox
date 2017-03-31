@@ -30,12 +30,12 @@
   </div>
   <ion-item-divider>自我评价：</ion-item-divider>
   <ion-item>
-    <ion-range min="0" max="5" step="1" snaps="true" [(ngModel)]="stars" color="danger">
+    <ion-range min="0" max="5" step="1" snaps="true" [(ngModel)]="sprintDetailsModel.sprint.stars" color="danger">
       <ion-icon range-left small name="star" color="danger"></ion-icon>
       <ion-icon range-right name="star" color="danger"></ion-icon>
     </ion-range>
   </ion-item>
-  <ion-item-divider>其他:</ion-item-divider>
+  <ion-item-divider>评论</ion-item-divider>
   <ion-item>
     <ion-row>
       <ion-col>
@@ -52,9 +52,10 @@
       </ion-col>
     </ion-row>
   </ion-item>
+  <ion-item-divider></ion-item-divider>
   <ion-item>
-    <button ion-button outline (click)="delSprint()" large>
-      <ion-icon name='del' is-active="false" >del</ion-icon>
+    <button ion-button (click)="delSprint()" large color="danger" block>
+      <ion-icon name='del' is-active="false" >删除</ion-icon>
     </button>
   </ion-item>
 </ion-content>

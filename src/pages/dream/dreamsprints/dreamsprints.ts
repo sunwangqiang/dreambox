@@ -5,7 +5,7 @@ import { Dream, Sprint, MediaRecord, DataModelService, MediaRecordType } from '.
 import { SprintDetailsPage } from './sprintdetails/sprintdetails'
 import { SprintMediaSlidePage } from './sprint.media.slide/page'
 
-class DreamSprintsModel{
+class DreamSprintModel{
   sprint: Sprint;
   createTime:string;
   constructor(sprint:Sprint){
@@ -21,7 +21,7 @@ class DreamSprintsModel{
   templateUrl: 'dreamsprints.html',
 })
 export class DreamSprintsPage {
-  dreamSprintModels: DreamSprintsModel[] = [];
+  dreamSprintModels: DreamSprintModel[] = [];
   sprintBaseKey: string = undefined;
   dream: Dream = new Dream();
   dreamKey: string;
@@ -55,8 +55,8 @@ export class DreamSprintsPage {
    * Transform service sprints to view Model
    * @param sprint, sprint that get from service layer
    */
-  transformSprintToViewModel(sprint: Sprint):DreamSprintsModel {
-    let sprintViewModel = new DreamSprintsModel(sprint);
+  transformSprintToViewModel(sprint: Sprint):DreamSprintModel {
+    let sprintViewModel = new DreamSprintModel(sprint);
     return sprintViewModel;
   }
 
@@ -69,19 +69,23 @@ export class DreamSprintsPage {
         this.dreamSprintModels.splice(0, 0, this.transformSprintToViewModel(sprint));
         //update dataModel
         this.dream.sprintsUid.splice(0, 0, sprint.uid);
+        this.dream.totalStars = this.dream.totalStars + sprint.stars;
         this.dataModelService.set(this.dreamKey, this.dream);
       });
     })
     this.navCtrl.push(SprintDetailsPage,
       { SprintBaseKey: this.sprintBaseKey, SprintUid: undefined });
   }
-  detailSprint(dreamSprintModel: DreamSprintsModel) {
+  detailSprint(dreamSprintModel: DreamSprintModel) {
     this.events.subscribe('SprintDetailsPage:UpdateSprint', (key) => {
       this.events.unsubscribe('SprintDetailsPage:UpdateSprint');
       this.dataModelService.get(key).then((s) => {
         let index = this.dreamSprintModels.indexOf(dreamSprintModel);
         if (index != -1) {
-          this.dreamSprintModels[index] = this.transformSprintToViewModel(s as Sprint);
+          let sprint = s as Sprint;
+          this.dreamSprintModels[index] = this.transformSprintToViewModel(sprint);
+          this.dream.totalStars = this.dream.totalStars - dreamSprintModel.sprint.stars;
+          this.dream.totalStars = this.dream.totalStars + sprint.stars;
           console.log(this.dreamSprintModels);
         }
       });
@@ -94,18 +98,19 @@ export class DreamSprintsPage {
         this.dreamSprintModels.splice(index, 1);
 
         let uidIndex = this.dream.sprintsUid.indexOf(dreamSprintModel.sprint.uid);
-        if(uidIndex){
+        if(uidIndex != -1){
+          this.dream.totalStars = this.dream.totalStars - dreamSprintModel.sprint.stars;
           this.dream.sprintsUid.splice(uidIndex, 1);
           this.dataModelService.set(this.dreamKey, this.dream);
         }
-        console.log(this.dreamSprintModels);
+        console.log(this.dream);
       }
     });
 
     this.navCtrl.push(SprintDetailsPage,
       { SprintBaseKey: this.sprintBaseKey, SprintUid: dreamSprintModel.sprint.uid });
   }
-  viewMedia(dreamSprintModel:DreamSprintsModel, mediaRecord:MediaRecord):void{
+  viewMedia(dreamSprintModel:DreamSprintModel, mediaRecord:MediaRecord):void{
     //PhotoViewer.show(mediaRecord.full);
     let sprintkey = this.sprintBaseKey+"/"+dreamSprintModel.sprint.uid;
     let index = dreamSprintModel.sprint.mediaRecord.indexOf(mediaRecord);

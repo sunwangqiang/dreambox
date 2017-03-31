@@ -68,15 +68,15 @@ export class Dream {
 
     title: string = "";
     description: string = "";
-    status: DreamStatus;
+    status: DreamStatus = DreamStatus.CREATED;
     startTime: Date = new Date();
     stopTime: Date;
     life: number = 100;
-    hot: number;
+    hot: number = 0;
     expose: boolean;
-    totalStars: number;
-    totalSprints: number;
-    totalReports: number;
+    totalStars: number = 0;
+    totalSprints: number = 0;
+    totalReports: number = 0;
     owner: DreamTreeUser;
     sprintsUid: number[] = [];
 
