@@ -19,9 +19,15 @@
         <p>{{dream.description}}</p>
       </ion-item>
       <ion-item>
-        <h4>我的星星:{{dream.totalStars}}</h4>
+        <h4>总共走了{{dream.totalSprints}}步，收获{{dream.totalStars}}个星星</h4>
       </ion-item>
       <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="star"></ion-icon>
+            <div>{{dream.totalStars}} 星</div>
+          </button>
+        </ion-col>
         <ion-col>
           <button ion-button icon-left clear small>
             <ion-icon name="thumbs-up"></ion-icon>
@@ -36,7 +42,7 @@
         </ion-col>
         <ion-col center text-center>
           <button ion-button icon-left clear small>
-            <ion-icon name="more"></ion-icon>
+            <ion-icon name="create"></ion-icon>
             <div>编辑</div>
             </button>
         </ion-col>
@@ -70,6 +76,12 @@
         </div>
 
         <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="star"></ion-icon>
+            <div>{{dreamSprintModel.sprint.stars}} 星</div>
+          </button>
+        </ion-col>
           <ion-col>
             <button ion-button icon-left clear small >
             <ion-icon name="thumbs-up"></ion-icon>
@@ -84,7 +96,7 @@
           </ion-col>
           <ion-col center text-center>
             <button ion-button icon-left clear small (click)="detailSprint(dreamSprintModel)">
-            <ion-icon name="more"></ion-icon>
+            <ion-icon name="create"></ion-icon>
             <div>编辑</div>
             </button>
           </ion-col>

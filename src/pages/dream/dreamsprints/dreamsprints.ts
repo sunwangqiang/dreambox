@@ -70,6 +70,7 @@ export class DreamSprintsPage {
         //update dataModel
         this.dream.sprintsUid.splice(0, 0, sprint.uid);
         this.dream.totalStars = this.dream.totalStars + sprint.stars;
+        this.dream.totalSprints = this.dream.totalSprints + 1;
         this.dataModelService.set(this.dreamKey, this.dream);
       });
     })
@@ -100,6 +101,7 @@ export class DreamSprintsPage {
         let uidIndex = this.dream.sprintsUid.indexOf(dreamSprintModel.sprint.uid);
         if(uidIndex != -1){
           this.dream.totalStars = this.dream.totalStars - dreamSprintModel.sprint.stars;
+          this.dream.totalSprints = this.dream.totalSprints - 1;
           this.dream.sprintsUid.splice(uidIndex, 1);
           this.dataModelService.set(this.dreamKey, this.dream);
         }
