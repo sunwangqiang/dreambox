@@ -40,4 +40,7 @@ export class DreamDetailsPage {
     }
     
   }
+  save(){
+    this.navCtrl.pop();
+  }
 }

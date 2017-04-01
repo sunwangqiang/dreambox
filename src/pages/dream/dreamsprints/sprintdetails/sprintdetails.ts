@@ -55,7 +55,10 @@ export class SprintDetailsPage {
       this.sprintDetailsModel = new SprintDetailsModel(sprint);
     }
   }
-
+  save(){
+    this.update = true;
+    this.navCtrl.pop();
+  }
   ionViewWillLeave() {
     //TODO: check content changed
     if (this.update) {
