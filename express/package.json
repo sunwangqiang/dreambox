@@ -3,8 +3,7 @@
   "author": "sunwangqiang@gmail.com",
   "private": true,
   "scripts": {
-    "compile": "../node_modules/.bin/gulp",
-    "httpd": "node dist/index.js"
+    "start": "node index.js"
   },
   "description": "just for gulp express source code"
 }
