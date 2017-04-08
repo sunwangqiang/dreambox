@@ -1,13 +1,11 @@
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session);
+var debug = require('debug')('idream')
 
-/**
- * session 
- */
 var config = {
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: false, //req.session被修改才保存
     cookie: {
         secure:false,
     },
@@ -21,7 +19,7 @@ function defaultSerializeFunction(session) {
     // Copy each property of the session to a new object
     const obj = {};
     let prop;
-    console.log(session);
+
     for (prop in session) {
         if (prop === 'cookie') {
             // Convert the cookie instance to an object, if possible
@@ -35,6 +33,9 @@ function defaultSerializeFunction(session) {
     return obj;
 }
 
+/**
+ * TODO:
+ */
 if ('' === 'production') {
     app.set('trust proxy', 1) // trust first proxy
     config.cookie.secure = true // serve secure cookies
