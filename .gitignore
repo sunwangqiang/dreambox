@@ -35,4 +35,5 @@ UserInterfaceState.xcuserstate
 
 *.keystore
 
-mongodb
+mongodb/
+tools/

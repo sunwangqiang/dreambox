@@ -17,7 +17,7 @@ var config = {
 
 function defaultSerializeFunction(session) {
     // Copy each property of the session to a new object
-    const obj = {};
+    const obj:any = {};
     let prop;
 
     for (prop in session) {
@@ -35,10 +35,11 @@ function defaultSerializeFunction(session) {
 
 /**
  * TODO:
- */
+
 if ('' === 'production') {
     app.set('trust proxy', 1) // trust first proxy
     config.cookie.secure = true // serve secure cookies
 }
+ */
 
 module.exports = session(config);

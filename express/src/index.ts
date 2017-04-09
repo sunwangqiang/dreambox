@@ -1,12 +1,12 @@
-var express = require('express')
-var app = express();
-var fs = require('fs');
-var assert = require('assert');
-var morgan = require('morgan')
+import express = require('express')
+let app = express();
+import fs = require('fs');
+import assert = require('assert');
+import morgan = require('morgan')
 
 app.use(morgan('dev'))
 
-var moduleDir = [
+let moduleDir = [
   "/api/login",
   "/ionic",
   "/api",
@@ -19,10 +19,10 @@ var moduleDir = [
 moduleDir.forEach((v, i, a)=>{
   let dir = __dirname+v+"/";
 
-  fs.readdirSync(dir).forEach(function (file) {
-    
+  fs.readdirSync(dir).forEach(function (file:string) {
+
     let stats = fs.statSync(dir+file);
-    if(stats.isDirectory()){
+    if(stats.isDirectory() || !file.endsWith('.js')){
       return;
     }
     let obj = require(dir+file);

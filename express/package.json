@@ -1,9 +1,13 @@
 {
-  "name": "dreambox",
+  "name": "idream",
+  "version": "0.1.0",
   "author": "sunwangqiang@gmail.com",
   "private": true,
   "scripts": {
-    "start": "node index.js"
+    "start": "npm run build",
+    "build": "../node_modules/.bin/tsc -w -p .",
+    "clean": "rm -fr dist/*"
   },
-  "description": "just for gulp express source code"
+  "main": "dist/index",
+  "description": "idream web server"
 }
