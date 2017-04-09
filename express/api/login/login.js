@@ -1,21 +1,23 @@
-var debug = require('debug')('idream')
+var debug = require('debug')('idream-login')
 var app = require('express')();
-var session = require(__dirname+'/../../lib/session.js');
+var adminSession = require(__dirname+'/../../lib/session.js');
+var database = require(__dirname+'/../../lib/database.js');
+var bodyParser = require('body-parser');
 
 /**
  * connect to db, check user info
  * if user is valid, create session info
  */
-function loginCheckUser(req, res, next)
+function adminCheckUser(req, res, next)
 {
-    debug("loginCheckUser, connect to mongodb check user");
+    debug("adminCheckUser, connect to mongodb check user");
     next();
 }
 
 /**
- * insert user name to session
+ * add user name to session
  */
-function loginCheckResponse(req, res, next)
+function adminSessionAddUser(req, res, next)
 {
     if(req.session){
         debug("sessionID created ", req.session);
@@ -24,10 +26,11 @@ function loginCheckResponse(req, res, next)
     }
     res.status(500).end("session service error");
 }
+
 /**
  * check session info for all req of /api/xxx/....
  */
-function sessionCheck(req, res, next)
+function adminSessionCheckUser(req, res, next)
 {
     console.log(req.session);
     if(!req.session){
@@ -39,7 +42,30 @@ function sessionCheck(req, res, next)
     next();
 }
 
-app.use('/login', loginCheckUser, session, loginCheckResponse);
-app.use('/api', session, sessionCheck);
+/**
+ * register user
+ */
+function adminRegisterUser(req, res, next)
+{
+    // check user name and password
+    let regObj = req.body;
+    debug(regObj);
+    if(!regObj || !regObj.userName || !regObj.password){
+        return res.status(400).end("wrong request");
+    }
+
+    //save user info to database
+    database.addUser(regObj.userName, regObj.password);
+    return res.status(200).end("register ok");
+}
+
+/**
+ * parser body into json
+ */
+app.use(bodyParser.json());
+
+app.use('/register', adminRegisterUser);
+app.use('/login', adminCheckUser, adminSession, adminSessionAddUser);
+app.use('/api', adminSession, adminSessionCheckUser);
 
 module.exports = app;
