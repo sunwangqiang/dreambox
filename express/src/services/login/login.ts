@@ -1,9 +1,6 @@
 var debug = require('debug')('idream-login')
 var app = require('express')();
 var adminSession = require(__dirname+'/../../modules/session.js');
-var database = require(__dirname+'/../../modules/database.js');
-import bodyParser = require('body-parser');
-
 
 /**
  * connect to db, check user info
@@ -43,29 +40,6 @@ function adminSessionCheckUser(req, res, next)
     next();
 }
 
-/**
- * register user
- */
-function adminRegisterUser(req, res, next)
-{
-    // check user name and password
-    let regObj = req.body;
-    debug(regObj);
-    if(!regObj || !regObj.userName || !regObj.password){
-        return res.status(400).end("wrong request");
-    }
-
-    //save user info to database
-    database.addUser(regObj.userName, regObj.password);
-    return res.status(200).end("register ok");
-}
-
-/**
- * parser body into json
- */
-app.use(bodyParser.json());
-
-app.use('/register', adminRegisterUser);
 app.use('/login', adminCheckUser, adminSession, adminSessionAddUser);
 app.use('/api', adminSession, adminSessionCheckUser);
 

@@ -1,16 +1,20 @@
-import express = require('express')
-let app = express();
-import fs = require('fs');
-import assert = require('assert');
-import morgan = require('morgan')
-
-app.use(morgan('dev'))
+var express = require('express')
+var app = express();
+var fs = require('fs');
+var assert = require('assert');
+var morgan = require('morgan')
+var bodyParser = require('body-parser');
 
 let moduleDir = [
   "/services/login",
   "/services/webpages",
   "/services/model",
 ];
+
+/**
+ * parser body into json
+ */
+app.use(bodyParser.json());
 
 /**
  *  load modules
@@ -34,7 +38,7 @@ moduleDir.forEach((v, i, a)=>{
   });
 });
 
-
+app.use(morgan('dev'))
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
