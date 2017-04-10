@@ -1,6 +1,8 @@
-var debug = require('debug')('idream-login')
-var app = require('express')();
-var adminSession = require(__dirname+'/../../modules/session.js');
+import * as debugModule from 'debug';
+const debug = debugModule('idream-login')
+import * as express from 'express';
+const app = express();
+var adminSession = require('../../modules/session');
 
 /**
  * connect to db, check user info

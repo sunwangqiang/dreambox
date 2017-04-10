@@ -1,8 +1,12 @@
-const session = require('express-session')
-const MongoStore = require('connect-mongo')(session);
-var debug = require('debug')('idream')
+//const session = require('express-session')
+import * as session from 'express-session'
+import  * as connectMongo  from 'connect-mongo'
+const MongoStore = connectMongo(session);
 
-var config = {
+import * as debugModule from 'debug';
+const debug = debugModule('idream-register')
+
+let config:session.SessionOptions = {
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false, //req.session被修改才保存
@@ -12,8 +16,8 @@ var config = {
     store: new MongoStore({
         url: 'mongodb://localhost/sessiontest',
         serialize: defaultSerializeFunction,
-    }),
-}
+    } as connectMongo.MongoUrlOptions),
+};
 
 function defaultSerializeFunction(session) {
     // Copy each property of the session to a new object

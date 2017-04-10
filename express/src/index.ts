@@ -11,9 +11,10 @@ let moduleDir = [
   "/services/model",
 ];
 
-/**
- * parser body into json
- */
+// for debug
+app.use(morgan('dev'))
+
+// parser body into json
 app.use(bodyParser.json());
 
 /**
@@ -28,6 +29,7 @@ moduleDir.forEach((v, i, a)=>{
     if(stats.isDirectory() || !file.endsWith('.js')){
       return;
     }
+    //TODO: change require to import() with promise???
     let obj = require(dir+file);
     console.log("loading", dir+file);
     if(obj.objPath){
@@ -37,8 +39,6 @@ moduleDir.forEach((v, i, a)=>{
     }
   });
 });
-
-app.use(morgan('dev'))
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
