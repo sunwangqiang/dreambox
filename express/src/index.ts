@@ -7,10 +7,9 @@ import morgan = require('morgan')
 app.use(morgan('dev'))
 
 let moduleDir = [
-  "/api/login",
-  "/ionic",
-  "/api",
-  "/api/model",
+  "/services/login",
+  "/services/webpages",
+  "/services/model",
 ];
 
 /**

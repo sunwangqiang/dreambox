@@ -1,8 +1,9 @@
 var debug = require('debug')('idream-login')
 var app = require('express')();
-var adminSession = require(__dirname+'/../../lib/session.js');
-var database = require(__dirname+'/../../lib/database.js');
-var bodyParser = require('body-parser');
+var adminSession = require(__dirname+'/../../modules/session.js');
+var database = require(__dirname+'/../../modules/database.js');
+import bodyParser = require('body-parser');
+
 
 /**
  * connect to db, check user info
