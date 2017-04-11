@@ -3,36 +3,39 @@ const debug = debugModule('idream-register')
 import * as express from 'express';
 const app = express();
 
-import { userAdmin } from '../../modules/useradmin';
+import { userAdmin, UserInfo } from '../../modules/useradmin';
 
 /**
  * register user
  */
-function adminRegisterUser(req, res, next)
+function adminPostUserInfo(req, res, next)
 {
     // check user name and password
-    let regObj = req.body;
+    let userInfo = req.body;
 
-    debug(regObj);
-    if(!regObj || !regObj.userName || !regObj.password){
-        return res.status(400).end("wrong request");
+    debug(userInfo);
+    if(!userInfo || !userInfo.username || !userInfo.password){
+        return res.status(400).end("wrong request\n");
     }
 
     //save user info to database
-    userAdmin.addUser(regObj.userName, regObj.password);
-    return res.status(200).end("register ok\n");
+    userAdmin.addUser(userInfo).then((v)=>{
+        return res.status(200).end("register ok\n");
+    })
 }
 
 /**
  * request user account and password,
  * encode those info to pic
  */
-function adminReqUserInfo(req, res, next)
+function adminGetUserInfo(req, res, next)
 {
-    return res.status(200).end("adminReqUserInfo\n");
+    userAdmin.allocUser().then((userInfo)=>{
+        return res.status(200).end(JSON.stringify(userInfo));
+    });
 }
 
-app.get('/register', adminReqUserInfo);
-app.post('/register', adminRegisterUser);
+app.get('/register', adminGetUserInfo);
+app.post('/register', adminPostUserInfo);
 
 module.exports = app;

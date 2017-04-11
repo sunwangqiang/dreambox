@@ -2,7 +2,8 @@ import * as debugModule from 'debug';
 const debug = debugModule('idream-login')
 import * as express from 'express';
 const app = express();
-import {sessionHandler}  from '../../modules/session';
+import { sessionHandler }  from '../../modules/session';
+import { userAdmin, UserInfo } from '../../modules/useradmin';
 
 /**
  * connect to db, check user info
@@ -10,8 +11,21 @@ import {sessionHandler}  from '../../modules/session';
  */
 function adminCheckUser(req, res, next)
 {
-    debug("adminCheckUser, connect to mongodb check user");
-    next();
+    // check user name and password
+    let userInfo = req.body;
+
+    debug(userInfo);
+    if(!userInfo || !userInfo.username || !userInfo.password){
+        return res.status(400).end("wrong request\n");
+    }
+
+    userAdmin.checkUserInfo(userInfo).then((v)=>{
+        if(!v){
+            return res.status(400).end("checkuser failed");
+        }
+        next();
+    });
+    
 }
 
 /**
@@ -19,9 +33,11 @@ function adminCheckUser(req, res, next)
  */
 function adminSessionAddUser(req, res, next)
 {
+    let userInfo = req.body as UserInfo;
+
     if(req.session){
         debug("sessionID created ", req.session);
-        req.session.login = 1;
+        req.session.username = userInfo.username;
         return res.status(200).end("login ok");
     }
     res.status(500).end("session service error");
@@ -33,16 +49,22 @@ function adminSessionAddUser(req, res, next)
 function adminSessionCheckUser(req, res, next)
 {
     console.log(req.session);
+
     if(!req.session){
-        return res.status(401).end("not auth");
+        return res.status(401).end("not auth info");
     }
-    if(!req.session.login){
-        return res.status(401).end("not login");
+    if(!req.session.username){
+        return res.status(401).end("no username");
     }
-    next();
+    userAdmin.checkUserName(req.session.username).then((v)=>{
+        if(!v){
+            return res.status(401).end("username not correct");
+        }
+        next();
+    })
 }
 
-app.use('/login', adminCheckUser, sessionHandler, adminSessionAddUser);
+app.post('/login', adminCheckUser, sessionHandler, adminSessionAddUser);
 app.use('/api', sessionHandler, adminSessionCheckUser);
 
 module.exports = app;
