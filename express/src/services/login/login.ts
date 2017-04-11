@@ -2,7 +2,7 @@ import * as debugModule from 'debug';
 const debug = debugModule('idream-login')
 import * as express from 'express';
 const app = express();
-var adminSession = require('../../modules/session');
+import {sessionHandler}  from '../../modules/session';
 
 /**
  * connect to db, check user info
@@ -42,7 +42,7 @@ function adminSessionCheckUser(req, res, next)
     next();
 }
 
-app.use('/login', adminCheckUser, adminSession, adminSessionAddUser);
-app.use('/api', adminSession, adminSessionCheckUser);
+app.use('/login', adminCheckUser, sessionHandler, adminSessionAddUser);
+app.use('/api', sessionHandler, adminSessionCheckUser);
 
 module.exports = app;

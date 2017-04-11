@@ -1,3 +1,3 @@
 import express = require('express');
 
-module.exports = express.static(__dirname+'/../../www');
+module.exports = express.static(__dirname+'/../../../../www');

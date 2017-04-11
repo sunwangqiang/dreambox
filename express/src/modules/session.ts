@@ -1,10 +1,9 @@
-//const session = require('express-session')
 import * as session from 'express-session'
 import  * as connectMongo  from 'connect-mongo'
 const MongoStore = connectMongo(session);
 
 import * as debugModule from 'debug';
-const debug = debugModule('idream-register')
+const debug = debugModule('idream.session')
 
 let config:session.SessionOptions = {
     secret: 'keyboard cat',
@@ -46,4 +45,6 @@ if ('' === 'production') {
 }
  */
 
-module.exports = session(config);
+//module.exports = session(config);
+let sessionHandler = session(config);
+export { sessionHandler };

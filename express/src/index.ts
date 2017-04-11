@@ -1,9 +1,9 @@
-var express = require('express')
+import * as express from 'express'
 var app = express();
 var fs = require('fs');
 var assert = require('assert');
 var morgan = require('morgan')
-var bodyParser = require('body-parser');
+import * as bodyParser from 'body-parser';
 
 let moduleDir = [
   "/services/login",
@@ -13,7 +13,6 @@ let moduleDir = [
 
 // for debug
 app.use(morgan('dev'))
-
 // parser body into json
 app.use(bodyParser.json());
 

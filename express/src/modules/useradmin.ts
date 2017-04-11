@@ -1,5 +1,5 @@
 import * as debugModule from 'debug';
-const debug = debugModule('idream-.UserAdmin')
+const debug = debugModule('idream.UserAdmin')
 
 class UserAdmin{
     private static usrAdmin: UserAdmin;
@@ -13,11 +13,11 @@ class UserAdmin{
         }
         return UserAdmin.usrAdmin;
     }
-    addUser(userName, password){
+    addUser(userName:string, password:string){
         //save hash value to DB 
         debug("adduser %s %s", userName, password);
      }
 }
 
 let userAdmin:UserAdmin = UserAdmin.getInstance();
-export {userAdmin}
+export { userAdmin }
