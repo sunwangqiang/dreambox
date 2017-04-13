@@ -2,6 +2,7 @@ import * as debugModule from 'debug';
 const debug = debugModule('idream.UserAdmin')
 
 import { MongoClient, Db, InsertOneWriteOpResult } from 'mongodb'
+import { MakeRandomString } from '../lib/random.string'
 
 interface UserInfo{
     username:string;
@@ -30,7 +31,12 @@ class UserAdmin{
         return UserAdmin.usrAdmin;
     }
     allocUser():Promise<UserInfo>{
-        return Promise.resolve(this.testUser);
+        let userInfo = {
+            username:MakeRandomString(16),
+            password:MakeRandomString(20),
+        } as UserInfo;
+
+        return Promise.resolve(userInfo);
     }
 
     addUser(userInfo:UserInfo):Promise<boolean>{
@@ -58,7 +64,6 @@ class UserAdmin{
             }else{
                 return Promise.resolve(false);
             }
-            
         })
     }
     checkUserName(userInfo:UserInfo):Promise<boolean>{
