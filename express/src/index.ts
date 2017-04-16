@@ -7,7 +7,7 @@ import * as bodyParser from 'body-parser';
 
 let moduleDir = [
   "/services/login",
-  "/services/webpages",
+  "/services/staticpages",
   "/services/model",
 ];
 
