@@ -3,7 +3,7 @@ import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http'
 import 'rxjs/add/operator/toPromise';
 
-const serverUrl:string = "http://localhost:3000"
+const serverUrl:string = window.location.origin; //"http://localhost:3000"
 
 export {serverUrl}
 
@@ -14,6 +14,7 @@ export {serverUrl}
 @Injectable()
 export class DataAccessService {
     constructor(public storage: Storage, public http:Http) {
+        //console.log("#####", window.location);
     }
     del(key: string): Promise<any> {
         return this.storage.remove(key);;
