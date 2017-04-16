@@ -5,7 +5,6 @@ import 'rxjs/add/operator/toPromise';
 import { DreamTreeFactory } from './dreamtree.ts'
 import { DreamFactory } from './dreamtree.dream'
 
-const remoteServer = 'http://localhost:3000'
 interface UserInfo{
     username:string;
     password:string;
@@ -22,39 +21,6 @@ export interface DataObjectFactory {
 const serverUrl:string = "http://localhost:3000"
 
 export {serverUrl}
-
-/**
- * /DreamTree/User object and factory
- */
-export class DreamTreeUser {
-    nickName: string;
-    totalDreams: number;
-    credibility: number;
-    avatar: string;
-}
-
-class DreamUserFactory implements DataObjectFactory {
-    constructor(private dataAcessService: DataAccessService,
-        private dataModelService: DataModelService) {
-    }
-
-    add(key: string): Promise<any> {
-        return Promise.resolve(undefined);
-    }
-
-    del(key: string): Promise<any> {
-        return this.dataAcessService.del(key);
-    }
-    set(key: string, value: any): Promise<any> {
-        return this.dataAcessService.set(key, value);
-    }
-    get(key: string): Promise<any> {
-        return this.dataAcessService.get(key);
-    }
-    list(key: string): Promise<any[]> {
-        return this.dataAcessService.list(key);
-    }
-}
 
 export enum MediaRecordType{
     PHOTO = 0,
