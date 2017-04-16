@@ -74,6 +74,9 @@ class UserAdmin{
     loginUser(userInfo:UserInfo){
         debug("loginUser ", userInfo);
     }
+    listUser():Promise<any>{
+        return this.db.collection(userInfoCollection).find().limit(5).toArray();
+    }
 }
 
 let userAdmin:UserAdmin = UserAdmin.getInstance();
