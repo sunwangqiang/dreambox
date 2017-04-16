@@ -4,7 +4,7 @@ import { DataAccessService, DataModelService, DataObjectFactory, serverUrl} from
 /**
  * /DreamTree object and factory
  */
-class DreamTree {
+export class DreamTree {
     rootDataModelVersion: string;
     updateTime: Date = new Date();
     keyWorlds: string[] = [];
@@ -15,7 +15,7 @@ class DreamTree {
     dreamsUid: number[] = [];
 }
 
-class DreamTreeFactory implements DataObjectFactory {
+export class DreamTreeFactory implements DataObjectFactory {
     http:Http;
 
     constructor(private dataAcessService: DataAccessService,
@@ -68,5 +68,3 @@ class DreamTreeFactory implements DataObjectFactory {
         return Promise.resolve(undefined);
     }
 }
-
-export { DreamTree, DreamTreeFactory }
