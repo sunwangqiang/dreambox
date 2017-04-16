@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
 import { NavController, AlertController, Events } from 'ionic-angular';
-import { DataModelService, DreamTree, Dream } from '../../services/dream.service'
+import { DataModelService, Dream } from '../../services/dream.service'
+import { DreamTree } from '../../services/dreamtree'
 import { DreamSprintsPage } from './dreamsprints/dreamsprints'
 import { DreamDetailsPage } from './dreamdetails/dreamdetails'
 
