@@ -59,6 +59,7 @@ export class DreamTreeOwnerFactory implements DataObjectFactory {
         //return this.dataAcessService.set(key, value);
     }
     get(key: string): Promise<any> {
+        //TODO: strict check key
         return this.dataAcessService.get(key);
     }
     list(key: string): Promise<any[]> {

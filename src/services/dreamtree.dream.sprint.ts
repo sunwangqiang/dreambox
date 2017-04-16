@@ -1,5 +1,5 @@
 import { DataModelService, DataObjectFactory, } from './data.model.service'
-import { DataAccessService, serverUrl } from './data.access.service'
+import { DataAccessService } from './data.access.service'
 
 export enum MediaRecordType{
     PHOTO = 0,

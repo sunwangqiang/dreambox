@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      浏览用户
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+<ion-list class="user-list" *ngFor="let dreamModel of dreamViewModels" >
+  <button ion-item (tap)="tapDream($event, dreamModel)" (press)="pressDream($event, dreamModel)">
+    <ion-avatar item-left>
+      <ion-icon name="football" large></ion-icon>
+    </ion-avatar>
+    <h2>{{dreamModel.title}}</h2>
+    <p>{{dreamModel.description}}</p>
+  </button>
+</ion-list>
+</ion-content>
+
+<style>
+  .user-list{
+    background-color: #FFFFFF;
+    border-bottom: 0px solid #E5E5E5;
+    margin: 5px 0 -4px 0;
+  }
+</style>
+
