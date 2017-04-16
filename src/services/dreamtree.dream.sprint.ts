@@ -1,4 +1,5 @@
-import { DataAccessService, DataModelService, DataObjectFactory, serverUrl} from './dream.service'
+import { DataModelService, DataObjectFactory, } from './dream.service'
+import { DataAccessService, serverUrl } from './data.access.service'
 
 export enum MediaRecordType{
     PHOTO = 0,
