@@ -30,6 +30,10 @@ export class DreamTreeOwnerFactory implements DataObjectFactory {
                 })
             }else{
                 console.log("/DreamTree/Owner is ", val);
+                this.http.post(serverUrl+"/login", val).toPromise().then(()=>{
+                    console.log("login return\n");
+                });
+                
             }
         })
     }
