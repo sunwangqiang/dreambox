@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
 import { NavController, NavParams } from 'ionic-angular';
-import { Sprint, MediaRecord, DataModelService, MediaRecordType } from '../../../../services/dream.service'
+import { DataModelService } from '../../../../services/dream.service'
+import { Sprint, MediaRecord, MediaRecordType} from '../../../../services/dreamtree.dream.sprint'
 
 @Component({
   templateUrl: 'template.html'

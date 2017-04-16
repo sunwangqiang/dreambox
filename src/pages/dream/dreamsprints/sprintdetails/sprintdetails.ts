@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { DomSanitizer  } from '@angular/platform-browser';
 import { AlertController, NavController, NavParams, Events } from 'ionic-angular';
-import { Sprint, MediaRecord, MediaRecordType, DataModelService } from '../../../../services/dream.service'
+import { DataModelService } from '../../../../services/dream.service'
+import { Sprint, MediaRecord, MediaRecordType} from '../../../../services/dreamtree.dream.sprint'
 import { ImagePicker, ImagePickerOptions } from 'ionic-native';
 import { Camera, CameraOptions } from 'ionic-native';
 import { ImageResizer, ImageResizerOptions } from 'ionic-native';
