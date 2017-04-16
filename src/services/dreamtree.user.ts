@@ -1,4 +1,4 @@
-import { DataModelService, DataObjectFactory, } from './dream.service'
+import { DataModelService, DataObjectFactory, } from './data.model.service'
 import { DataAccessService, serverUrl } from './data.access.service'
 /**
  * /DreamTree/User object and factory

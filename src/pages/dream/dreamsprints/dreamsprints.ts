@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DomSanitizer  } from '@angular/platform-browser';
 import { NavController, NavParams, Events } from 'ionic-angular';
-import { DataModelService } from '../../../services/dream.service'
+import { DataModelService } from '../../../services/data.model.service'
 import { Sprint, MediaRecord, MediaRecordType} from '../../../services/dreamtree.dream.sprint'
 import { Dream } from '../../../services/dreamtree.dream'
 import { SprintDetailsPage } from './sprintdetails/sprintdetails'

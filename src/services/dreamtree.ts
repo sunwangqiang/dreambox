@@ -1,5 +1,5 @@
 import { Http } from '@angular/http'
-import { DataModelService, DataObjectFactory} from './dream.service'
+import { DataModelService, DataObjectFactory} from './data.model.service'
 import { DataAccessService, serverUrl } from './data.access.service'
 /**
  * /DreamTree object and factory

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Events } from 'ionic-angular';
-import { DataModelService } from '../../../services/dream.service'
+import { DataModelService } from '../../../services/data.model.service'
 import { Dream } from '../../../services/dreamtree.dream'
 
 @Component({

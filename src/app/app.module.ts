@@ -11,7 +11,7 @@ import { SprintMediaSlidePage } from '../pages/dream/dreamsprints/sprint.media.s
 import { DreamDetailsPage } from '../pages/dream/dreamdetails/dreamdetails'
 import { SprintDetailsPage } from '../pages/dream/dreamsprints/sprintdetails/sprintdetails'
 import { TabsPage } from '../pages/tabs/tabs';
-import { DataModelService, } from '../services/dream.service'
+import { DataModelService, } from '../services/data.model.service'
 import { DataAccessService } from '../services/data.access.service'
 import {Autosize} from '../common/autosize.directive';
 import { Keyboard } from 'ionic-native'
