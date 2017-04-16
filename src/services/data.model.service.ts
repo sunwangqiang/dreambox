@@ -3,6 +3,7 @@ import { DreamTreeFactory } from './dreamtree.ts'
 import { DreamFactory } from './dreamtree.dream'
 import { SprintFactory } from './dreamtree.dream.sprint'
 import { DataAccessService } from './data.access.service'
+import { DreamTreeOwnerFactory } from './dreamtree.owner'
 
 interface UserInfo{
     username:string;
@@ -28,6 +29,7 @@ export class DataModelService {
         this.dataObjectFactorys["/DreamTree"] = new DreamTreeFactory(dataAcessService, this);
         this.dataObjectFactorys["/DreamTree/Dream"] = new DreamFactory(dataAcessService, this);
         this.dataObjectFactorys["/DreamTree/Dream/Sprint"] = new SprintFactory(dataAcessService, this);
+        this.dataObjectFactorys["/DreamTree/Owner"] = new DreamTreeOwnerFactory(dataAcessService, this)
     }
     /**
      * create a new object
