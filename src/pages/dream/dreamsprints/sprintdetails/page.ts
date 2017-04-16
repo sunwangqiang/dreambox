@@ -18,7 +18,7 @@ class SprintDetailsModel {
 
 @Component({
   selector: 'page-contact',
-  templateUrl: 'sprintdetails.html',
+  templateUrl: 'page.html',
 })
 export class SprintDetailsPage {
   sprintDetailsModel: SprintDetailsModel = new SprintDetailsModel(new Sprint());

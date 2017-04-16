@@ -5,7 +5,7 @@ import { DataModelService } from '../../../../services/data.model.service'
 import { Sprint, MediaRecord, MediaRecordType} from '../../../../services/dreamtree.dream.sprint'
 
 @Component({
-  templateUrl: 'template.html'
+  templateUrl: 'page.html'
 })
 export class SprintMediaSlidePage {
   @ViewChild(Slides) slideView: Slides;

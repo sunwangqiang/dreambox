@@ -1,14 +1,14 @@
 import { Component, OnInit} from '@angular/core';
 
-import { DreamTreePage } from '../dream/dreamtree';
-import { FocusPage } from '../focus/focus';
-import { discoverPage } from '../discover/discover';
-import { MinePage } from '../mine/mine';
+import { DreamTreePage } from '../dream/page';
+import { FocusPage } from '../focus/page';
+import { discoverPage } from '../discover/page';
+import { MinePage } from '../mine/page';
 import { Keyboard } from 'ionic-native'
 import { Platform } from 'ionic-angular';
 
 @Component({
-  templateUrl: 'tabs.html',
+  templateUrl: 'page.html',
 })
 export class TabsPage implements OnInit{
   // this tells the tabs component which Pages

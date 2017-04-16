@@ -4,13 +4,13 @@ import { NavController, AlertController, Events } from 'ionic-angular';
 import { DataModelService } from '../../services/data.model.service'
 import { Dream } from '../../services/dreamtree.dream'
 import { DreamTree } from '../../services/dreamtree'
-import { DreamSprintsPage } from './dreamsprints/dreamsprints'
-import { DreamDetailsPage } from './dreamdetails/dreamdetails'
+import { DreamSprintsPage } from './dreamsprints/page'
+import { DreamDetailsPage } from './dreamdetails/page'
 
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'dreamtree.html'
+  templateUrl: 'page.html'
 })
 export class DreamTreePage {
   dreamViewModels: Dream[] = [];

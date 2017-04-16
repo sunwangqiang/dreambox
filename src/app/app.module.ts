@@ -2,15 +2,15 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { MinePage } from '../pages/mine/mine';
-import { FocusPage } from '../pages/focus/focus';
-import { discoverPage } from '../pages/discover/discover';
-import { DreamTreePage } from '../pages/dream/dreamtree';
-import { DreamSprintsPage } from '../pages/dream/dreamsprints/dreamsprints'
+import { MinePage } from '../pages/mine/page';
+import { FocusPage } from '../pages/focus/page';
+import { discoverPage } from '../pages/discover/page';
+import { DreamTreePage } from '../pages/dream/page';
+import { DreamSprintsPage } from '../pages/dream/dreamsprints/page'
 import { SprintMediaSlidePage } from '../pages/dream/dreamsprints/sprint.media.slide/page'
-import { DreamDetailsPage } from '../pages/dream/dreamdetails/dreamdetails'
-import { SprintDetailsPage } from '../pages/dream/dreamsprints/sprintdetails/sprintdetails'
-import { TabsPage } from '../pages/tabs/tabs';
+import { DreamDetailsPage } from '../pages/dream/dreamdetails/page'
+import { SprintDetailsPage } from '../pages/dream/dreamsprints/sprintdetails/page'
+import { TabsPage } from '../pages/tabs/page';
 import { DataModelService, } from '../services/data.model.service'
 import { DataAccessService } from '../services/data.access.service'
 import {Autosize} from '../common/autosize.directive';

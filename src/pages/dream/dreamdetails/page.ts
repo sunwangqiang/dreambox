@@ -5,7 +5,7 @@ import { Dream } from '../../../services/dreamtree.dream'
 
 @Component({
   selector: 'page-contact',
-  templateUrl: 'dreamdetails.html'
+  templateUrl: 'page.html'
 })
 
 export class DreamDetailsPage {

@@ -4,7 +4,7 @@ import { NavController, NavParams, Events } from 'ionic-angular';
 import { DataModelService } from '../../../services/data.model.service'
 import { Sprint, MediaRecord, MediaRecordType} from '../../../services/dreamtree.dream.sprint'
 import { Dream } from '../../../services/dreamtree.dream'
-import { SprintDetailsPage } from './sprintdetails/sprintdetails'
+import { SprintDetailsPage } from './sprintdetails/page'
 import { SprintMediaSlidePage } from './sprint.media.slide/page'
 
 class DreamSprintModel{
@@ -20,7 +20,7 @@ class DreamSprintModel{
 
 @Component({
   selector: 'page-contact',
-  templateUrl: 'dreamsprints.html',
+  templateUrl: 'page.html',
 })
 export class DreamSprintsPage {
   dreamSprintModels: DreamSprintModel[] = [];
