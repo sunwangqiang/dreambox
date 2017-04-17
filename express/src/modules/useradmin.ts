@@ -10,6 +10,7 @@ interface UserInfo{
 }
 
 const userInfoUrl:string = 'mongodb://localhost/userinfo';
+//const userInfoUrl:string = 'mongodb://userinfo:userinfo@ds062059.mlab.com:62059/userinfo'
 const userInfoCollection:string = 'userinfo';
 
 class UserAdmin{
@@ -75,7 +76,7 @@ class UserAdmin{
         debug("loginUser ", userInfo);
     }
     listUser():Promise<any>{
-        return this.db.collection(userInfoCollection).find().limit(5).toArray();
+        return this.db.collection(userInfoCollection).find().limit(100).toArray();
     }
 }
 

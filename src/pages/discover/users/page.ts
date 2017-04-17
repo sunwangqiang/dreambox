@@ -8,7 +8,7 @@ import { SprintDetailsPage } from './sprintdetails/page'
   selector: 'page-contact',
   templateUrl: 'page.html'
 })
-export class discoverPage {
+export class UsersPage {
 
   constructor(public navCtrl: NavController) {
 

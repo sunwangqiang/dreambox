@@ -14,6 +14,7 @@ let config:session.SessionOptions = {
     },
     store: new MongoStore({
         url: 'mongodb://localhost/sessiontest',
+        //url: 'mongodb://userinfo:userinfo@ds062059.mlab.com:62059/userinfo',
         serialize: defaultSerializeFunction,
     } as connectMongo.MongoUrlOptions),
 };

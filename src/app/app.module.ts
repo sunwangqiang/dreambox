@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { MinePage } from '../pages/mine/page';
 import { FocusPage } from '../pages/focus/page';
 import { discoverPage } from '../pages/discover/page';
+import { UsersPage } from '../pages/discover/users/page';
 import { DreamTreePage } from '../pages/dream/page';
 import { DreamSprintsPage } from '../pages/dream/dreamsprints/page'
 import { SprintMediaSlidePage } from '../pages/dream/dreamsprints/sprint.media.slide/page'
@@ -13,7 +14,7 @@ import { SprintDetailsPage } from '../pages/dream/dreamsprints/sprintdetails/pag
 import { TabsPage } from '../pages/tabs/page';
 import { DataModelService, } from '../services/data.model.service'
 import { DataAccessService } from '../services/data.access.service'
-import {Autosize} from '../common/autosize.directive';
+import { Autosize } from '../common/autosize.directive';
 import { Keyboard } from 'ionic-native'
 
 import { Storage } from '@ionic/storage';
@@ -26,6 +27,7 @@ export function provideStorage() {
     MyApp,
     FocusPage,
     discoverPage,
+    UsersPage,
     DreamTreePage,
     DreamSprintsPage,
     SprintMediaSlidePage,
@@ -45,6 +47,7 @@ export function provideStorage() {
     MyApp,
     FocusPage,
     discoverPage,
+    UsersPage,
     DreamTreePage,
     DreamSprintsPage,
     SprintMediaSlidePage,
