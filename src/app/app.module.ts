@@ -14,7 +14,7 @@ import { SprintDetailsPage } from '../pages/dream/dreamsprints/sprintdetails/pag
 import { TabsPage } from '../pages/tabs/page';
 import { DataModelService, } from '../services/data.model.service'
 import { DataAccessService } from '../services/data.access.service'
-import { Autosize } from '../common/autosize.directive';
+import { Autosize } from '../lib/autosize.directive';
 import { Keyboard } from 'ionic-native'
 
 import { Storage } from '@ionic/storage';
