@@ -1,9 +1,10 @@
 import { DataModelService, DataObjectFactory} from './data.model.service'
 import { DataAccessService } from './data.access.service'
+import { DreamTreeModel } from './data.model.interface'
 /**
  * /DreamTree object and factory
  */
-export class DreamTree {
+export class DreamTree implements DreamTreeModel{
     rootDataModelVersion: string;
     updateTime: Date = new Date();
     keyWorlds: string[] = [];

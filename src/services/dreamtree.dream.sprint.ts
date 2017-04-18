@@ -1,5 +1,6 @@
 import { DataModelService, DataObjectFactory, } from './data.model.service'
 import { DataAccessService } from './data.access.service'
+import { SprintModel } from './data.model.interface'
 
 export enum MediaRecordType{
     PHOTO = 0,
@@ -14,7 +15,7 @@ export class MediaRecord{
 /**
  * /DreamTree/Dream/Sprint object and factory
  */
-export class Sprint {
+export class Sprint implements SprintModel{
     private static gid = Date.now();
     readonly uid: number;
 

@@ -1,11 +1,11 @@
 import { DataModelService, DataObjectFactory, } from './data.model.service'
 import { DataAccessService, serverUrl } from './data.access.service'
-import { Http } from '@angular/http'
+import { DreamTreeUserModel } from './data.model.interface'
 
 /**
  * /DreamTree/User object and factory
  */
-export class DreamTreeUser {
+export class DreamTreeUser implements DreamTreeUserModel{
     nickName: string;
     username: string;
     totalDreams: number;

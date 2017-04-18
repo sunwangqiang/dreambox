@@ -1,12 +1,13 @@
 import { DataModelService, DataObjectFactory, } from './data.model.service'
 import { DataAccessService, serverUrl } from './data.access.service'
+import { DreamTreeOwnerModel } from './data.model.interface'
 import { Http } from '@angular/http'
 
 /**
  * /DreamTree/Owner object and factory
  */
 
-export class DreamTreeOwner{
+export class DreamTreeOwner implements DreamTreeOwnerModel{
     nickName: string;
     userName: string;
     password: string;

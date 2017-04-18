@@ -1,15 +1,11 @@
 import { DataModelService, DataObjectFactory, } from './data.model.service'
 import { DataAccessService } from './data.access.service'
+import { DreamTreeDreamModel, DreamStatus } from './data.model.interface'
 import { DreamTreeUser } from './dreamtree.user'
 /**
  * /DreamTree/Dream object and factory
  */
-export enum DreamStatus {
-    CREATED = 1,
-    STARTING,
-    FINISH,
-}
-export class Dream {
+export class Dream implements DreamTreeDreamModel{
     private static gid = Date.now();
     readonly uid: number;
 
