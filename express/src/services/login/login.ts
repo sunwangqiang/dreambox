@@ -65,6 +65,6 @@ function adminSessionCheckUser(req, res, next)
 }
 
 app.post('/login', adminCheckUser, sessionHandler, adminSessionAddUser);
-app.use('/api', sessionHandler, adminSessionCheckUser);
+app.use('/DreamTree', sessionHandler, adminSessionCheckUser);
 
 module.exports = app;

@@ -1,5 +1,5 @@
 import { DataModelService, DataObjectFactory, } from './data.model.service'
-import { DataAccessService, serverUrl } from './data.access.service'
+import { DataAccessService } from './data.access.service'
 import { Http } from '@angular/http'
 import { DreamTreeUser } from './dreamtree.user'
 import 'rxjs/add/operator/map';
@@ -9,11 +9,9 @@ import 'rxjs/add/operator/toPromise';
  * /DreamTree/Subcriber and factory
  */
 export class DreamTreeSubcriberFactory implements DataObjectFactory {
-    http:Http;
 
     constructor(private dataAcessService: DataAccessService,
         private dataModelService: DataModelService) {
-        this.http = dataAcessService.http;
     }
 
     add(key: string): Promise<any> {
@@ -29,9 +27,8 @@ export class DreamTreeSubcriberFactory implements DataObjectFactory {
     }
 
     get(key: string): Promise<any> {
-        console.log(serverUrl+'/api/DreamTree/Subcribers');
-        return this.http
-                 .get(serverUrl+'/api/DreamTree/Subcribers')
+        return this.dataAcessService
+                 .httpGet('/DreamTree/Subcribers')
                  .map(response => response.json()).toPromise().then((result)=>{
                      return result;
                  });

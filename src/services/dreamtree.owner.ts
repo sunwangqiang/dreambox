@@ -1,5 +1,5 @@
 import { DataModelService, DataObjectFactory, } from './data.model.service'
-import { DataAccessService, serverUrl } from './data.access.service'
+import { DataAccessService } from './data.access.service'
 import { DreamTreeOwnerModel } from './data.model.interface'
 import { Http } from '@angular/http'
 
@@ -31,7 +31,7 @@ export class DreamTreeOwnerFactory implements DataObjectFactory {
                 })
             }else{
                 console.log("/DreamTree/Owner is ", val);
-                this.http.post(serverUrl+"/login", val).toPromise().then(()=>{
+                this.dataAcessService.post("/login", val).then(()=>{
                     console.log("login return\n");
                 });
                 
@@ -41,13 +41,13 @@ export class DreamTreeOwnerFactory implements DataObjectFactory {
     registerUser():Promise<any>{
         let userInfo;
 
-        return this.http.get(serverUrl+"/register").toPromise().then((rsp)=>{
+        return this.dataAcessService.get("/register", 'http').then((rsp)=>{
             userInfo = rsp.json();
             return userInfo;
         }).then((data)=>{
-            return this.http.post(serverUrl+"/register", data).toPromise();
+            return this.dataAcessService.post("/register", data);
         }).then(()=>{
-            return this.http.post(serverUrl+"/login", userInfo).toPromise();
+            return this.dataAcessService.post("/login", userInfo);
         }).then(()=>{
             return userInfo;
         })

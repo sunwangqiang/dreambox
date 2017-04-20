@@ -2,30 +2,45 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http'
 import 'rxjs/add/operator/toPromise';
-
-const serverUrl:string = window.location.origin; //"http://localhost:3000"
-
-export {serverUrl}
-
+import { Observable } from 'rxjs/Observable'
 
 /**
  * used for access local Storage or remote http service
+ * option: http 
  */
 @Injectable()
 export class DataAccessService {
+    httpUrl:string = window.location.origin; //"http://localhost:3000"
+
     constructor(public storage: Storage, public http:Http) {
         //console.log("#####", window.location);
     }
-    del(key: string): Promise<any> {
+    del(key: string, proto?:string): Promise<any> {
+        if("http" === proto){
+            return this.http.delete(this.httpUrl+key).toPromise();
+        }
         return this.storage.remove(key);;
     }
-    set(key: string, value: any): Promise<any> {
+    post(key: string, value: any): Promise<any> {
+        return this.http.post(this.httpUrl+key, value).toPromise();
+    }
+    set(key: string, value: any, proto?:string): Promise<any> {
+        if("http" === proto){
+            return this.http.post(this.httpUrl+key, value).toPromise();
+        }
         return this.storage.set(key, value);
     }
+    //TODO: clear all server data
     clear() {
         return this.storage.clear();
     }
-    get(key: string): Promise<any> {
+    httpGet(key: string): Observable<any> {
+        return this.http.get(this.httpUrl+key);
+    }
+    get(key: string, proto?:string): Promise<any> {
+        if("http" === proto){
+            return this.http.get(this.httpUrl+key).toPromise();
+        }
         return this.storage.get(key);
     }
     list(key: string): Promise<any[]> {

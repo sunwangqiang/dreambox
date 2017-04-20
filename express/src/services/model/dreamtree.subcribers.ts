@@ -10,6 +10,6 @@ function getDreamTreeSubcribers(req, res, next)
     });
 }
 
-app.get('/api/DreamTree/Subcribers', getDreamTreeSubcribers);
+app.get('/DreamTree/Subcribers', getDreamTreeSubcribers);
 
 module.exports = app;
