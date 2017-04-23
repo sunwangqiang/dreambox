@@ -31,6 +31,7 @@ class UserAdmin{
         }
         return UserAdmin.usrAdmin;
     }
+    //TODO:how to make sure atomic operations
     allocUser():Promise<UserInfo>{
         let userInfo = {
             username:MakeRandomString(16),

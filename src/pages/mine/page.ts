@@ -14,7 +14,6 @@ export class MinePage {
   constructor(private navCtrl: NavController,
               private dataModelService: DataModelService) {
     dataModelService.get("/DreamTree/Subcribers").then((data:DreamTreeUser[])=>{
-      console.log(data);
       this.subcribers = data;
     });
   }
