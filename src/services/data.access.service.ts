@@ -12,18 +12,34 @@ import { Observable } from 'rxjs/Observable'
 @Injectable()
 export class DataAccessService {
     httpUrl:string = window.location.origin; //"http://localhost:3000"
+    timerID;
 
     constructor(public storage: Storage, public http:Http) {
         //console.log("#####", window.location);
+        this.timerID = setInterval(()=>{this.synData()}, 5000);
+    }
+    synData(){
+        console.log("syn data run");
+        this.storage.keys().then((key:string[])=>{
+            if(!key){
+                return;
+            }
+            key.forEach((v, i, a)=>{
+                this.storage.get(v).then((value)=>{
+                    console.log("post ", this.httpUrl+v, value);
+                    this.http.post(this.httpUrl+v, value).subscribe((rsp)=>{
+                        console.log(rsp);
+                    });
+                })
+                
+            })
+        })
     }
     del(key: string, proto?:string): Promise<any> {
         if("http" === proto){
             return this.http.delete(this.httpUrl+key).toPromise();
         }
         return this.storage.remove(key);;
-    }
-    post(key: string, value: any): Promise<any> {
-        return this.http.post(this.httpUrl+key, value).toPromise();
     }
     set(key: string, value: any, proto?:string): Promise<any> {
         if("http" === proto){
