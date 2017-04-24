@@ -32,7 +32,7 @@ export class DreamTreeOwnerFactory implements DataObjectFactory {
                 })
             }else{
                 console.log("/DreamTree/Owner is ", val);
-                this.dataAcessService.post("/login", val).then(()=>{
+                this.dataAcessService.set("/login", val, 'http').then(()=>{
                     console.log("login return\n");
                 });
                 
@@ -46,9 +46,9 @@ export class DreamTreeOwnerFactory implements DataObjectFactory {
             userInfo = rsp.json();
             return userInfo;
         }).then((data)=>{
-            return this.dataAcessService.post("/register", data);
+            return this.dataAcessService.set("/register", data, 'http');
         }).then(()=>{
-            return this.dataAcessService.post("/login", userInfo);
+            return this.dataAcessService.set("/login", userInfo, 'http');
         }).then(()=>{
             return userInfo;
         })
