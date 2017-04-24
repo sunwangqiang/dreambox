@@ -18,7 +18,7 @@ export class DreamDetailsPage {
     let dreamUid:number = navParams.get('DreamUid');
     
     if(dreamUid != undefined) {
-      this.dataModelService.get(dreamBaseUrl+"/"+dreamUid).then((d)=>{
+      this.dataModelService.get(dreamBaseUrl+"/"+dreamUid).subscribe((d)=>{
         this.dreamViewModel = this.transformDreamToViewModel(d);
         this.dreamUrl = dreamBaseUrl+"/"+dreamUid;
       });

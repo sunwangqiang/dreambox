@@ -5,6 +5,7 @@ import { SprintFactory } from './dreamtree.dream.sprint'
 import { DataAccessService } from './data.access.service'
 import { DreamTreeOwnerFactory } from './dreamtree.owner'
 import { DreamTreeSubcriberFactory } from './dreamtree.subcriber'
+import { Observable } from 'rxjs/Observable'
 
 interface UserInfo{
     username:string;
@@ -15,7 +16,7 @@ export interface DataObjectFactory {
     add(key: string): Promise<any>;
     del(key: string): Promise<any>;
     set(key: string, value: any): Promise<any>;
-    get(key: string): Promise<any>;
+    get(key: string): Observable<any>;
     list(key: string): Promise<any[]>;
 }
 
@@ -91,13 +92,13 @@ export class DataModelService {
      * 
      * @param key looks like "/DreamTree/:id/Dream/:id/Sprint/:id"
      */
-    get(key: string): Promise<any> {
+    get(key: string): Observable<any> {
         console.log("get Object ", key);
         let factory: DataObjectFactory =
             this.dataObjectFactorys[key.replace(/\/[0-9]+/g, "")];
         if (!factory) {
             console.log("invalid object " + key);
-            return Promise.resolve(undefined);
+            return Observable.throw('invalid object');
         }
         return factory.get(key);
     }

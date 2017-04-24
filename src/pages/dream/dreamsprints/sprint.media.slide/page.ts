@@ -21,7 +21,7 @@ export class SprintMediaSlidePage {
     this.initialSlide = navParams.get("MediaRecordIndex");
     let sprintKey = navParams.get("SprintKey");
 
-    dataModelService.get(sprintKey).then((s)=>{
+    dataModelService.get(sprintKey).subscribe((s)=>{
       let sprint = s as Sprint;
       sprint.mediaRecord.forEach((value, index, array)=>{
         //console.log(value);

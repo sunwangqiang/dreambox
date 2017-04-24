@@ -2,8 +2,8 @@ import { DataModelService, DataObjectFactory, } from './data.model.service'
 import { DataAccessService } from './data.access.service'
 import { Http } from '@angular/http'
 import { DreamTreeUser } from './dreamtree.user'
+import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
 
 /**
  * /DreamTree/Subcriber and factory
@@ -26,13 +26,9 @@ export class DreamTreeSubcriberFactory implements DataObjectFactory {
         //return this.dataAcessService.set(key, value);
     }
 
-    get(key: string): Promise<any> {
+    get(key: string): Observable<any> {
         return this.dataAcessService
-                 .httpGet('/DreamTree/Subcribers')
-                 .map(response => response.json()).toPromise().then((result)=>{
-                     return result;
-                 });
-        //return this.dataAcessService.get(key);
+                 .get('/DreamTree/Subcribers', 'http');
     }
     list(key: string): Promise<any[]> {
         return Promise.resolve(undefined);

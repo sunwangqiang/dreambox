@@ -13,8 +13,8 @@ export class MinePage {
 
   constructor(private navCtrl: NavController,
               private dataModelService: DataModelService) {
-    dataModelService.get("/DreamTree/Subcribers").then((data:DreamTreeUser[])=>{
-      this.subcribers = data;
-    });
+    dataModelService.get("/DreamTree/Subcribers")
+                    .map(response => response.json())
+                    .subscribe((data:DreamTreeUser[])=>{ this.subcribers = data; });
   }
 }

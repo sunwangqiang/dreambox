@@ -33,10 +33,10 @@ export class DreamTreePage {
   }
 
   ngOnInit() {
-    this.dataModelService.get(this.dreamTreeKey).then((dt) => {
+    this.dataModelService.get(this.dreamTreeKey).subscribe((dt) => {
       this.dreamTree = dt as DreamTree;
       this.dreamTree.dreamsUid.forEach((value, index, array) => {
-        this.dataModelService.get(this.dreamBaseKey + "/" + value).then((dream) => {
+        this.dataModelService.get(this.dreamBaseKey + "/" + value).subscribe((dream) => {
           console.log(dream);
           if(dream){
             this.dreamViewModels.push(this.transformDreamToViewModel(dream));
@@ -56,7 +56,7 @@ export class DreamTreePage {
   addDream(event) {
     this.events.subscribe('DreamPage:UpdateDream', (key) => {
       this.events.unsubscribe('DreamPage:UpdateDream');
-      this.dataModelService.get(key).then((d)=>{
+      this.dataModelService.get(key).subscribe((d)=>{
         let dream = d as Dream;
         this.dreamViewModels.push(this.transformDreamToViewModel(dream));
 
@@ -110,7 +110,7 @@ export class DreamTreePage {
           handler: data => {
             this.events.subscribe('DreamPage:UpdateDream', (key) => {
               this.events.unsubscribe('DreamPage:UpdateDream');
-              this.dataModelService.get(key).then((d)=>{
+              this.dataModelService.get(key).subscribe((d)=>{
                 let index = this.dreamViewModels.indexOf(dreamViewModel);
                 if(index != -1){
                   this.dreamViewModels[index] = d as Dream;

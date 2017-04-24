@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http'
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/observable/fromPromise';
 import { Observable } from 'rxjs/Observable'
 
 /**
@@ -34,14 +35,11 @@ export class DataAccessService {
     clear() {
         return this.storage.clear();
     }
-    httpGet(key: string): Observable<any> {
-        return this.http.get(this.httpUrl+key);
-    }
-    get(key: string, proto?:string): Promise<any> {
+    get(key: string, proto?:string): Observable<any> {
         if("http" === proto){
-            return this.http.get(this.httpUrl+key).toPromise();
+            return this.http.get(this.httpUrl+key);
         }
-        return this.storage.get(key);
+        return Observable.fromPromise(this.storage.get(key));
     }
     list(key: string): Promise<any[]> {
         console.log("list Object ", key);

@@ -1,6 +1,7 @@
 import { DataModelService, DataObjectFactory, } from './data.model.service'
 import { DataAccessService } from './data.access.service'
 import { SprintModel } from './data.model.interface'
+import { Observable } from 'rxjs/Observable'
 
 export enum MediaRecordType{
     PHOTO = 0,
@@ -57,7 +58,7 @@ export class SprintFactory implements DataObjectFactory {
     set(key: string, value: any): Promise<any> {
         return this.dataAcessService.set(key, value);
     }
-    get(key: string): Promise<any> {
+    get(key: string): Observable<any> {
         return this.dataAcessService.get(key);
     }
     list(key: string): Promise<any[]> {

@@ -41,10 +41,10 @@ export class DreamSprintsPage {
     this.dreamKey = dreamBaseKey + "/" + dreamUid;
     this.sprintBaseKey = dreamBaseKey + "/" + dreamUid + "/Sprint";
 
-    this.dataModelService.get(dreamBaseKey + "/" + dreamUid).then((d) => {
+    this.dataModelService.get(dreamBaseKey + "/" + dreamUid).subscribe((d) => {
       this.dream = d as Dream;
       this.dream.sprintsUid.forEach((value, index, arrye) => {
-        this.dataModelService.get(this.sprintBaseKey + "/" + value).then((sprint) => {
+        this.dataModelService.get(this.sprintBaseKey + "/" + value).subscribe((sprint) => {
           if(sprint){
             this.dreamSprintModels.push(this.transformSprintToViewModel(sprint));
           }
@@ -66,7 +66,7 @@ export class DreamSprintsPage {
     this.events.subscribe('SprintDetailsPage:UpdateSprint', (key) => {
       this.events.unsubscribe('SprintDetailsPage:UpdateSprint');
 
-      this.dataModelService.get(key).then((s) => {
+      this.dataModelService.get(key).subscribe((s) => {
         let sprint = s as Sprint;
         this.dreamSprintModels.splice(0, 0, this.transformSprintToViewModel(sprint));
         //update dataModel
@@ -82,7 +82,7 @@ export class DreamSprintsPage {
   detailSprint(dreamSprintModel: DreamSprintModel) {
     this.events.subscribe('SprintDetailsPage:UpdateSprint', (key) => {
       this.events.unsubscribe('SprintDetailsPage:UpdateSprint');
-      this.dataModelService.get(key).then((s) => {
+      this.dataModelService.get(key).subscribe((s) => {
         let index = this.dreamSprintModels.indexOf(dreamSprintModel);
         if (index != -1) {
           let sprint = s as Sprint;

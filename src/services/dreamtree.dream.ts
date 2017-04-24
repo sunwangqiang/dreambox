@@ -2,6 +2,8 @@ import { DataModelService, DataObjectFactory, } from './data.model.service'
 import { DataAccessService } from './data.access.service'
 import { DreamTreeDreamModel, DreamStatus } from './data.model.interface'
 import { DreamTreeUser } from './dreamtree.user'
+import { Observable } from 'rxjs/Observable'
+
 /**
  * /DreamTree/Dream object and factory
  */
@@ -41,7 +43,7 @@ export class DreamFactory implements DataObjectFactory {
     }
 
     del(key: string): Promise<any> {
-        return this.dataModelService.get(key).then((d)=>{
+        return this.dataModelService.get(key).toPromise().then((d)=>{
             let dream = d as Dream;
             let promises = [];
             console.log(dream);
@@ -60,7 +62,7 @@ export class DreamFactory implements DataObjectFactory {
     set(key: string, value: any): Promise<any> {
         return this.dataAcessService.set(key, value);
     }
-    get(key: string): Promise<any> {
+    get(key: string): Observable<any> {
         return this.dataAcessService.get(key);
     }
     list(key: string): Promise<any[]> {

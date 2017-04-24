@@ -2,6 +2,7 @@ import { DataModelService, DataObjectFactory, } from './data.model.service'
 import { DataAccessService } from './data.access.service'
 import { DreamTreeOwnerModel } from './data.model.interface'
 import { Http } from '@angular/http'
+import { Observable } from 'rxjs/Observable'
 
 /**
  * /DreamTree/Owner object and factory
@@ -23,7 +24,7 @@ export class DreamTreeOwnerFactory implements DataObjectFactory {
         private dataModelService: DataModelService) {
         this.http = dataAcessService.http;
         //tryto get user info from local storage
-        dataAcessService.get("/DreamTree/Owner").then((val)=>{
+        dataAcessService.get("/DreamTree/Owner").subscribe((val)=>{
             if(!val){
                 this.registerUser().then((userInfo)=>{
                     console.log(userInfo);
@@ -41,7 +42,7 @@ export class DreamTreeOwnerFactory implements DataObjectFactory {
     registerUser():Promise<any>{
         let userInfo;
 
-        return this.dataAcessService.get("/register", 'http').then((rsp)=>{
+        return this.dataAcessService.get("/register", 'http').toPromise().then((rsp)=>{
             userInfo = rsp.json();
             return userInfo;
         }).then((data)=>{
@@ -63,7 +64,7 @@ export class DreamTreeOwnerFactory implements DataObjectFactory {
         return Promise.resolve(undefined);
         //return this.dataAcessService.set(key, value);
     }
-    get(key: string): Promise<any> {
+    get(key: string): Observable<any> {
         //TODO: strict check key
         return this.dataAcessService.get(key);
     }

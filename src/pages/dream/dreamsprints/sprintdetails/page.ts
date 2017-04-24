@@ -38,7 +38,7 @@ export class SprintDetailsPage {
 
     if (sprintUid != undefined) {
       this.sprintkey = sprintBaseKey + "/" + sprintUid;
-      this.dataModelService.get(this.sprintkey).then((sprint) => {
+      this.dataModelService.get(this.sprintkey).subscribe((sprint) => {
         this.transformSprintToViewModel(sprint);
       })
     } else {

@@ -1,6 +1,9 @@
 import { DataModelService, DataObjectFactory} from './data.model.service'
 import { DataAccessService } from './data.access.service'
 import { DreamTreeModel } from './data.model.interface'
+import { Observable } from 'rxjs/Observable'
+import 'rxjs/add/operator/mergeMap'
+import 'rxjs/add/observable/of'
 /**
  * /DreamTree object and factory
  */
@@ -30,17 +33,19 @@ export class DreamTreeFactory implements DataObjectFactory {
     set(key: string, value: any): Promise<any> {
         return this.dataAcessService.set(key, value);
     }
-    get(key: string): Promise<any> {
-        return this.dataAcessService.get("/DreamTree/0").then((val) => {
+    get(key: string): Observable<any> {
+        return this.dataAcessService.get("/DreamTree/0").flatMap( (val) =>{
             let dreamTree;
             if (val == undefined) {
                 dreamTree = new DreamTree()
-                this.dataAcessService.set("/DreamTree/0", dreamTree);
-                console.log("/DreamTree/0 created");
+                this.dataAcessService.set("/DreamTree/0", dreamTree).then(()=>{
+                    console.log("/DreamTree/0 created");
+                });
             }else{
                 dreamTree = val as DreamTree;
             }
-            return Promise.resolve(dreamTree);
+            //TODO:
+            return Observable.of(dreamTree);
         });
     }
     list(key: string): Promise<any[]> {
