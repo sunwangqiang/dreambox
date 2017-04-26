@@ -3,15 +3,16 @@ const debug = debugModule('idream-register')
 import * as express from 'express';
 const app = express();
 
-import { userAdmin, UserInfo } from '../../modules/useradmin';
-
+import { userAdmin } from '../../modules/useradmin';
+import { UserInfo } from '../../interface/user.info'
 /**
  * register user
  */
 function adminPostUserInfo(req, res, next)
 {
     // check user name and password
-    let userInfo = req.body;
+    // parsed in index.ts by bodyParser
+    let userInfo:UserInfo = req.body;
 
     debug(userInfo);
     if(!userInfo || !userInfo.username || !userInfo.password){

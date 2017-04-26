@@ -1,6 +1,6 @@
 import { DataModelService, DataObjectFactory, } from './data.model.service'
 import { DataAccessService } from './data.access.service'
-import { DreamTreeDreamModel, DreamStatus } from './data.model.interface'
+import { DreamTreeDreamModel, DreamStatus } from '../interface/data.model.interface'
 import { DreamTreeUser } from './dreamtree.user'
 import { Observable } from 'rxjs/Observable'
 

@@ -16,14 +16,11 @@ export class DataAccessService {
 
     constructor(public storage: Storage, public http:Http) {
         //console.log("#####", window.location);
-        this.timerID = setInterval(()=>{this.synData()}, 5000);
+        //this.timerID = setInterval(()=>{this.synData()}, 5000);
     }
     synData(){
         console.log("syn data run");
         this.storage.keys().then((key:string[])=>{
-            if(!key){
-                return;
-            }
             key.forEach((v, i, a)=>{
                 this.storage.get(v).then((value)=>{
                     console.log("post ", this.httpUrl+v, value);

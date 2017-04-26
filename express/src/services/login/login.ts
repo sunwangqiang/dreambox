@@ -44,11 +44,11 @@ function adminSessionAddUser(req, res, next)
 }
 
 /**
- * check session info for all req of /api/xxx/....
+ * check session info for all req of /DreamTree/....
  */
 function adminSessionCheckUser(req, res, next)
 {
-    console.log(req.session);
+    //console.log(req.session);
 
     if(!req.session){
         return res.status(401).end("not auth info");

@@ -3,19 +3,15 @@ const debug = debugModule('idream.UserAdmin')
 
 import { MongoClient, Db, InsertOneWriteOpResult } from 'mongodb'
 import { MakeRandomString } from '../lib/random.string'
+import { UserInfo } from '../interface/user.info'
 
-interface UserInfo{
-    username:string;
-    password:string;
-}
-
+//TODO: move database code to database.ts
 const userInfoUrl:string = 'mongodb://localhost/userinfo';
 //const userInfoUrl:string = 'mongodb://userinfo:userinfo@ds062059.mlab.com:62059/userinfo'
 const userInfoCollection:string = 'userinfo';
 
 class UserAdmin{
     private static usrAdmin: UserAdmin;
-    testUser:UserInfo = {username:"username", password:"password"};
     db:Db;
 
     private constructor(){
@@ -33,10 +29,10 @@ class UserAdmin{
     }
     //TODO:how to make sure atomic operations
     allocUser():Promise<UserInfo>{
-        let userInfo = {
+        let userInfo:UserInfo = {
             username:MakeRandomString(16),
             password:MakeRandomString(20),
-        } as UserInfo;
+        };
 
         return Promise.resolve(userInfo);
     }
@@ -57,7 +53,7 @@ class UserAdmin{
      * @param userInfo 
      */
     checkUserInfo(userInfo:UserInfo):Promise<boolean>{
-        //save hash value to DB 
+        //TODO: save hash value to DB 
         debug("checkUserInfo ", userInfo);
         return this.db.collection(userInfoCollection).findOne(userInfo).then((doc)=>{
             console.log(doc);

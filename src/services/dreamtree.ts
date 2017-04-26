@@ -1,6 +1,6 @@
 import { DataModelService, DataObjectFactory} from './data.model.service'
 import { DataAccessService } from './data.access.service'
-import { DreamTreeModel } from './data.model.interface'
+import { DreamTreeModel } from '../interface/data.model.interface'
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/observable/of'

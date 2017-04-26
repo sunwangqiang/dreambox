@@ -7,11 +7,6 @@ import { DreamTreeOwnerFactory } from './dreamtree.owner'
 import { DreamTreeSubcriberFactory } from './dreamtree.subcriber'
 import { Observable } from 'rxjs/Observable'
 
-interface UserInfo{
-    username:string;
-    password:string;
-}
-
 export interface DataObjectFactory {
     add(key: string): Promise<any>;
     del(key: string): Promise<any>;

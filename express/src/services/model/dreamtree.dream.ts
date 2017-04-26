@@ -1,19 +1,32 @@
-var express = require('express');
-var app = express();
+import * as express from 'express';
+const app = express();
+import { UserInfo } from '../../interface/user.info'
+import { DreamDB } from '../../modules/database';
 
-// Access the session as req.session
-app.get('/api/DreamTree/:id/Dream/:id', function(req, res, next) {
-  var sess = req.session
-  if (sess.views) {
-    sess.views++
-    res.setHeader('Content-Type', 'text/html')
-    res.write('<h1>views: ' + sess.views + '</h1>')
-    res.write('<h1>expires in: ' + (sess.cookie.maxAge / 1000) + 's</h1>')
-    res.end()
-  } else {
-    sess.views = 1
-    res.end('welcome to the session demo. refresh!')
+function getDreamTreeSubcribers(req, res, next)
+{
+  let sess = req.session as any;
+  let userInfo: UserInfo = req.body;
+  
+  console.log("####/DreamTree/:id/Dream/:id");
+
+  if (!userInfo || !userInfo.username) {
+    return res.status(400).end("wrong request, miss dst username\n");
   }
-})
+
+  if(userInfo.username !== sess.username as string){
+    console.log('watch others database');
+  }
+
+  //get object info from backend database
+  console.log("get ", req.originalUrl);
+
+  DreamDB.get(req.originalUrl, sess.username, userInfo.username).then((value)=>{
+    return res.status(200).end(value);
+  });
+
+}
+
+app.get('/DreamTree/Dream/Test', getDreamTreeSubcribers);
 
 module.exports = app;

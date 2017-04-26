@@ -6,14 +6,14 @@ import * as debugModule from 'debug';
 const debug = debugModule('idream.session')
 
 let config:session.SessionOptions = {
-    secret: 'keyboard cat',
+    secret: 'keyboard cat', //TODO
     resave: false,
     saveUninitialized: false, //req.session被修改才保存
     cookie: {
         secure:false,
     },
     store: new MongoStore({
-        url: 'mongodb://localhost/sessiontest',
+        url: 'mongodb://localhost/sessiontest', //TODO
         //url: 'mongodb://userinfo:userinfo@ds062059.mlab.com:62059/userinfo',
         serialize: defaultSerializeFunction,
     } as connectMongo.MongoUrlOptions),
