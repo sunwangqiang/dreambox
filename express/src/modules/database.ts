@@ -22,8 +22,8 @@ class Database {
 
     private constructor() {
         //TODO
-        let mongoUrl = `mongo://root:root@${this.server}/admin`;
-        console.log("mongoUrl ", mongoUrl)
+        let mongoUrl = `mongodb://${this.server}/admin`;
+        //console.log("mongoUrl ", mongoUrl)
         MongoClient.connect(mongoUrl).then((db) => {
             this.admin = db;
         })
@@ -46,14 +46,14 @@ class Database {
                 }
                 console.log(`query ${userName} OK!`);
                 //let's connect to database
-                return MongoClient.connect(`mongo://${userName}:${doc[0].password}@${this.server}/${userName}`);
+                return MongoClient.connect(`mongodb://${userName}:${doc[0].password}@${this.server}/${userName}`);
             }).then((db:Db) => {
                 this.userDbConnect[userName].db = db;
                 return db;
             });
         }
         console.log(`create ${this.readOnlyUserName} OK!`);
-        return MongoClient.connect(`mongo://${this.readOnlyUserName}:${this.readOnlyPassword}@${this.server}/${userName}`)
+        return MongoClient.connect(`mongodb://${this.readOnlyUserName}:${this.readOnlyPassword}@${this.server}/${userName}`)
             .then((db) => {
                 this.userDbConnect[userName].db = db;
                 return db;
@@ -69,10 +69,6 @@ class Database {
             }
         }
         return this.newDbConnect(userName, dstUser);
-    }
-    newUser(userName: string, password: string) {
-        //create a new db with userName and password
-        console.log("create new user");
     }
 
     get(key: string, userName: string, dstUser: string): Promise<any> {

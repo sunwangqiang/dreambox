@@ -6,9 +6,9 @@ import { DreamDB } from '../../modules/database';
 function getDreamTreeSubcribers(req, res, next)
 {
   let sess = req.session as any;
-  let userInfo: UserInfo = req.body;
+  let userInfo: UserInfo = req.query;
   
-  console.log("####/DreamTree/:id/Dream/:id");
+  console.log(userInfo);
 
   if (!userInfo || !userInfo.username) {
     return res.status(400).end("wrong request, miss dst username\n");
@@ -27,6 +27,6 @@ function getDreamTreeSubcribers(req, res, next)
 
 }
 
-app.get('/DreamTree/Dream/Test', getDreamTreeSubcribers);
+app.get('/DreamTree/:id/Dream/:id', getDreamTreeSubcribers);
 
 module.exports = app;
